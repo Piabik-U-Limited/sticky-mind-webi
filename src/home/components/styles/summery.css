@@ -1,0 +1,23 @@
+.root {
+  flex-grow: calc(100 / 12 * 5);
+  width: "100%";
+}
+.paper {
+  padding: 20;
+  text-align: "center";
+  color: "blue";
+  border-radius: "10px";
+}
+.card,
+.card-content {
+  padding: 16;
+  display: "flex";
+  justify-content: "space-between";
+}
+
+@media screen and (min-width: 600px) {
+  .root {
+    flex-grow: calc(100 / 12 * 5);
+    width: "100%";
+  }
+}

@@ -1,0 +1,32 @@
+.topbar-logo {
+  color: #ffff;
+}
+.link {
+  text-decoration: none;
+}
+.rotate-icon {
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Staff form */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.asterisks {
+  color: red;
+}
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+}

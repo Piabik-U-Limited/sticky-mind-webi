@@ -1,0 +1,121 @@
+.container {
+  margin: 30px;
+  background-color: #f2ebeb;
+}
+.top-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 50px;
+}
+.content-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px;
+  width: 80%;
+  cursor: pointer;
+  box-shadow: 3px 5px 20px -10px rgba(0, 0, 0, 0.5) !important;
+}
+.content-card:hover {
+  box-shadow: none !important;
+}
+.content-card .right {
+  text-align: right;
+}
+.content-card .right.alumni {
+  background-image: url(../../../assets/images/alumni-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content-card .right.students {
+  background-image: url(../../../assets/images/student-bg.png);
+}
+.content-card .right.programs {
+  background-image: url(../../../assets/images/program-bg.png);
+}
+.content-card .right.staff {
+  background-image: url(../../../assets/images/staff-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content-card .right.programs p {
+  color: #a3a3a3;
+}
+
+.grid-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.grid-left {
+  background-color: white;
+  width: 75%;
+  margin-right: 20px;
+  padding: 20px 25px;
+}
+.grid-right {
+  background-color: white;
+  width: 25%;
+  padding: 20px 25px;
+}
+.chart-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: "10px";
+}
+.index-keys span img {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  margin-top: 50px;
+}
+
+.cardContent {
+  width: 23.2%;
+  cursor: pointer;
+  /* box-shadow: 3px 5px 20px -10px rgba(0, 0, 0, 0.5) !important; */
+  width: 100%;
+}
+
+.cardContent:hover {
+  box-shadow: none !important;
+}
+
+.graphWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 20px;
+}
+
+.lineGraph {
+  width: 70%;
+}
+
+.pieChart {
+  width: 25%;
+}
+
+@media screen and (max-width: 760px) {
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .cardContent {
+    width: 100%;
+  }
+  .lineGraph {
+    width: 100%;
+  }
+  .pieChart {
+    width: 100%;
+  }
+}
