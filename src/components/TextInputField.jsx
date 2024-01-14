@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useField } from "formik";
 
 const TextInputField = ({ ...props }) => {
@@ -23,7 +23,7 @@ const TextInputField = ({ ...props }) => {
           multiline={props.multiline}
           placeholder={props.placeholder}
           {...field}
-          helperText={errorText}
+          //helperText={errorText}
           InputProps={{
             inputProps: { min: 0 },
           }}
@@ -32,11 +32,13 @@ const TextInputField = ({ ...props }) => {
           fullWidth
           sx={{
             input: {
-              color: "#542A52",
               height: "6px",
             },
           }}
         />
+        <Typography sx={{ color: "tomato" }} variant="caption">
+          {errorText}
+        </Typography>
       </div>
     </div>
   );

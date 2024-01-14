@@ -12,16 +12,17 @@ import { Link, useLocation } from "react-router-dom";
 import {
   Store,
   Dashboard,
-  ShoppingBag,
+  Settings,
   Percent,
-  SettingsApplications,
+  Category,
 } from "@mui/icons-material";
 
 import { useNavigate } from "react-router-dom";
 
-function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
+function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
   const navigate = useNavigate();
-  const [active, setActive] = React.useState("Home");
+  const [active, setActive] = React.useState("Dashboard");
+
   const handleChange = (itemName) => {
     setActive(itemName);
     toggleDrawer();
@@ -35,23 +36,23 @@ function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
     },
 
     {
-      name: "Manage Stocks",
-      icon: <Store />,
-      link: "/staff",
-    },
-    {
       name: "Manage Sales",
       icon: <Percent />,
-      link: "/staff",
+      link: "/sales",
+    },
+    {
+      name: "Categories",
+      icon: <Category />,
+      link: "/sales",
     },
     {
       name: "Manage Products",
-      icon: <ShoppingBag />,
-      link: "/staff",
+      icon: <Store />,
+      link: "/products",
     },
     {
       name: "Invetory Settings",
-      icon: <SettingsApplications />,
+      icon: <Settings />,
       link: "/staff",
     },
   ];
@@ -83,7 +84,9 @@ function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
                       style={
                         active === item.name
                           ? { color: "#fff" }
-                          : { color: "#0F9D58" }
+                          : theme === "light"
+                          ? { color: "#0F9D58" }
+                          : { color: "lightgray" }
                       }
                     >
                       {item.icon}
@@ -93,7 +96,9 @@ function DrawerComponent({ drawerWidth, toggleDrawer, logout }) {
                       style={
                         active === item.name
                           ? { color: "#fff" }
-                          : { color: "#0F9D58" }
+                          : theme === "light"
+                          ? { color: "#0F9D58" }
+                          : { color: "lightgray" }
                       }
                     />
                   </ListItemButton>

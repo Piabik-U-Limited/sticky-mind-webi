@@ -1,7 +1,7 @@
 import React from "react";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
-import { FormControl, InputLabel } from "@mui/material";
+import { FormControl, InputLabel, Typography } from "@mui/material";
 import { useField } from "formik";
 
 export default function SelectField({ ...props }) {
@@ -25,11 +25,9 @@ export default function SelectField({ ...props }) {
             name={props.name}
             id={props.id}
             {...field}
-            helperText={errorText}
             error={!!errorText}
             variant="outlined"
             sx={{
-              color: "#542A52",
               height: "40px",
             }}
           >
@@ -41,13 +39,17 @@ export default function SelectField({ ...props }) {
                     key={menuItem.value}
                     disabled={menuItem.disabled}
                   >
-                    {menuItem.label}({menuItem.name})
+                    {menuItem.label}
+                    {menuItem.name}
                     {/* Use label as the visible label */}
                   </MenuItem>
                 );
               })}
           </Select>
         </FormControl>
+        <Typography sx={{ color: "tomato" }} variant="caption">
+          {errorText}
+        </Typography>
       </div>
     </div>
   );

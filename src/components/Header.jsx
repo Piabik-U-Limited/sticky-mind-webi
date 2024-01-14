@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
-import { Menu, PersonAddAlt } from "@mui/icons-material";
+import { Menu, AddBox, PercentRounded } from "@mui/icons-material";
 import AccountMenu from "./ActionMenu";
 import { useDispatch } from "react-redux";
-import { toggleShowAddModal } from "../redux/slices/staffSlice";
+
+import { toggleShowAddProductModal } from "../redux/slices/products.slice";
+import { toggleShowAddSaleModal } from "../redux/slices/sales.slice";
 function Header(props) {
   const dispatch = useDispatch();
   const [greeting, setGreeting] = useState("");
@@ -49,13 +51,26 @@ function Header(props) {
           <Button
             sx={{
               backgroundColor: "#0F9D58",
+              margin: 1,
               ":hover": { backgroundColor: "#0F9D58c0" },
             }}
-            endIcon={<PersonAddAlt />}
+            endIcon={<AddBox />}
             variant="contained"
-            onClick={() => dispatch(toggleShowAddModal())}
+            onClick={() => dispatch(toggleShowAddProductModal())}
           >
-            Add new Stock
+            New Stock
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: "#0F9D58",
+              margin: 1,
+              ":hover": { backgroundColor: "#0F9D58c0" },
+            }}
+            endIcon={<PercentRounded />}
+            variant="contained"
+            onClick={() => dispatch(toggleShowAddSaleModal())}
+          >
+            New Sale
           </Button>
         </div>
       </Toolbar>

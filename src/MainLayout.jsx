@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { Box, CssBaseline, Drawer, Paper } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 
-import Header from "./components/Header";
-import DrawerComponent from "./components/DrawerComponent";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -14,13 +12,21 @@ import {
   toggleShowDeleteModal,
   toggleShowEditModal,
 } from "./redux/slices/staffSlice";
-import FormModal from "./components/FormModal";
-import AddStaffForm from "./forms/AddStaffForm";
-import EditStaffForm from "./forms/EditStaffForm";
-import SuccessAlert from "./components/SuccessAlert";
-import ErrorAlert from "./components/ErrorAlert";
-import ConfirmAlert from "./components/ConfirmAlert";
+
+import { AddProductForm, AddSalesForm } from "./forms";
+
+import {
+  SuccessAlert,
+  ErrorAlert,
+  ConfirmAlert,
+  FormModal,
+  Header,
+  DrawerComponent,
+} from "./components";
+
 import useStaff from "./api/hooks/useStaff";
+import { toggleShowAddProductModal } from "./redux/slices/products.slice";
+import { toggleShowAddSaleModal } from "./redux/slices/sales.slice";
 const drawerWidth = 240;
 
 function MainLayout(props) {
@@ -29,8 +35,8 @@ function MainLayout(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const themeMode = useSelector((state) => state.theme.mode);
   const dispatch = useDispatch();
-  const showAdd = useSelector((state) => state.staff.showAddModal);
-  const showEdit = useSelector((state) => state.staff.showEditModal);
+  const products = useSelector((state) => state.products);
+  const sales = useSelector((state) => state.sales);
   const showDelete = useSelector((state) => state.staff.showDeleteModal);
   const deleting = useSelector((state) => state.staff.submitting);
   const successMessage = useSelector((state) => state.staff.message);
@@ -59,6 +65,8 @@ function MainLayout(props) {
     handleFetch();
     fetchHierarchy();
   }, []);
+
+  console.log(products, sales);
   return (
     <Box
       sx={{
@@ -103,7 +111,7 @@ function MainLayout(props) {
           <DrawerComponent
             drawerWidth={drawerWidth}
             toggleDrawer={handleDrawerToggle}
-            logout={handleLogout}
+            theme={themeMode}
           />
         </Drawer>
         <Drawer
@@ -119,7 +127,7 @@ function MainLayout(props) {
             },
           }}
         >
-          <DrawerComponent drawerWidth={drawerWidth} logout={handleLogout} />
+          <DrawerComponent drawerWidth={drawerWidth} theme={themeMode} />
         </Drawer>
       </Box>
       <Box
@@ -147,19 +155,20 @@ function MainLayout(props) {
           <Outlet />
         </Box>
         <FormModal
-          open={showAdd}
-          handleClose={() => dispatch(toggleShowAddModal())}
+          open={products.showAddProductModal}
+          handleClose={() => dispatch(toggleShowAddProductModal())}
           title="Add New Product"
         >
-          <AddStaffForm handleSubmit={handleSubmit} />
+          <AddProductForm handleSubmit={handleSubmit} />
         </FormModal>
         <FormModal
-          open={showEdit}
-          handleClose={() => dispatch(toggleShowEditModal())}
-          title={`Edit ${selectedStaff.name} `}
+          open={sales.showAddSaleModal}
+          handleClose={() => dispatch(toggleShowAddSaleModal())}
+          title="Add New Sale"
         >
-          <EditStaffForm handleEdit={handleEdit} />
+          <AddSalesForm handleSubmit={handleSubmit} />
         </FormModal>
+
         <SuccessAlert
           message={successMessage}
           close={() => dispatch(setMessage(""))}

@@ -1,6 +1,11 @@
 import * as React from "react";
 import { Paper, Table, TableBody, TableCell, TableRow } from "@mui/material";
-import { TableContainer, TableHead, TablePagination } from "@mui/material";
+import {
+  TableContainer,
+  TableHead,
+  TablePagination,
+  Button,
+} from "@mui/material";
 import { Menu, MenuItem, ListItemIcon } from "@mui/material";
 import {
   MoreVert,
@@ -11,6 +16,7 @@ import {
   Clear,
   Visibility,
   OpenInNew,
+  Add,
 } from "@mui/icons-material";
 import { IconButton, InputBase } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +31,7 @@ import { useNavigate } from "react-router-dom";
 function ProductsTable({ data }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const selectedProduct = useSelector((state) => state.product.selectedProduct);
+  //const selectedProduct = useSelector((state) => state.product.selectedProduct);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [filterQuery, setFilterQuery] = React.useState("");
@@ -34,7 +40,7 @@ function ProductsTable({ data }) {
   const handleOpen = (event, products) => {
     setAnchorEl(event.currentTarget);
     //update global state for selected products
-    dispatch(setselectedProduct(products));
+    // dispatch(setselectedProduct(products));
   };
 
   const handleClose = () => {
@@ -46,16 +52,16 @@ function ProductsTable({ data }) {
     dispatch(openproducts());
   };
   const selectproducts = () => {
-    navigate(`/admin/dashboard/product/${selectedProduct.id}`);
+    // navigate(`/admin/dashboard/product/${selectedProduct.id}`);
   };
   const editproducts = () => {
     setAnchorEl(null);
-    dispatch(toggleEditproducts());
+    // dispatch(toggleEditproducts());
   };
 
   const deleteproducts = () => {
     setAnchorEl(null);
-    dispatch(toggleOpenDelete());
+    // dispatch(toggleOpenDelete());
   };
 
   const handleChangePage = (event, newPage) => {
@@ -70,11 +76,10 @@ function ProductsTable({ data }) {
   const columns = [
     { id: "id", label: "Id" },
     { id: "name", label: "Name", minWidth: 40 },
-    { id: "award", label: "Award", minWidth: 40 },
-    { id: "description", label: "Description" },
-    { id: "modularity", label: "Modularity", minWidth: 40 },
-    { id: "productsTuition", label: "Tuition", minWidth: 40 },
-    { id: "duration", label: "Duration", minWidth: 40 },
+    { id: "category", label: "Category", minWidth: 40 },
+    { id: "quantity", label: "Quantity" },
+    { id: "price", label: "Price", minWidth: 40 },
+    { id: "totalPrice", label: "Total Price", minWidth: 40 },
     {
       id: "action",
       label: "Action",
@@ -127,19 +132,21 @@ function ProductsTable({ data }) {
   });
   return (
     <Paper sx={{ width: "100%", overflow: "scroll", borderRadius: 2 }}>
-      <div
+      <Paper
         style={{
           alignSelf: "auto",
           display: "flex",
           alignItems: "center",
           padding: 5,
+          backgroundColor: "#0F9D58",
+          color: "#fff",
         }}
       >
         <Search />
         <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Filter"
-          inputProps={{ "aria-label": "search google maps" }}
+          sx={{ ml: 2, flex: 1, color: "#fff" }}
+          placeholder="Filter Products"
+          inputProps={{ "aria-label": "search products " }}
           value={filterQuery}
           onChange={(e) => setFilterQuery(e.target.value)}
         />
@@ -152,12 +159,12 @@ function ProductsTable({ data }) {
         >
           <Clear />
         </IconButton>
-      </div>
+      </Paper>
       <TableContainer sx={{ maxHeight: 440, overflowBlock: "auto" }}>
         <Table
           stickyHeader
           aria-label="sticky table"
-          size="small"
+          size={"small"}
           sx={{ overflowBlock: "auto" }}
         >
           <TableHead>
