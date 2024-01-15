@@ -5,16 +5,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  toggleShowAddModal,
-  setError,
-  setMessage,
-  toggleShowDeleteModal,
-  toggleShowEditModal,
-} from "./redux/slices/staffSlice";
-
 import { AddProductForm, AddSalesForm } from "./forms";
-
+import { setSuccess, setError } from "./redux/slices/notification.slice";
 import {
   SuccessAlert,
   ErrorAlert,
@@ -24,7 +16,6 @@ import {
   DrawerComponent,
 } from "./components";
 
-import useStaff from "./api/hooks/useStaff";
 import { toggleShowAddProductModal } from "./redux/slices/products.slice";
 import { toggleShowAddSaleModal } from "./redux/slices/sales.slice";
 const drawerWidth = 240;
@@ -39,16 +30,9 @@ function MainLayout(props) {
   const sales = useSelector((state) => state.sales);
   const showDelete = useSelector((state) => state.staff.showDeleteModal);
   const deleting = useSelector((state) => state.staff.submitting);
-  const successMessage = useSelector((state) => state.staff.message);
+  const notification = useSelector((state) => state.notification);
   const errorMessage = useSelector((state) => state.staff.error);
   const selectedStaff = useSelector((state) => state.staff.selectedStaff);
-  const {
-    handleSubmit,
-    handleFetch,
-    handleDelete,
-    fetchHierarchy,
-    handleEdit,
-  } = useStaff();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -60,13 +44,7 @@ function MainLayout(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  //Fetch users
-  useEffect(() => {
-    handleFetch();
-    fetchHierarchy();
-  }, []);
 
-  console.log(products, sales);
   return (
     <Box
       sx={{
@@ -159,28 +137,33 @@ function MainLayout(props) {
           handleClose={() => dispatch(toggleShowAddProductModal())}
           title="Add New Product"
         >
-          <AddProductForm handleSubmit={handleSubmit} />
+          <AddProductForm />
         </FormModal>
         <FormModal
           open={sales.showAddSaleModal}
           handleClose={() => dispatch(toggleShowAddSaleModal())}
           title="Add New Sale"
+          maxWidth="md"
+          //fullScreen={true}
         >
-          <AddSalesForm handleSubmit={handleSubmit} />
+          <AddSalesForm />
         </FormModal>
 
         <SuccessAlert
-          message={successMessage}
-          close={() => dispatch(setMessage(""))}
+          message={notification.success}
+          close={() => dispatch(setSuccess(""))}
         />
-        <ErrorAlert error={errorMessage} close={() => dispatch(setError(""))} />
-        <ConfirmAlert
+        <ErrorAlert
+          error={notification.error}
+          close={() => dispatch(setError(""))}
+        />
+        {/* <ConfirmAlert
           open={showDelete}
           close={() => dispatch(toggleShowDeleteModal())}
           action={() => handleDelete(selectedStaff.id)}
           message={`Do you want to delete this staff?`}
           performing={deleting}
-        />
+        /> */}
       </Box>
     </Box>
   );

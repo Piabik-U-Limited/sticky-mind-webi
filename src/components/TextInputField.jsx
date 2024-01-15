@@ -28,7 +28,7 @@ const TextInputField = ({ ...props }) => {
             inputProps: { min: 0 },
           }}
           error={!!errorText}
-          variant="outlined"
+          variant={props.variant ? props.variant : "outlined"}
           fullWidth
           sx={{
             input: {

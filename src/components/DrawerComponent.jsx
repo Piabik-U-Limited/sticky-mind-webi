@@ -43,7 +43,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
     {
       name: "Categories",
       icon: <Category />,
-      link: "/sales",
+      link: "/categories",
     },
     {
       name: "Manage Products",

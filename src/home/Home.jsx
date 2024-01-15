@@ -1,16 +1,15 @@
-import React from "react";
-import StaffHierarchy from "./StaffHierarchy";
+import React, { useEffect } from "react";
+import useDashboard from "../api/hooks/useDashboard";
 import { useSelector } from "react-redux";
-import LoadingComponent from "../components/LoadingComponent";
 import { Summery } from "./components";
 import "./styles/main-content.css";
-function Home() {
-  const loading = useSelector((state) => state.staff.loading);
 
-  const loadingRender = {
-    true: <LoadingComponent />,
-    false: <StaffHierarchy />,
-  }[loading];
+function Home() {
+  const { handleFetchDashboardData } = useDashboard();
+  useEffect(() => {
+    handleFetchDashboardData();
+  }, []);
+
   return (
     <div>
       <Summery />

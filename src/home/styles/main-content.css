@@ -22,24 +22,7 @@
 .content-card .right {
   text-align: right;
 }
-.content-card .right.alumni {
-  background-image: url(../../../assets/images/alumni-bg.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.content-card .right.students {
-  background-image: url(../../../assets/images/student-bg.png);
-}
-.content-card .right.programs {
-  background-image: url(../../../assets/images/program-bg.png);
-}
-.content-card .right.staff {
-  background-image: url(../../../assets/images/staff-bg.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 .content-card .right.programs p {
   color: #a3a3a3;
 }

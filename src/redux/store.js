@@ -4,6 +4,9 @@ import themeSlice from "./slices/themeSlice";
 import productsSlice from "./slices/products.slice";
 import notificationSlice from "./slices/notification.slice";
 import salesSlice from "./slices/sales.slice";
+import categoriesSlice from "./slices/categories.slice";
+import dashbardSlice from "./slices/dashbard.slice";
+
 const store = configureStore({
   reducer: {
     staff: staffSlice,
@@ -11,6 +14,8 @@ const store = configureStore({
     products: productsSlice,
     notification: notificationSlice,
     sales: salesSlice,
+    categories: categoriesSlice,
+    dashboard: dashbardSlice,
   },
 });
 export default store;

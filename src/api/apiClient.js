@@ -1,79 +1,44 @@
 import axios from "axios";
-import { API_URL } from "../constants/contants";
-
+import { API_URL, API_KEY } from "../constants/contants";
 export default class ApiClient {
   constructor() {
     this.base_url = API_URL;
-  }
-  //get staff hierarchy
-  async getStaffHierarchy() {
-    try {
-      const response = await axios({
-        method: "get",
-        url: `${this.base_url}/staff/hierarchy`,
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-      return response;
-    } catch (error) {
-      return error;
-    }
-  }
-  //Post Staff Member
-  async postStaff(values) {
-    try {
-      const response = await axios({
-        method: "post",
-        url: `${this.base_url}/staff/`,
-        data: values,
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-      return response;
-    } catch (error) {
-      return error;
-    }
+    this.api_key = API_KEY;
   }
 
-  //Return all staff members registered
-  async getAllStaff() {
+  //Resubale methods
+  async _makeRequest(method, endpoint, data) {
+    //const tokens = store.getState().tokens.tokens || "None";
     try {
       const response = await axios({
-        method: "get",
-        url: `${this.base_url}/staff/`,
-        headers: { "Content-Type": "application/json" },
+        method: method,
+        url: `${this.base_url}/${endpoint}`,
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": this.api_key,
+          //Authorization: `Bearer ${tokens?.access_token}`,
+        },
         withCredentials: true,
+        data: data,
       });
       return response;
     } catch (error) {
       return error;
     }
   }
-
-  //edit staff
-  async editStaff(values, staffId) {
+  async _submitFile(method, endpoint, data) {
+    //const tokens = store.getState().tokens.tokens || "None";
     try {
       const response = await axios({
-        method: "put",
-        url: `${this.base_url}/staff/${staffId}`,
-        data: values,
-        headers: { "Content-Type": "application/json" },
+        method: method,
+        url: `${this.base_url}/${endpoint}`.replace("localhost", "127.0.0.1"),
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "X-API-KEY": this.api_key,
+          //Authorization: `Bearer ${tokens?.access_token}`,
+        },
         withCredentials: true,
-      });
-      return response;
-    } catch (error) {
-      return error;
-    }
-  }
-
-  //delete staff member
-  async deleteStaff(staffId) {
-    try {
-      const response = await axios({
-        method: "delete",
-        url: `${this.base_url}/staff/${staffId}`,
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
+        data: data,
       });
       return response;
     } catch (error) {
