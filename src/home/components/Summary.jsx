@@ -18,12 +18,18 @@ function Summary() {
             <SummeryBarChart />
           </div>
 
-          <Card className="pieChart" sx={{ padding: 1 }}>
+          <Card
+            className="pieChart"
+            sx={{
+              padding: 1,
+            }}
+          >
             <div>
-              <Typography>Sales</Typography>
-              {/* <RingChart applicants={applicants} gender={genderCount} /> */}
+              <Typography variant="h6">Sales</Typography>
             </div>
-            <SummeryPieChart />
+            <div>
+              <SummeryPieChart />
+            </div>
           </Card>
         </Grid>
       </Box>

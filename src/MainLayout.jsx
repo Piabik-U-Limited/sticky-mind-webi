@@ -144,7 +144,7 @@ function MainLayout(props) {
           handleClose={() => dispatch(toggleShowAddSaleModal())}
           title="Add New Sale"
           maxWidth="md"
-          //fullScreen={true}
+          fullScreen={true}
         >
           <AddSalesForm />
         </FormModal>

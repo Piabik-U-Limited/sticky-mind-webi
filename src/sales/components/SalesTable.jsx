@@ -71,28 +71,14 @@ function SalesTable({ data }) {
     setPage(0);
   };
 
-  function createData(id, name, date, category, fat, carbs, protein, price) {
+  function createData(id, customerName, refNo, date, totalAmount, items) {
     return {
       id,
-      name,
+      customerName,
+      refNo,
       date,
-      category,
-      fat,
-      carbs,
-      protein,
-      price,
-      items: [
-        {
-          id: "2020-01-05",
-          customerId: "11091700",
-          amount: 3,
-        },
-        {
-          id: "2020-01-02",
-          customerId: "Anonymous",
-          amount: 1,
-        },
-      ],
+      totalAmount,
+      items,
     };
   }
 
@@ -113,13 +99,12 @@ function SalesTable({ data }) {
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="row">
-            {row.id}
+            {row.id.slice(0, 8).toUpperCase()}
           </TableCell>
-          <TableCell align="left">{row.name}</TableCell>
-          <TableCell align="right">{row.category}</TableCell>
-          <TableCell align="right">{row.fat}</TableCell>
-          <TableCell align="right">{row.carbs}</TableCell>
-          <TableCell align="right">{row.protein}</TableCell>
+          <TableCell align="left">{row?.customerName}</TableCell>
+          <TableCell align="right">{row?.refNo || "__"}</TableCell>
+          <TableCell align="right">{row?.date}</TableCell>
+          <TableCell align="right">{row?.totalAmount || "__"}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -131,7 +116,7 @@ function SalesTable({ data }) {
                   <Chip
                     gutterBottom
                     component="div"
-                    label={`Sale Id: ${row.id}`}
+                    label={`Reference: ${row.refNo}`}
                   />
                   <Chip
                     gutterBottom
@@ -151,17 +136,25 @@ function SalesTable({ data }) {
                     <TableRow>
                       <TableCell>Product(s)</TableCell>
                       <TableCell align="right">Quantity</TableCell>
-                      <TableCell align="right">Total price (UGX)</TableCell>
+                      <TableCell align="right">Unit Price</TableCell>
+                      <TableCell align="right">Total Price (UGX)</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {row.items.map((itemsRow) => (
-                      <TableRow key={itemsRow.id}>
-                        <TableCell>{itemsRow.customerId}</TableCell>
-                        <TableCell align="right">{itemsRow.amount}</TableCell>
+                      <TableRow key={itemsRow?.id}>
+                        <TableCell>{itemsRow?.product?.name}</TableCell>
+                        <TableCell>{itemsRow?.quantity}</TableCell>
                         <TableCell align="right">
-                          {Math.round(itemsRow.amount * row.price * 100) / 100}
+                          {itemsRow?.unitPrice}
                         </TableCell>
+                        <TableCell align="right">
+                          {itemsRow?.totalPrice}
+                        </TableCell>
+                        {/* <TableCell align="right">
+                          {Math.round(itemsRow.quantity * row.unitPrice * 100) /
+                            100}
+                        </TableCell> */}
                       </TableRow>
                     ))}
                     <TableRow>
@@ -211,18 +204,21 @@ function SalesTable({ data }) {
     }).isRequired,
   };
 
-  const rows = [
-    createData("12", "Frozen ", "2022-01012", 159, 6.0, 24, 4.0, 3.99),
-    createData("12", "Ice cream", "2022-01012", 237, 9.0, 37, 4.3, 4.99),
-    createData("12", "Eclair", "2022-01012", 262, 16.0, 24, 6.0, 3.79),
-    createData("12", "Cupcake", "2022-01012", 305, 3.7, 67, 4.3, 2.5),
-    createData("12", "Gingerbread", "2022-01012", 356, 16.0, 49, 3.9, 1.5),
-  ];
+  const rows = data.map((item) =>
+    createData(
+      item.id,
+      item.customerName,
+      item.refNo,
+      item.date,
+      item.totalAmount,
+      item.items
+    )
+  );
 
   const filteredRows = rows.filter((row) => {
     return (
-      row.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-      row.category.toLowerCase().includes(filterQuery.toLowerCase())
+      row.customerName.toLowerCase().includes(filterQuery.toLowerCase()) ||
+      row.date.toLowerCase().includes(filterQuery.toLowerCase())
       //row.modularity.toLowerCase().includes(filterQuery.toLowerCase())
       //row.productsTuition.toLowerCase().includes(filterQuery.toLowerCase()) ||
       //row.duration.toLowerCase().includes(filterQuery.toLowerCase())
@@ -275,10 +271,9 @@ function SalesTable({ data }) {
               <TableCell />
               <TableCell>Sale ID</TableCell>
               <TableCell>Customer</TableCell>
-              <TableCell align="right">Category</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell align="right">Refrence Number</TableCell>
+              <TableCell align="right">Date Sold</TableCell>
+              <TableCell align="right">Total Sale</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

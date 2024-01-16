@@ -78,8 +78,8 @@ function ProductsTable({ data }) {
     { id: "name", label: "Name", minWidth: 40 },
     { id: "category", label: "Category", minWidth: 40 },
     { id: "quantity", label: "Quantity" },
-    { id: "price", label: "Price", minWidth: 40 },
-    { id: "totalPrice", label: "Total Price", minWidth: 40 },
+    { id: "unitPrice", label: "Unit Price (UGX)", minWidth: 40 },
+    { id: "totalPrice", label: "Total Price (UGX)", minWidth: 40 },
     {
       id: "action",
       label: "Action",
@@ -99,13 +99,15 @@ function ProductsTable({ data }) {
     },
   ];
 
-  function createData(id, name, quantity, category, price, totalPrice) {
+  function createData(id, name, quantity, category, unitPrice) {
+    const totalPrice = quantity * unitPrice;
+
     return {
       id,
       name,
       quantity,
       category,
-      price,
+      unitPrice,
       totalPrice,
     };
   }
@@ -115,8 +117,8 @@ function ProductsTable({ data }) {
       item.id,
       item.name,
       item.quantity,
-      item.category,
-      item.price,
+      item.category.name,
+      item.unitPrice,
       item.totalPrice
     )
   );

@@ -90,7 +90,7 @@ const SummeryBarChart = () => {
     },
   ];
   return (
-    <Card>
+    <Card sx={{ padding: 1 }}>
       <BarChart width={400} height={250} data={data1}>
         <Bar dataKey="sales" fill="#0F9D58" />
         <CartesianGrid strokeDasharray="3 3" />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { Grid, Button, Box } from "@mui/material";
 import TextInputField from "../components/TextInputField";
@@ -7,16 +7,18 @@ import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
 import { Save } from "@mui/icons-material";
-import { categories } from "../utils/categories";
+import useProducts from "../api/hooks/useProducts";
+import useCategories from "../api/hooks/useCategories";
 function AddProductForm(props) {
-  const submitting = useSelector((state) => state.staff.submitting);
-  const userList = useSelector((state) => state.staff.userList);
+  const { handleAddProduct } = useProducts();
+  const { handleFetchCategories } = useCategories();
+  const state = useSelector((state) => state.products);
+  const categories = useSelector((state) => state.categories);
 
-  const loading = useSelector((state) => state.staff.loading);
   const validationSchema = yup.object({
     name: yup.string().required("Product name is required"),
-    price: yup
-      .number("Price must be a currency value")
+    unitPrice: yup
+      .number("Unit Price must be a currency value")
       .min(100, "Minimum price should be 100")
       .required("Unit price is required"),
     quantity: yup
@@ -35,7 +37,9 @@ function AddProductForm(props) {
     }
     return error;
   }
-
+  useEffect(() => {
+    !categories.categories.length > 0 && handleFetchCategories();
+  }, []);
   return (
     <div>
       <Formik
@@ -43,20 +47,22 @@ function AddProductForm(props) {
           name: "",
           category: "",
           categoryId: "",
-          price: 0,
+          unitPrice: 0,
           quantity: 0,
           decription: "",
+          // manDate: "",
+          // expDate: "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          props.handleSubmit(values);
+          handleAddProduct(values);
           console.log(values);
         }}
       >
         {({ handleSubmit }) => (
           <form className="form-wrap" onSubmit={handleSubmit} method="POST">
             <Grid container className="form-grid" spacing={2}>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <div className="form-input">
                   <label htmlFor="name">
                     Product Name
@@ -75,7 +81,7 @@ function AddProductForm(props) {
                 </div>
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <div className="form-input">
                   <label htmlFor="role">
                     Quantity
@@ -85,6 +91,68 @@ function AddProductForm(props) {
                   <TextInputField
                     name="quantity"
                     placeholder="e.g 10"
+                    type="number"
+                    size="small"
+                    sx={{
+                      marginTop: "5px",
+                    }}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div>
+                  <label htmlFor="supervisorId">
+                    Category<span className="asterisks">*</span>
+                  </label>
+                  {categories.loading ? (
+                    // Render a loading indicator or message while data is being fetched
+                    <p>Loading Categories...</p>
+                  ) : (
+                    <SelectField
+                      labelName="Select Category"
+                      name="categoryId"
+                      validate={validateSelect}
+                      fullWidth
+                      size="small"
+                      sx={{
+                        marginTop: "5px",
+                      }}
+                      MenuItems={categories.categories.map((category) => ({
+                        value: category.id,
+                        name: category.name,
+                      }))}
+                    />
+                  )}
+                </div>
+              </Grid>
+            </Grid>
+
+            <Grid container className="form-grid" spacing={2}>
+              <Grid item xs={4}>
+                <div className="form-input">
+                  <label htmlFor="unitPrice">
+                    Unit Price
+                    <span className="asterisks">*</span>
+                  </label>
+
+                  <TextInputField
+                    name="unitPrice"
+                    placeholder="Enter Unit price"
+                    type="number"
+                    size="small"
+                    sx={{
+                      marginTop: "5px",
+                    }}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div className="form-input">
+                  <label htmlFor="manDate">Manufucture Date</label>
+
+                  <TextInputField
+                    name="manDate"
+                    placeholder="Optional"
                     type="input"
                     size="small"
                     sx={{
@@ -93,45 +161,15 @@ function AddProductForm(props) {
                   />
                 </div>
               </Grid>
-            </Grid>
 
-            <Grid container className="form-grid" spacing={2}>
-              <Grid item xs={6}>
-                <div>
-                  <label htmlFor="supervisorId">
-                    Category<span className="asterisks">*</span>
-                  </label>
-                  {loading && (
-                    // Render a loading indicator or message while data is being fetched
-                    <p>Loading Categories...</p>
-                  )}
-                  <SelectField
-                    labelName="Select Category"
-                    name="categoryId"
-                    validate={validateSelect}
-                    fullWidth
-                    size="small"
-                    sx={{
-                      marginTop: "5px",
-                    }}
-                    MenuItems={categories.map((category) => ({
-                      value: category.id,
-                      name: category.name,
-                    }))}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <div className="form-input">
-                  <label htmlFor="price">
-                    Price
-                    <span className="asterisks">*</span>
-                  </label>
+                  <label htmlFor="expDate">Expiry Date</label>
 
                   <TextInputField
-                    name="price"
-                    placeholder="Enter Unit price"
-                    type="number"
+                    name="expDate"
+                    placeholder="Optional"
+                    type="input"
                     size="small"
                     sx={{
                       marginTop: "5px",
@@ -155,7 +193,7 @@ function AddProductForm(props) {
               />
             </div>
             <div className="form-grid">
-              {submitting ? (
+              {state.submitting ? (
                 <LoadingButton
                   className="btnNext"
                   loading
