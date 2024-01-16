@@ -33,7 +33,10 @@ export default function Category({ category }) {
             <Folder />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={category?.name} secondary={"Secondary text"} />
+        <ListItemText
+          primary={category?.name}
+          secondary={`${category?.products?.length} Products`}
+        />
       </ListItem>
       <Divider />
     </List>

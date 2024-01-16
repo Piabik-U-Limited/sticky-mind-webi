@@ -15,10 +15,10 @@ function useSetError() {
         dispatch(setError(message));
       } else {
         // Handle other cases if needed
-        dispatch(setError(response.message));
+        dispatch(setError("An error occurred. Please try again."));
       }
     } else {
-      dispatch(setError("An unknown error occured!"));
+      dispatch(setError("Sorry, could not connect to the server!"));
     }
   };
   return { captureError };

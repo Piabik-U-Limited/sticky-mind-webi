@@ -16,12 +16,12 @@ import {
 
 const SummeryPieChart = () => {
   const data = [
-    { name: "January", value: 400 },
-    { name: "February", value: 300 },
-    { name: "March", value: 300 },
-    { name: "April", value: 200 },
-    { name: "May", value: 200 },
-    { name: "June", value: 500 },
+    { name: "January", sales: 400 },
+    { name: "February", sales: 300 },
+    { name: "March", sales: 300 },
+    { name: "April", sales: 200 },
+    { name: "May", sales: 200 },
+    { name: "June", sales: 800 },
   ];
 
   const COLORS = ["purple", "#87CEEB", "#FFBB28", "#0F9D58", "yellow", "blue"];
@@ -35,7 +35,7 @@ const SummeryPieChart = () => {
         label={"Data"}
         outerRadius={50}
         fill="#8884d8"
-        dataKey="value"
+        dataKey="sales"
       >
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

@@ -1,32 +1,20 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { Paper, Table, TableBody, TableCell, TableRow } from "@mui/material";
+import { TableContainer, TableHead } from "@mui/material";
+import { Collapse, Button, Typography, Chip } from "@mui/material";
 import {
-  TableContainer,
-  TableHead,
-  TablePagination,
-  Button,
-  Typography,
-  Chip,
-} from "@mui/material";
-import { Menu, MenuItem, ListItemIcon, Collapse } from "@mui/material";
-import {
-  MoreVert,
-  Search,
-  Edit,
-  Delete,
-  Error,
-  Clear,
-  Visibility,
   OpenInNew,
-  Add,
   KeyboardArrowDown,
   KeyboardArrowUp,
   CalendarMonth,
   Percent,
 } from "@mui/icons-material";
-import { IconButton, InputBase, Box } from "@mui/material";
+import { IconButton, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import * as dayjs from "dayjs";
+// import utc from "dayjs/plugin/utc";
+// import timezone from "dayjs/plugin/timezone";
 // import {
 //   openproducts,
 //   setselectedProduct,
@@ -103,7 +91,9 @@ function SalesTable({ data }) {
           </TableCell>
           <TableCell align="left">{row?.customerName}</TableCell>
           <TableCell align="right">{row?.refNo || "__"}</TableCell>
-          <TableCell align="right">{row?.date}</TableCell>
+          <TableCell align="right">
+            {dayjs(row?.date).format("MMM D, YYYY HH:MM:ss")}
+          </TableCell>
           <TableCell align="right">{row?.totalAmount || "__"}</TableCell>
         </TableRow>
         <TableRow>
@@ -127,7 +117,9 @@ function SalesTable({ data }) {
                   <Chip
                     gutterBottom
                     component="div"
-                    label={`Date Sold: ${row.date}`}
+                    label={`Date Sold: ${dayjs(row?.date).format(
+                      "MMMM D, YYYY HH:MM:ss"
+                    )}`}
                     icon={<CalendarMonth />}
                   />
                 </div>
@@ -144,7 +136,9 @@ function SalesTable({ data }) {
                     {row.items.map((itemsRow) => (
                       <TableRow key={itemsRow?.id}>
                         <TableCell>{itemsRow?.product?.name}</TableCell>
-                        <TableCell>{itemsRow?.quantity}</TableCell>
+                        <TableCell align="right">
+                          {itemsRow?.quantity}
+                        </TableCell>
                         <TableCell align="right">
                           {itemsRow?.unitPrice}
                         </TableCell>
@@ -158,10 +152,14 @@ function SalesTable({ data }) {
                       </TableRow>
                     ))}
                     <TableRow>
-                      <TableCell scope="row" align="right" colSpan={4}>
-                        Total:{" "}
+                      <TableCell scope="row" align="left">
                         <Typography sx={{ fontWeight: "bold" }}>
-                          {10000}
+                          Total:
+                        </Typography>
+                      </TableCell>
+                      <TableCell scope="row" align="right" colSpan={3}>
+                        <Typography sx={{ fontWeight: "bold" }}>
+                          {row.totalAmount}
                         </Typography>
                       </TableCell>
                     </TableRow>

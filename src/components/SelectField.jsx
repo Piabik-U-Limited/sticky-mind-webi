@@ -1,8 +1,9 @@
 import React from "react";
-import { Select } from "@mui/material";
+import { Select, TextField, InputAdornment } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { FormControl, InputLabel, Typography } from "@mui/material";
 import { useField } from "formik";
+import { Close, Search } from "@mui/icons-material";
 
 export default function SelectField({ ...props }) {
   const [field, meta] = useField(props);
@@ -26,11 +27,36 @@ export default function SelectField({ ...props }) {
             id={props.id}
             {...field}
             error={!!errorText}
-            variant="outlined"
             sx={{
               height: "40px",
             }}
           >
+            <TextField
+              label="Search"
+              placeholder={"Search"}
+              variant="standard"
+              focused
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                marginX: 2,
+                width: "90%",
+              }}
+              onChange={
+                (e) =>
+                  props.MenuItems.filter((item) =>
+                    item.label
+                      .toLowerCase()
+                      .includes(e.target.value.toLowerCase())
+                  )
+                // console.log(e.target.value)
+              }
+            />
             {!!props.MenuItems?.length &&
               props.MenuItems.map((menuItem) => {
                 return (

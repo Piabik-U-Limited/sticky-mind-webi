@@ -122,7 +122,7 @@ function MainLayout(props) {
         {/* <Toolbar /> */}
         <Box
           style={{
-            marginTop: 70,
+            marginTop: 60,
             padding: 0,
             "@media (minWidth: 600px)": {
               width: "100vw",

@@ -17,6 +17,7 @@
     "@mui/material": "^5.14.12",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
+    "dayjs": "^1.11.10",
     "formik": "^2.4.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

@@ -53,7 +53,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
     {
       name: "Invetory Settings",
       icon: <Settings />,
-      link: "/staff",
+      link: "/settings",
     },
   ];
   return (
@@ -74,9 +74,10 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
                   disablePadding
                   onClick={() => handleChange(item.name)}
                   sx={
-                    active === item.name
-                      ? { backgroundColor: "#0F9D58", borderRadius: 2 }
-                      : { borderRadius: 2 }
+                    active === item.name && {
+                      backgroundColor: "#0F9D58",
+                      borderRadius: 1,
+                    }
                   }
                 >
                   <ListItemButton>

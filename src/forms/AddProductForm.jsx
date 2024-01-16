@@ -62,7 +62,7 @@ function AddProductForm(props) {
         {({ handleSubmit }) => (
           <form className="form-wrap" onSubmit={handleSubmit} method="POST">
             <Grid container className="form-grid" spacing={2}>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
                   <label htmlFor="name">
                     Product Name
@@ -81,7 +81,7 @@ function AddProductForm(props) {
                 </div>
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
                   <label htmlFor="role">
                     Quantity
@@ -99,7 +99,7 @@ function AddProductForm(props) {
                   />
                 </div>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <div>
                   <label htmlFor="supervisorId">
                     Category<span className="asterisks">*</span>
@@ -128,7 +128,7 @@ function AddProductForm(props) {
             </Grid>
 
             <Grid container className="form-grid" spacing={2}>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
                   <label htmlFor="unitPrice">
                     Unit Price
@@ -146,7 +146,7 @@ function AddProductForm(props) {
                   />
                 </div>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
                   <label htmlFor="manDate">Manufucture Date</label>
 
@@ -162,7 +162,7 @@ function AddProductForm(props) {
                 </div>
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
                   <label htmlFor="expDate">Expiry Date</label>
 

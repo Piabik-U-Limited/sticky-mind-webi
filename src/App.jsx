@@ -5,6 +5,7 @@ import Home from "./home/Home";
 import Products from "./products/Products";
 import Sales from "./sales/Sales";
 import Categories from "./categories/Categories";
+import Settings from "./settings/Settings";
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
             <Route path="products" element={<Products />} />
             <Route path="sales" element={<Sales />} />
             <Route path="categories" element={<Categories />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
       </div>
