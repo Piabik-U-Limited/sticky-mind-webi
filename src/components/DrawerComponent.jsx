@@ -15,6 +15,7 @@ import {
   Settings,
   Percent,
   Category,
+  FormatListBulleted
 } from "@mui/icons-material";
 
 import { useNavigate } from "react-router-dom";
@@ -49,6 +50,11 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       name: "Manage Products",
       icon: <Store />,
       link: "/products",
+    },
+    {
+      name: "Batches",
+      icon: <FormatListBulleted />,
+      link: "/batches",
     },
     {
       name: "Invetory Settings",
