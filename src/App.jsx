@@ -7,6 +7,7 @@ import Sales from "./sales/Sales";
 import Categories from "./categories/Categories";
 import Settings from "./settings/Settings";
 import { SignIn,SignUp } from "./auth";
+import { CreateCompony } from "./companies";
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/create-company" element={<CreateCompony />} />
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="products" element={<Products />} />
