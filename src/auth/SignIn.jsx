@@ -16,7 +16,7 @@ import { Login } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
 import { companies } from "../utils/companies";
-import { registerSchema } from "../shemas/registerSchema";
+import { loginSchema } from "../shemas/loginSchema";
 export default function SignIn() {
   return (
     <Container component="main" maxWidth="xs">
@@ -28,8 +28,8 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#0F9D58" }} sizes={["small", "medium"]}>
-          <LockOutlinedIcon />
+        <Avatar sx={{ m: 1, bgcolor: "#0F9D58",height: "70px", width: "70px" }} sizes={["small", "medium"]}>
+          <LockOutlinedIcon fontSize="large" />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -40,7 +40,7 @@ export default function SignIn() {
             password: "",
             companyId: "",
           }}
-          validationSchema={registerSchema}
+          validationSchema={loginSchema}
           onSubmit={(values) => {
             //handleAddProduct(values);
             console.log(values);

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Typography, Box, Grid, Avatar, Button } from "@mui/material";
 import Container from "@mui/material/Container";
-import { AccountCircle, Login, PersonAdd } from "@mui/icons-material";
+import { AccountCircle, Login, PersonAdd, PersonAddAlt } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
 import { Link } from "react-router-dom";
@@ -19,8 +19,8 @@ export default function SignUp() {
           //backgroundColor: "red",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#0F9D58" }} sizes={["small", "medium"]}>
-          <AccountCircle />
+        <Avatar sx={{ m: 1, bgcolor: "#0F9D58",height: "70px", width: "70px" }} sizes={["small", "medium"]}>
+          <PersonAddAlt fontSize="large"/>
         </Avatar>
         <Typography component="h1" variant="h5">
           Create Account
