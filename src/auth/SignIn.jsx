@@ -19,113 +19,111 @@ import { companies } from "../utils/companies";
 import { loginSchema } from "../shemas/loginSchema";
 export default function SignIn() {
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+    <Box
+      sx={{
+        marginTop: 8,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "70px", width: "70px" }}>
+        <LockOutlinedIcon fontSize="large" />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
+      <Formik
+        initialValues={{
+          userName: "",
+          password: "",
+          companyId: "",
+        }}
+        validationSchema={loginSchema}
+        onSubmit={(values) => {
+          //handleAddProduct(values);
+          console.log(values);
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#0F9D58",height: "70px", width: "70px" }} sizes={["small", "medium"]}>
-          <LockOutlinedIcon fontSize="large" />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Formik
-          initialValues={{
-            userName: "",
-            password: "",
-            companyId: "",
-          }}
-          validationSchema={loginSchema}
-          onSubmit={(values) => {
-            //handleAddProduct(values);
-            console.log(values);
-          }}
-        >
-          {({ handleSubmit }) => (
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
+        {({ handleSubmit }) => (
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <SelectField
+              labelName="Select Company"
+              name="companyId"
+              //validate={validateSelect}
+              fullWidth
+              size="small"
+              sx={{
+                marginTop: "5px",
+              }}
+              MenuItems={companies.map((company) => ({
+                value: company.id,
+                name: company.name,
+              }))}
+            />
+            <TextInputField
+              name="userName"
+              placeholder="Enter Username"
+              type="input"
+              size="small"
+              sx={{
+                marginTop: "5px",
+              }}
+            />
+            <TextInputField
+              name="password"
+              placeholder="Enter password"
+              type="password"
+              size="small"
+              sx={{
+                marginTop: "5px",
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              onClick={handleSubmit}
+              variant="contained"
+              sx={{
+                fontSize: "14px",
+                padding: "8px 40px",
+                backgroundColor: "#0F9D58",
+                color: "white",
+                borderRadius: "5px",
+                cursor: "pointer",
+                border: "none",
+                "&:hover": {
+                  backgroundColor: "#0F9D58c0",
+                },
+              }}
+              endIcon={<Login />}
             >
-              <SelectField
-                labelName="Select Company"
-                name="companyId"
-                //validate={validateSelect}
-                fullWidth
-                size="small"
-                sx={{
-                  marginTop: "5px",
-                }}
-                MenuItems={companies.map((company) => ({
-                  value: company.id,
-                  name: company.name,
-                }))}
-              />
-              <TextInputField
-                name="userName"
-                placeholder="Enter Username"
-                type="input"
-                size="small"
-                sx={{
-                  marginTop: "5px",
-                }}
-              />
-              <TextInputField
-                name="password"
-                placeholder="Enter password"
-                type="password"
-                size="small"
-                sx={{
-                  marginTop: "5px",
-                }}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                onClick={handleSubmit}
-                variant="contained"
-                sx={{
-                  fontSize: "14px",
-                  padding: "8px 40px",
-                  backgroundColor: "#0F9D58",
-                  color: "white",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  border: "none",
-                  "&:hover": {
-                    backgroundColor: "#0F9D58c0",
-                  },
-                }}
-                endIcon={<Login />}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/reset-password" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link to={"/signup"}>
-                    <Typography>Create Account</Typography>
-                  </Link>
-                </Grid>
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="/reset-password" variant="body2">
+                  Forgot password?
+                </Link>
               </Grid>
-            </Box>
-          )}
-        </Formik>
-      </Box>
-    </Container>
+              <Grid item>
+                <Link to={"/auth/signup"}>
+                  <Typography>Create Account</Typography>
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        )}
+      </Formik>
+    </Box>
   );
 }

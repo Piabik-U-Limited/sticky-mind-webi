@@ -6,6 +6,7 @@ import notificationSlice from "./slices/notification.slice";
 import salesSlice from "./slices/sales.slice";
 import categoriesSlice from "./slices/categories.slice";
 import dashbardSlice from "./slices/dashbard.slice";
+import authSlice from "./slices/auth.slice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     sales: salesSlice,
     categories: categoriesSlice,
     dashboard: dashbardSlice,
+    auth: authSlice,
   },
 });
 export default store;
