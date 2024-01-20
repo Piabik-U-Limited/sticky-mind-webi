@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { Grid, Button, Box } from "@mui/material";
-import TextInputField from "../components/TextInputField";
-import SelectField from "../components/SelectField";
+import { TextInputField, SelectField, FormDatePicker } from "../components";
 import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
 import { Save } from "@mui/icons-material";
 import useProducts from "../api/hooks/useProducts";
 import useCategories from "../api/hooks/useCategories";
+import * as dayjs from "dayjs";
 function AddProductForm(props) {
   const { handleAddProduct } = useProducts();
   const { handleFetchCategories } = useCategories();
@@ -26,6 +26,14 @@ function AddProductForm(props) {
       .min(1, "Minimum Quantity should be 1")
       .required("Quantity is required"),
     categoryId: yup.string().required("You must select the Category"),
+    expDate: yup.date().required("Expiry date is required"),
+    sellingPrice: yup
+      .number("Selling price must be a number")
+      .required("Selling price is required")
+      .test('greaterThan', 'Selling price must be greater than unit price', function(value) {
+        let { unitPrice } = this.parent;
+        return value > unitPrice;
+      })
   });
 
   function validateSelect(value) {
@@ -51,15 +59,23 @@ function AddProductForm(props) {
           quantity: 0,
           decription: "",
           // manDate: "",
-          // expDate: "",
+          expDate: "",
+          sellingPrice: 0,
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          handleAddProduct(values);
-          console.log(values);
+          const expDate = dayjs(values.expDate).format(
+            "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+          );
+          const manDate = dayjs(values.manDate).format(
+            "YYYY-MM-DDTHH:mm:ss.SSS[Z]"
+          );
+          const data = { ...values, expDate, manDate };
+          handleAddProduct(data);
+          console.log(data);
         }}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, setFieldValue }) => (
           <form className="form-wrap" onSubmit={handleSubmit} method="POST">
             <Grid container className="form-grid" spacing={2}>
               <Grid item xs={12} sm={6} md={4}>
@@ -148,9 +164,8 @@ function AddProductForm(props) {
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
-                  <label htmlFor="manDate">Manufucture Date</label>
-
-                  <TextInputField
+                  <FormDatePicker
+                    label="Manufucture Date"
                     name="manDate"
                     placeholder="Optional"
                     type="input"
@@ -158,15 +173,15 @@ function AddProductForm(props) {
                     sx={{
                       marginTop: "5px",
                     }}
+                    handleChange={(date) => setFieldValue("manDate", date)}
                   />
                 </div>
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
                 <div className="form-input">
-                  <label htmlFor="expDate">Expiry Date</label>
-
-                  <TextInputField
+                  <FormDatePicker
+                    label="Expiration Date"
                     name="expDate"
                     placeholder="Optional"
                     type="input"
@@ -174,24 +189,29 @@ function AddProductForm(props) {
                     sx={{
                       marginTop: "5px",
                     }}
+                    handleChange={(date) => setFieldValue("expDate", date)}
                   />
                 </div>
               </Grid>
             </Grid>
-            <div>
-              <label htmlFor="description">Description</label>
+            <Grid item xs={12} sm={6} md={4}>
+              <div className="form-input">
+                <label htmlFor="sellingPrice">
+                  Selling Price
+                  <span className="asterisks">*</span>
+                </label>
 
-              <TextInputField
-                multiline={true}
-                name="decription"
-                placeholder="N/A"
-                type="text"
-                size="small"
-                sx={{
-                  marginTop: "5px",
-                }}
-              />
-            </div>
+                <TextInputField
+                  name="sellingPrice"
+                  placeholder="Flu camp"
+                  type="number"
+                  size="small"
+                  sx={{
+                    marginTop: "5px",
+                  }}
+                />
+              </div>
+            </Grid>
             <div className="form-grid">
               {state.submitting ? (
                 <LoadingButton

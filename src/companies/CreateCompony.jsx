@@ -137,7 +137,7 @@ export default function CreateCompony() {
                 }}
                 endIcon={<Add />}
               >
-                Create Compan
+                Create Company
               </Button>
             )}
             </Box>

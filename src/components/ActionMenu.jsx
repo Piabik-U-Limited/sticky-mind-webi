@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MenuItem, Divider } from "@mui/material";
 import { IconButton, Tooltip, Typography } from "@mui/material";
-import { ListItemIcon, Menu, Button, Box } from "@mui/material";
+import { ListItemIcon, Menu, Button, Box ,Avatar} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { changeMode } from "../redux/slices/themeSlice";
 import {
@@ -27,7 +27,7 @@ export default function AccountMenu(props) {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Settings">
           <IconButton
-            className="rotate-icon"
+            //className="rotate-icon"
             onClick={handleClick}
             size="small"
             sx={{ mr: 2 }}
@@ -35,7 +35,9 @@ export default function AccountMenu(props) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Settings sx={{ color: "#0F9D58" }} />
+            <Avatar sx={{ color: "#0F9D58" }} >
+              <Person />
+              </Avatar>
           </IconButton>
         </Tooltip>
       </Box>

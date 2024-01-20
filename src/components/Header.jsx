@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material";
-import { Menu, AddBox, PercentRounded } from "@mui/icons-material";
+import { AppBar, Toolbar, IconButton, Typography, Button,Avatar } from "@mui/material";
+import { Menu, AddBox, PercentRounded,Person } from "@mui/icons-material";
 import AccountMenu from "./ActionMenu";
 import { useDispatch } from "react-redux";
 
@@ -47,7 +47,7 @@ function Header(props) {
           {greeting}
         </Typography>
         <div style={{ display: "flex" }}>
-          <AccountMenu />
+        
           <Button
             sx={{
               backgroundColor: "#0F9D58",
@@ -72,6 +72,7 @@ function Header(props) {
           >
             New Sale
           </Button>
+          <AccountMenu />
         </div>
       </Toolbar>
     </AppBar>

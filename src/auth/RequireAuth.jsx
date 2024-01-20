@@ -7,7 +7,6 @@ import Authenticating from "./Authenticating";
 import { decode } from "base-64";
 import { useNavigate } from "react-router-dom";
 
-
 const RequireAuth = ({ children }) => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
@@ -33,28 +32,25 @@ const RequireAuth = ({ children }) => {
         //if error just naviagate to landing screen
         return navigation("/auth");
       } finally {
-        
-       setAuthChecked(true);
-      
+        setAuthChecked(true);
       }
     };
-setTimeout(() => {
-    checkAuth(); 
-},3000)
-   
+    setTimeout(() => {
+      checkAuth();
+    }, 2000);
   }, [navigation]);
 
   const getUser = async () => {
     try {
       const user = Cookies.get("user");
       const data = JSON.parse(user);
-      if(!data) {
-         navigation("/auth");
+      if (!data) {
+        navigation("/auth");
       }
       const company = Cookies.get("company");
       const comapanyData = JSON.parse(company);
-      if(!comapanyData) {
-         navigation("/company/create");
+      if (!comapanyData) {
+        navigation("/company/create");
       }
       dispatch(setCompany(comapanyData));
       dispatch(setUser(data));
