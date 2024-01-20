@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import Authenticating from "./Authenticating";
 import { decode } from "base-64";
 import { useNavigate } from "react-router-dom";
-global.atob = decode; //decode tokens
+
 
 const RequireAuth = ({ children }) => {
   const navigation = useNavigate();
@@ -17,7 +17,7 @@ const RequireAuth = ({ children }) => {
     const checkAuth = async () => {
       try {
         const accessToken = Cookies.get("access_token");
-        if (accessToken) {
+        if (!accessToken) {
           //if no token, redirect to login
           return navigation("/auth");
         } else {
@@ -27,12 +27,15 @@ const RequireAuth = ({ children }) => {
             //Access Token expired
             return navigation("/auth");
           }
+          await getUser();
         }
       } catch (error) {
         //if error just naviagate to landing screen
         return navigation("/auth");
       } finally {
-        setAuthChecked(true);
+        
+       setAuthChecked(true);
+      
       }
     };
 
@@ -43,7 +46,10 @@ const RequireAuth = ({ children }) => {
     try {
       const user = Cookies.get("user");
       const data = JSON.parse(user);
-      dispatch(setUser(data?.user));
+      if(!data) {
+         navigation("/auth");
+      }
+      dispatch(setUser(data));
     } catch (error) {
       return navigation("/auth");
     }

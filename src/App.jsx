@@ -6,8 +6,9 @@ import Products from "./products/Products";
 import Sales from "./sales/Sales";
 import Categories from "./categories/Categories";
 import Settings from "./settings/Settings";
-import { Auth, SignIn, SignUp } from "./auth";
-import { CreateCompony } from "./companies";
+import { Auth, SignIn, SignUp,RequireAuth } from "./auth";
+import { CreateCompony,Company } from "./companies";
+
 function App() {
   return (
     <Router>
@@ -17,9 +18,11 @@ function App() {
             <Route path="" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
           </Route>
-
-          <Route path="/create-company" element={<CreateCompony />} />
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/company" element={<RequireAuth><Company /></RequireAuth>}>
+            <Route path="" element={<CreateCompony />} />
+            <Route path="create" element={<CreateCompony />} />
+          </Route>
+          <Route path="/" element={<RequireAuth><MainLayout /></RequireAuth>}>
             <Route index element={<Home />} />
             <Route path="products" element={<Products />} />
             <Route path="sales" element={<Sales />} />

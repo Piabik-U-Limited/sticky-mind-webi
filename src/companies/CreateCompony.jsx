@@ -4,6 +4,9 @@ import { Business, Add, CloudUpload } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField } from "../components";
 import { styled } from "@mui/material/styles";
+import useCompany from "../api/hooks/useCompany";
+import { LoadingButton } from "@mui/lab";
+import { useSelector } from "react-redux";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -17,6 +20,10 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 export default function CreateCompony() {
+    const {handleCreateCompany}=useCompany()
+    const {loading,user}=useSelector((state)=>state.auth)
+
+  
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -27,7 +34,7 @@ export default function CreateCompony() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "80px", width: "80px" }} sizes={["small", "medium"]}>
+        <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "80px", width: "80px" }} >
           <Business fontSize="large" />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -37,11 +44,12 @@ export default function CreateCompony() {
           initialValues={{
             name: "",
             location: "",
+            creatorId:user?.id
           }}
           //validationSchema={validationSchema}
           onSubmit={(values) => {
-            //handleAddProduct(values);
-            console.log(values);
+            handleCreateCompany(values);
+            console.log(values)
           }}
         >
           {({ handleSubmit }) => (
@@ -70,6 +78,7 @@ export default function CreateCompony() {
                   marginTop: "5px",
                 }}
               />
+              
               <Button
                 component="label"
                 fullWidth
@@ -92,7 +101,23 @@ export default function CreateCompony() {
                 Upload Logo
                 <VisuallyHiddenInput type="file" />
               </Button>
-
+              {loading ? (
+              <LoadingButton
+                className="btnNext"
+                fullWidth
+                loading
+                color="secondary"
+                loadingPosition="start"
+                variant="contained"
+                sx={{
+                  fontSize: "14px",
+                  padding: "8px 40px",
+                  borderRadius: "15px",
+                }}
+              >
+                Creating Account....
+              </LoadingButton>
+            ) : (
               <Button
                 type="submit"
                 fullWidth
@@ -114,6 +139,7 @@ export default function CreateCompony() {
               >
                 Create Compan
               </Button>
+            )}
             </Box>
           )}
         </Formik>

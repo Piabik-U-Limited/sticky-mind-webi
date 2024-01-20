@@ -4,7 +4,7 @@ import { setSuccess } from "../../redux/slices/notification.slice";
 import { useDispatch } from "react-redux";
 import { setUser, setTokens, setLoading } from "../../redux/slices/auth.slice";
 import ApiClient from "../apiClient";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 function useRegister() {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ function useRegister() {
 
       if (response.status === 201) {
         dispatch(setUser(response.data.user));
+        console.log(response.data.user)
         dispatch(setTokens(response.data.tokens));
         dispatch(setSuccess(response.data.message));
         Cookies.remove("refresh_token");
@@ -32,7 +33,7 @@ function useRegister() {
         Cookies.set("refresh_token", response.data.tokens.refresh_token);
         Cookies.set("access_token", response.data.tokens.access_token);
         Cookies.set("user", JSON.stringify(response.data.user));
-        return navigate("/create-company",{ replace: true });
+        navigate("/company/create", { replace: true });
       } else {
         captureError(response);
       }

@@ -17,7 +17,9 @@ import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
 import { companies } from "../utils/companies";
 import { loginSchema } from "../shemas/loginSchema";
+import useLogin from "../api/hooks/useLogin";
 export default function SignIn() {
+  const {handleLogin}=useLogin()
   return (
     <Box
       sx={{
@@ -37,12 +39,12 @@ export default function SignIn() {
         initialValues={{
           userName: "",
           password: "",
-          companyId: "",
+          companyName: "",
         }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
-          //handleAddProduct(values);
-          console.log(values);
+          handleLogin(values);
+          //console.log(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -52,7 +54,7 @@ export default function SignIn() {
             noValidate
             sx={{ mt: 1 }}
           >
-            <SelectField
+            {/* <SelectField
               labelName="Select Company"
               name="companyId"
               //validate={validateSelect}
@@ -65,6 +67,16 @@ export default function SignIn() {
                 value: company.id,
                 name: company.name,
               }))}
+            /> */}
+
+<TextInputField
+              name="companyName"
+              placeholder="Enter Username"
+              type="input"
+              size="small"
+              sx={{
+                marginTop: "5px",
+              }}
             />
             <TextInputField
               name="userName"
