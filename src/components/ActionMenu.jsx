@@ -1,21 +1,24 @@
 import * as React from "react";
 import { MenuItem, Divider } from "@mui/material";
 import { IconButton, Tooltip, Typography } from "@mui/material";
-import { ListItemIcon, Menu, Button, Box ,Avatar} from "@mui/material";
+import { ListItemIcon, Menu, Button, Box, Avatar } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { changeMode } from "../redux/slices/themeSlice";
+import useLogin from "../api/hooks/useLogin";
 import {
   AdminPanelSettings,
   Settings,
   Person,
   Brightness4,
+  Logout,
+  Person2,
 } from "@mui/icons-material";
 
 export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(false);
   const dispatch = useDispatch();
   const themeMode = useSelector((state) => state.theme.mode);
-
+  const { handleLogout } = useLogin();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -35,9 +38,9 @@ export default function AccountMenu(props) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ color: "#0F9D58" }} >
+            <Avatar sx={{ color: "#0F9D58" }}>
               <Person />
-              </Avatar>
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -89,6 +92,26 @@ export default function AccountMenu(props) {
             <Brightness4 fontSize="small" />
           </ListItemIcon>
           {themeMode === "light" ? " Dark Theme" : "Light Theme"}
+        </MenuItem>
+        
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Person2 fontSize="small" />
+          </ListItemIcon>
+          Manage Profile
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
         </MenuItem>
       </Menu>
     </React.Fragment>

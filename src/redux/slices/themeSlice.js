@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const date = new Date().getHours();
 const defaultThemne= date > 6 && date < 18 ? "light" : "dark";
 const initialState = {
-  mode: defaultThemne,
+  mode: "light",
 };
 const themeSlice = createSlice({
   name: "theme",

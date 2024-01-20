@@ -28,7 +28,14 @@ function useLogin() {
     }
     dispatch(setLoading(false));
   };
-  return { handleLogin };
+  const handleLogout = () => {
+    Cookies.remove("refresh_token");
+    Cookies.remove("access_token");
+    Cookies.remove("user");
+    Cookies.remove("company");
+    navigate("/auth",{replace:true} );
+  }
+  return { handleLogin,handleLogout };
 }
 
 export default useLogin;
