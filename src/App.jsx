@@ -6,7 +6,7 @@ import Products from "./products/Products";
 import Sales from "./sales/Sales";
 import Categories from "./categories/Categories";
 import Settings from "./settings/Settings";
-import { Auth, SignIn, SignUp,RequireAuth } from "./auth";
+import { Auth, SignIn, SignUp,RequireAuth,ForgotPassword } from "./auth";
 import { CreateCompony,Company } from "./companies";
 import Batches from "./batches/Batches";
 
@@ -18,6 +18,7 @@ function App() {
           <Route path="/auth" element={<Auth />}>
             <Route path="" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
+            <Route path="reset" element={<ForgotPassword />} />
           </Route>
           <Route path="/company" element={<RequireAuth><Company /></RequireAuth>}>
             <Route path="" element={<CreateCompony />} />
