@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 function useSetError() {
   const dispatch = useDispatch();
   const captureError = (error) => {
+    
     if (error.response) {
       const message = error.response.data.message;
       if (Array.isArray(message) && message.length > 0) {
@@ -18,6 +19,7 @@ function useSetError() {
         dispatch(setError("An error occurred. Please try again."));
       }
     } else {
+      console.log(error)
       dispatch(setError("Sorry, could not connect to the server!"));
     }
   };
