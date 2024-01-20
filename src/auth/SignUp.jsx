@@ -4,9 +4,8 @@ import Container from "@mui/material/Container";
 import { AccountCircle, Login, PersonAdd } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
-import { companies } from "../utils/companies";
 import { Link } from "react-router-dom";
-
+import { registerSchema } from "../shemas/registerSchema";
 export default function SignUp() {
   return (
     <Container component="main" maxWidth="lg">
@@ -32,7 +31,7 @@ export default function SignUp() {
             userName: "",
             password: "",
           }}
-          //validationSchema={validationSchema}
+          validationSchema={registerSchema}
           onSubmit={(values) => {
             //handleAddProduct(values);
             console.log(values);
@@ -59,6 +58,15 @@ export default function SignUp() {
                 name="userName"
                 placeholder="Enter Username"
                 type="input"
+                size="small"
+                sx={{
+                  marginTop: "5px",
+                }}
+              />
+               <TextInputField
+                name="email"
+                placeholder="Enter Email"
+                type="inpuit"
                 size="small"
                 sx={{
                   marginTop: "5px",

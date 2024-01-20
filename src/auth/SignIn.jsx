@@ -16,7 +16,7 @@ import { Login } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
 import { companies } from "../utils/companies";
-
+import { registerSchema } from "../shemas/registerSchema";
 export default function SignIn() {
   return (
     <Container component="main" maxWidth="xs">
@@ -40,7 +40,7 @@ export default function SignIn() {
             password: "",
             companyId: "",
           }}
-          //validationSchema={validationSchema}
+          validationSchema={registerSchema}
           onSubmit={(values) => {
             //handleAddProduct(values);
             console.log(values);
