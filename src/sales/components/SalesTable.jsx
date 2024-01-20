@@ -186,8 +186,8 @@ function SalesTable({ data }) {
 
   Row.propTypes = {
     row: PropTypes.shape({
-      category: PropTypes.number.isRequired,
-      carbs: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
       fat: PropTypes.number.isRequired,
       items: PropTypes.arrayOf(
         PropTypes.shape({

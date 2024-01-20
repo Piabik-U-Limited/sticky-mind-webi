@@ -1,25 +1,23 @@
 import * as React from "react";
-import {Typography,Box,Grid,Avatar,Button} from "@mui/material";
+import { Typography, Box, Grid, Avatar, Button } from "@mui/material";
 import Container from "@mui/material/Container";
-import { AccountCircle, Login } from "@mui/icons-material";
+import { AccountCircle, Login, PersonAdd } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
 import { companies } from "../utils/companies";
 import { Link } from "react-router-dom";
 
-
-
 export default function SignUp() {
- 
-
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="lg">
       <Box
         sx={{
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          // width: "100%",
+          //backgroundColor: "red",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "#0F9D58" }} sizes={["small", "medium"]}>
@@ -30,10 +28,9 @@ export default function SignUp() {
         </Typography>
         <Formik
           initialValues={{
-            name:"",
+            name: "",
             userName: "",
             password: "",
-            
           }}
           //validationSchema={validationSchema}
           onSubmit={(values) => {
@@ -47,8 +44,8 @@ export default function SignUp() {
               onSubmit={handleSubmit}
               noValidate
               sx={{ mt: 1 }}
+              minWidth={"32%"}
             >
-              
               <TextInputField
                 name="name"
                 placeholder="Enter Full Name"
@@ -58,7 +55,7 @@ export default function SignUp() {
                   marginTop: "5px",
                 }}
               />
-               <TextInputField
+              <TextInputField
                 name="userName"
                 placeholder="Enter Username"
                 type="input"
@@ -76,7 +73,7 @@ export default function SignUp() {
                   marginTop: "5px",
                 }}
               />
-             
+
               <Button
                 type="submit"
                 fullWidth
@@ -94,23 +91,24 @@ export default function SignUp() {
                     backgroundColor: "#0F9D58c0",
                   },
                 }}
-                endIcon={<Login />}
+                startIcon={<PersonAdd />}
               >
-                Sign In
+                Register Account
               </Button>
-              
-                
+              <Grid container flex={1}>
+                <Grid item xs>
+                  <Typography>Already have an account? </Typography>
+                </Grid>
                 <Grid item>
-                  <Link to="/login" >
+                  <Link to="/login">
                     <Typography>Login Instead</Typography>
                   </Link>
                 </Grid>
-            
+              </Grid>
             </Box>
           )}
         </Formik>
       </Box>
-     
     </Container>
   );
 }

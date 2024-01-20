@@ -1,24 +1,23 @@
 import * as React from "react";
-import {Avatar,Button,} from "@mui/material";
+import {
+  Container,
+  Avatar,
+  Button,
+  Checkbox,
+  Grid,
+  Box,
+  Typography,
+} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+
+import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { Login } from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, SelectField } from "../components";
 import { companies } from "../utils/companies";
 
-
-
-
 export default function SignIn() {
- 
-
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -87,7 +86,7 @@ export default function SignIn() {
                 }}
               />
               <FormControlLabel
-                control={<Checkbox value="remember"  />}
+                control={<Checkbox value="remember" />}
                 label="Remember me"
               />
               <Button
@@ -113,13 +112,13 @@ export default function SignIn() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/reset-password" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Create Account"}
+                  <Link to={"/signup"}>
+                    <Typography>Create Account</Typography>
                   </Link>
                 </Grid>
               </Grid>
@@ -127,7 +126,6 @@ export default function SignIn() {
           )}
         </Formik>
       </Box>
-     
     </Container>
   );
 }
