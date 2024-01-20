@@ -20,6 +20,7 @@ function useLogin() {
       Cookies.remove("user");
       Cookies.set("refresh_token", response.data.tokens.refresh_token);
       Cookies.set("access_token", response.data.tokens.access_token);
+      Cookies.set("company", JSON.stringify(response.data.user.company));
       Cookies.set("user", JSON.stringify(response.data.user));
       navigate("/", { replace: true });
     } else {

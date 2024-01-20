@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
-import { setUser } from "../redux/slices/auth.slice";
+import { setCompany, setUser } from "../redux/slices/auth.slice";
 import { useDispatch } from "react-redux";
 import Authenticating from "./Authenticating";
 import { decode } from "base-64";
@@ -38,8 +38,10 @@ const RequireAuth = ({ children }) => {
       
       }
     };
-
-    checkAuth();
+setTimeout(() => {
+    checkAuth(); 
+},3000)
+   
   }, [navigation]);
 
   const getUser = async () => {
@@ -49,6 +51,12 @@ const RequireAuth = ({ children }) => {
       if(!data) {
          navigation("/auth");
       }
+      const company = Cookies.get("company");
+      const comapanyData = JSON.parse(company);
+      if(!comapanyData) {
+         navigation("/company/create");
+      }
+      dispatch(setCompany(comapanyData));
       dispatch(setUser(data));
     } catch (error) {
       return navigation("/auth");

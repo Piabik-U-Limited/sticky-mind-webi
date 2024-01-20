@@ -8,16 +8,17 @@ import {
 } from "../../redux/slices/categories.slice";
 import ApiClient from "../apiClient";
 import useSetError from "./useSetError";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 function useCategories() {
   const dispatch = useDispatch();
   const api = new ApiClient();
   const { captureError } = useSetError();
+  const company =useSelector(state=>state.auth.company)
 
   const handleFetchCategories = async () => {
     dispatch(setLoading(true));
     try {
-      const response = await api._makeRequest("get", "categories");
+      const response = await api._makeRequest("get", `categories/${company?.id}`);
 
       if (response.status === 200) {
         console.log(response.data);

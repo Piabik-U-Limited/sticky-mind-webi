@@ -7,7 +7,7 @@ import salesSlice from "./slices/sales.slice";
 import categoriesSlice from "./slices/categories.slice";
 import dashbardSlice from "./slices/dashbard.slice";
 import authSlice from "./slices/auth.slice";
-
+import batchesSlice from "./slices/batches.slice";
 const store = configureStore({
   reducer: {
     staff: staffSlice,
@@ -18,6 +18,7 @@ const store = configureStore({
     categories: categoriesSlice,
     dashboard: dashbardSlice,
     auth: authSlice,
+    batches: batchesSlice,
   },
 });
 export default store;

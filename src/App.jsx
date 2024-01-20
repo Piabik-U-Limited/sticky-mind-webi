@@ -8,6 +8,7 @@ import Categories from "./categories/Categories";
 import Settings from "./settings/Settings";
 import { Auth, SignIn, SignUp,RequireAuth } from "./auth";
 import { CreateCompony,Company } from "./companies";
+import Batches from "./batches/Batches";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="sales" element={<Sales />} />
             <Route path="categories" element={<Categories />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="batches" element={<Batches />} />
           </Route>
         </Routes>
       </div>
