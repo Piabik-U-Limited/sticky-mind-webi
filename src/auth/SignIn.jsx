@@ -19,7 +19,7 @@ import { companies } from "../utils/companies";
 import { loginSchema } from "../shemas/loginSchema";
 import useLogin from "../api/hooks/useLogin";
 export default function SignIn() {
-  const {handleLogin}=useLogin()
+  const { handleLogin } = useLogin();
   return (
     <Box
       sx={{
@@ -53,6 +53,7 @@ export default function SignIn() {
             onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
+            minWidth={"32%"}
           >
             {/* <SelectField
               labelName="Select Company"
@@ -69,7 +70,7 @@ export default function SignIn() {
               }))}
             /> */}
 
-<TextInputField
+            <TextInputField
               name="companyName"
               placeholder="Enter Username"
               type="input"
