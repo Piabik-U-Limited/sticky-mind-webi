@@ -8,7 +8,7 @@ import {
   PersonAddAlt,
 } from "@mui/icons-material";
 import { Formik } from "formik";
-import { TextInputField, SelectField } from "../components";
+import { TextInputField, PasswordInput } from "../components";
 import { Link } from "react-router-dom";
 import { registerSchema } from "../shemas/registerSchema";
 import { useSelector } from "react-redux";
@@ -81,10 +81,9 @@ export default function SignUp() {
                 marginTop: "5px",
               }}
             />
-            <TextInputField
+            <PasswordInput
               name="password"
               placeholder="Enter password"
-              type="password"
               size="small"
               sx={{
                 marginTop: "5px",

@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Key, Login, Password } from "@mui/icons-material";
 import { Formik } from "formik";
-import { TextInputField, SelectField } from "../components";
+import { TextInputField, PasswordInput } from "../components";
 import { companies } from "../utils/companies";
 import { loginSchema } from "../shemas/loginSchema";
 import useLogin from "../api/hooks/useLogin";
@@ -88,10 +88,10 @@ export default function SignIn() {
                 marginTop: "5px",
               }}
             />
-            <TextInputField
+            <PasswordInput
               name="password"
               placeholder="Enter password"
-              type="password"
+              //type="password"
               size="small"
               sx={{
                 marginTop: "5px",

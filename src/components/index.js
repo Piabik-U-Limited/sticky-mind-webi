@@ -10,3 +10,5 @@ export { default as SuccessAlert } from "./SuccessAlert";
 export { default as SelectField } from "./SelectField";
 export { default as TextInputField } from "./TextInputField";
 export {default as FormDatePicker} from "./FormDatePicker"
+export {default as PasswordInput} from "./PasswordInput"
+
