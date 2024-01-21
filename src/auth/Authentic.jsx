@@ -50,13 +50,14 @@ const Authentic = ({ children }) => {
       if (!data) {
         return 
       }
+      dispatch(setUser(data));
       const company = Cookies.get("company");
       const comapanyData = JSON.parse(company);
       if (!comapanyData) {
         navigation("/company/create");
       }
       dispatch(setCompany(comapanyData));
-      dispatch(setUser(data));
+      
     } catch (error) {
       return 
     }

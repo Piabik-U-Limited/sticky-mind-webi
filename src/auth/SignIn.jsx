@@ -72,7 +72,7 @@ export default function SignIn() {
 
             <TextInputField
               name="companyName"
-              placeholder="Enter Username"
+              placeholder="Enter Company Name"
               type="input"
               size="small"
               sx={{
