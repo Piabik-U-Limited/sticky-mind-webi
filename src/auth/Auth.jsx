@@ -8,7 +8,7 @@ function Auth() {
     const dispatch = useDispatch();
     const notification = useSelector((state) => state.notification);
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="lg" sx={{backgroundImage:"url('../assets/svgs/bottom.svg')",backgroundSize:"cover",}}>
       <Outlet />
       <SuccessAlert
           message={notification.success}

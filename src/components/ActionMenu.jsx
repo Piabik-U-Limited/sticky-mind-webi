@@ -38,7 +38,7 @@ export default function AccountMenu(props) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ color: "#0F9D58" }}>
+            <Avatar >
               <Person />
             </Avatar>
           </IconButton>

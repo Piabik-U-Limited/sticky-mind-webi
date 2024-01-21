@@ -8,18 +8,19 @@ import {
 } from "../../redux/slices/products.slice";
 import ApiClient from "../apiClient";
 import useSetError from "./useSetError";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import useDashboard from "./useDashboard";
 function useProducts() {
   const dispatch = useDispatch();
   const api = new ApiClient();
   const { captureError } = useSetError();
   const { handleFetchDashboardData } = useDashboard();
+  const {company}=useSelector(state=>state.auth)
 
   const handleFetchProducts = async () => {
     dispatch(setLoading(true));
     try {
-      const response = await api._makeRequest("get", "products");
+      const response = await api._makeRequest("get", `products/${company?.id}`);
 
       if (response.status === 200) {
         console.log(response.data);

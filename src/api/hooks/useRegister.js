@@ -33,7 +33,8 @@ function useRegister() {
         Cookies.set("refresh_token", response.data.tokens.refresh_token);
         Cookies.set("access_token", response.data.tokens.access_token);
         Cookies.set("user", JSON.stringify(response.data.user));
-        console.log(response.data)
+       
+        dispatch(setLoading(false));
         navigate("/company/create", { replace: true });
       } else {
         captureError(response);

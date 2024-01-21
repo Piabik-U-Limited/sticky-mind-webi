@@ -35,11 +35,10 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       icon: <Dashboard />,
       link: "/",
     },
-
     {
-      name: "Manage Sales",
-      icon: <Percent />,
-      link: "/sales",
+      name: "Batches",
+      icon: <FormatListBulleted />,
+      link: "/batches",
     },
     {
       name: "Categories",
@@ -52,10 +51,12 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       link: "/products",
     },
     {
-      name: "Batches",
-      icon: <FormatListBulleted />,
-      link: "/batches",
+      name: "Manage Sales",
+      icon: <Percent />,
+      link: "/sales",
     },
+    
+    
     {
       name: "Invetory Settings",
       icon: <Settings />,
