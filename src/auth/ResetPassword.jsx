@@ -12,7 +12,7 @@ import * as yup from "yup";
     password: yup.string().required("Password is required"),
     confirmPassword: yup
       .string()
-      .required("Confirm Password is required")
+      .required("Confirm Password is required").min(6, "Password must be at least 6 characters")
       .oneOf([yup.ref("password"), null], "Passwords must match"),
     
 })
