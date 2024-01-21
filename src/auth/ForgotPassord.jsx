@@ -1,21 +1,16 @@
 import * as React from "react";
 import {
-  Container,
   Avatar,
   Button,
-  Checkbox,
   Grid,
   Box,
   Typography,
 } from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
+import { resetSchema } from "../shemas/resetSchema";
 import { Link } from "react-router-dom";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Login } from "@mui/icons-material";
+import {LockOutlined,LockOpen} from "@mui/icons-material";
 import { Formik } from "formik";
 import { TextInputField, } from "../components";
-import { loginSchema } from "../shemas/loginSchema";
 import useLogin from "../api/hooks/useLogin";
 export default function ForgotPassword() {
   const { handleLogin } = useLogin();
@@ -29,7 +24,7 @@ export default function ForgotPassword() {
       }}
     >
       <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "70px", width: "70px" }}>
-        <LockOutlinedIcon fontSize="large" />
+        <LockOutlined fontSize="large" />
       </Avatar>
       <Typography component="h1" variant="h5">
         Password Reset
@@ -39,7 +34,7 @@ export default function ForgotPassword() {
           email: "",
           
         }}
-        //validationSchema={loginSchema}
+        validationSchema={resetSchema}
         onSubmit={(values) => {
           //handleLogin(values);
           console.log(values);
@@ -83,9 +78,9 @@ export default function ForgotPassword() {
                   backgroundColor: "#0F9D58c0",
                 },
               }}
-              endIcon={<Login />}
+              endIcon={<LockOpen />}
             >
-              Request Password Reset
+              Reset My Password 
             </Button>
             <Grid container sx={{ marginY: "10px" }}>
               <Grid item xs>
