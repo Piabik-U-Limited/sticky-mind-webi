@@ -5,6 +5,7 @@ import { setSuccess } from "../../redux/slices/notification.slice";
 import useSetError from "./useSetError";
 import { setCompany,setLoading } from "../../redux/slices/auth.slice";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 function useCompany() {
   const dispatch = useDispatch();
   const { captureError } = useSetError();
@@ -17,6 +18,7 @@ function useCompany() {
       if (response.status === 201) {
         dispatch(setCompany(response.data.company));
         dispatch(setSuccess(response.data.message));
+        Cookies.set("company", JSON.stringify(response.data.company));
         return navigate("/", { replace: true });
       } else {
         captureError(response);
