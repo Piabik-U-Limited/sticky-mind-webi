@@ -28,10 +28,10 @@ function useDashboard() {
     setLoading(false);
   };
 
-  const handleFetchStats = async () => {
+  const handleFetchStats = async (endpoint) => {
     setLoading(true);
     try {
-      const response = await api._makeRequest("get", `dashboard/${company?.id}/stats/monthly`);
+      const response = await api._makeRequest("get", `dashboard/${company?.id}/stats/${endpoint}`);
       if (response.status === 200) {
         dispatch(setStats(response.data));
       } else {

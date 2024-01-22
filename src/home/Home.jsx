@@ -6,9 +6,10 @@ import "./styles/main-content.css";
 
 function Home() {
   const { handleFetchDashboardData,handleFetchStats } = useDashboard();
+  const  statType= useSelector((state) => state.dashboard.statType);
   useEffect(() => {
     handleFetchDashboardData();
-    handleFetchStats();
+    handleFetchStats(statType);
   }, []);
 
   return (

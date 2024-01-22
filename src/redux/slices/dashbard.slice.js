@@ -4,6 +4,8 @@ const initialState = {
   dashboardData: {},
   loading: false,
   stats: [],
+  
+  statType:"daily"
 };
 
 const dashboardSlice = createSlice({
@@ -19,9 +21,12 @@ const dashboardSlice = createSlice({
     setStats(state, action) {
       state.stats = action.payload;
     },
+    setStatType(state, action) {
+      state.statType = action.payload;
+    }
   },
 });
 
-export const { setDashbaordData, setLoading, setStats } =
+export const { setDashbaordData, setLoading, setStats,setStatType } =
   dashboardSlice.actions;
 export default dashboardSlice.reducer;
