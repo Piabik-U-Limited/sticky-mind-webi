@@ -72,10 +72,10 @@ function useRegister() {
         "auth/reset-password",
         data
       );
-      if (response.status === 201) {
+      if (response.status === 200) {
         dispatch(setLoading(false));
         dispatch(setSuccess(response.data.message));
-        navigate("/auth/login", { replace: true });
+        navigate("/auth", { replace: true });
       } else {
         captureError(response);
       }
