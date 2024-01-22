@@ -21,9 +21,7 @@ function useBatches() {
       } else {
         captureError(response);
       }
-      console.log(response)
     } catch (error) {
-      console.log(error);
       captureError(error);
     }
     dispatch(setLoading(false));

@@ -17,7 +17,6 @@ function useDashboard() {
     try {
       const response = await api._makeRequest("get", `dashboard/${company?.id}`);
       if (response.status === 200) {
-        console.log(response.data);
         dispatch(setDashbaordData(response.data));
       } else {
         captureError(response);

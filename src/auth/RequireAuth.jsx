@@ -17,21 +17,18 @@ const RequireAuth = ({ children }) => {
         const accessToken = Cookies.get("access_token");
         if (!accessToken) {
           //if no token, redirect to login
-          console.log("no token");
           return navigation("/auth");
         } else {
           const decoded = jwtDecode(accessToken, { header: true });
           const currentDate = new Date().getTime() / 1000;
           if (currentDate >= decoded.exp + 2) {
             //Access Token expired
-            console.log("Token Expired");
             return navigation("/auth");
           }
           await getUser();
         }
       } catch (error) {
         //if error just naviagate to landing screen
-        console.log("couldn't get user tokens"); 
         return navigation("/auth");
       } finally {
         setAuthChecked(true);

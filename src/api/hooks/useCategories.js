@@ -21,13 +21,11 @@ function useCategories() {
       const response = await api._makeRequest("get", `categories/${company?.id}`);
 
       if (response.status === 200) {
-        console.log(response.data);
         dispatch(setCategoriess(response.data));
       } else {
         captureError(response);
       }
     } catch (error) {
-      console.log(error);
       captureError(error);
     }
     dispatch(setLoading(false));

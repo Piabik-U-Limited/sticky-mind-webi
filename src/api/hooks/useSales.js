@@ -23,13 +23,11 @@ function useSales() {
       const response = await api._makeRequest("get", `sales/${company?.id}`);
 
       if (response.status === 200) {
-        console.log(response.data);
         dispatch(setSales(response.data));
       } else {
         captureError(response);
       }
     } catch (error) {
-      console.log(error);
       captureError(error);
     }
     dispatch(setLoading(false));

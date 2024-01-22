@@ -19,7 +19,6 @@ function useSetError() {
         dispatch(setError("An error occurred. Please try again."));
       }
     } else {
-      console.log(error)
       dispatch(setError("Sorry, could not connect to the server!"));
     }
   };

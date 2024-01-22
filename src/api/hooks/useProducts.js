@@ -23,13 +23,11 @@ function useProducts() {
       const response = await api._makeRequest("get", `products/${company?.id}`);
 
       if (response.status === 200) {
-        console.log(response.data);
         dispatch(setProducts(response.data));
       } else {
         captureError(response);
       }
     } catch (error) {
-      console.log(error);
       captureError(error);
     }
     dispatch(setLoading(false));
