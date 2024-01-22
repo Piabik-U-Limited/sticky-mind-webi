@@ -5,9 +5,10 @@ import { Summery } from "./components";
 import "./styles/main-content.css";
 
 function Home() {
-  const { handleFetchDashboardData } = useDashboard();
+  const { handleFetchDashboardData,handleFetchStats } = useDashboard();
   useEffect(() => {
     handleFetchDashboardData();
+    handleFetchStats();
   }, []);
 
   return (

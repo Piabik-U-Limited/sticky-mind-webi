@@ -13,16 +13,18 @@ import {
   Legend,
   Line,
 } from "recharts";
-
+import { useSelector } from "react-redux";
 const SummeryPieChart = () => {
-  const data = [
-    { name: "January", sales: 400 },
-    { name: "February", sales: 300 },
-    { name: "March", sales: 300 },
-    { name: "April", sales: 200 },
-    { name: "May", sales: 200 },
-    { name: "June", sales: 800 },
-  ];
+  // const data = [
+  //   { name: "January", sales: 400 },
+  //   { name: "February", sales: 300 },
+  //   { name: "March", sales: 300 },
+  //   { name: "April", sales: 200 },
+  //   { name: "May", sales: 200 },
+  //   { name: "June", sales: 800 },
+  // ];
+
+  const data= useSelector((state) => state.dashboard.stats);
 
   const COLORS = ["purple", "#87CEEB", "#FFBB28", "#0F9D58", "yellow", "blue"];
   return (
