@@ -92,7 +92,7 @@ function SummeryData() {
                 <img src={income} alt="Income" width={50} />
               </div>
               <div>
-                <Typography variant="subtitle1">Net Income</Typography>
+                <Typography variant="subtitle1">Gross Sales</Typography>
                 <Typography variant="h6">
                   UGX. {state.dashboardData?.netIncome}
                 </Typography>
