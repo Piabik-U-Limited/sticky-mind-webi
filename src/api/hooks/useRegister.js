@@ -24,7 +24,6 @@ function useRegister() {
 
       if (response.status === 201) {
         dispatch(setUser(response.data.user));
-        console.log(response.data.user)
         dispatch(setTokens(response.data.tokens));
         dispatch(setSuccess(response.data.message));
         Cookies.remove("refresh_token");
@@ -44,7 +43,49 @@ function useRegister() {
     }
     dispatch(setLoading(false));
   };
-  return { handleRegister };
+
+  const handleRequestpasswordreset = async (data) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiClient._makeRequest(
+        "post",
+        "auth/forgot-password",
+        data
+      );
+      if (response.status === 201) {
+        dispatch(setLoading(false));
+        dispatch(setSuccess(response.data.message));
+        navigate("/auth/email-sent", { replace: true });
+      } else {
+        captureError(response);
+      }
+    } catch (error) {
+      captureError(error);
+    }
+    dispatch(setLoading(false));
+  }
+  const handleResetpassword = async (data) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiClient._makeRequest(
+        "patch",
+        "auth/reset-password",
+        data
+      );
+      if (response.status === 201) {
+        dispatch(setLoading(false));
+        dispatch(setSuccess(response.data.message));
+        navigate("/auth/login", { replace: true });
+      } else {
+        captureError(response);
+      }
+    } catch (error) {
+      captureError(error);
+    }
+    dispatch(setLoading(false));
+    
+  }
+  return { handleRegister,handleRequestpasswordreset,handleResetpassword };
 }
 
 export default useRegister;

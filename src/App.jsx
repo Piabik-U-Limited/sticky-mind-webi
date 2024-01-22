@@ -6,8 +6,8 @@ import Products from "./products/Products";
 import Sales from "./sales/Sales";
 import Categories from "./categories/Categories";
 import Settings from "./settings/Settings";
-import { Auth, SignIn, SignUp,RequireAuth,ForgotPassword , Authentic,ResetPassword} from "./auth";
-import { CreateCompony,Company } from "./companies";
+import { Auth, SignIn, SignUp,RequireAuth,ForgotPassword , Authentic,ResetPassword,EmailSent} from "./auth";
+import { CreateCompony,Company, } from "./companies";
 import Batches from "./batches/Batches";
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
             <Route path="" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="reset" element={<ForgotPassword />} />
+            <Route path="email-sent" element={<EmailSent />} />
             <Route path="reset/:token" element={<ResetPassword />} />
           </Route>
           <Route path="/company" element={<RequireAuth><Company /></RequireAuth>}>

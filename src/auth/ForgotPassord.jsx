@@ -1,19 +1,17 @@
 import * as React from "react";
-import {
-  Avatar,
-  Button,
-  Grid,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Avatar, Button, Grid, Box, Typography } from "@mui/material";
 import { resetSchema } from "../shemas/resetSchema";
 import { Link } from "react-router-dom";
-import {LockOutlined,LockOpen} from "@mui/icons-material";
+import { LockOutlined, LockOpen } from "@mui/icons-material";
 import { Formik } from "formik";
-import { TextInputField, } from "../components";
-import useLogin from "../api/hooks/useLogin";
+import { TextInputField, FormSubmitButton } from "../components";
+import useRegister from "../api/hooks/useRegister";
+import { useSelector } from "react-redux";
+
 export default function ForgotPassword() {
-  const { handleLogin } = useLogin();
+  const { handleRequestpasswordreset } = useRegister();
+  const { loading } = useSelector((state) => state.auth);
+
   return (
     <Box
       sx={{
@@ -32,12 +30,10 @@ export default function ForgotPassword() {
       <Formik
         initialValues={{
           email: "",
-          
         }}
         validationSchema={resetSchema}
         onSubmit={(values) => {
-          //handleLogin(values);
-          console.log(values);
+          handleRequestpasswordreset(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -48,8 +44,6 @@ export default function ForgotPassword() {
             sx={{ mt: 1 }}
             minWidth={"32%"}
           >
-            
-
             <TextInputField
               name="email"
               placeholder="Enter Your Email"
@@ -59,34 +53,18 @@ export default function ForgotPassword() {
                 marginTop: "5px",
               }}
             />
-           
-           
-            <Button
-              type="submit"
-              fullWidth
-              onClick={handleSubmit}
-              variant="contained"
-              sx={{
-                fontSize: "14px",
-                padding: "8px 40px",
-                backgroundColor: "#0F9D58",
-                color: "white",
-                borderRadius: "5px",
-                cursor: "pointer",
-                border: "none",
-                "&:hover": {
-                  backgroundColor: "#0F9D58c0",
-                },
-              }}
-              endIcon={<LockOpen />}
-            >
-              Reset My Password 
-            </Button>
+
+            <FormSubmitButton
+              handleSubmit={handleSubmit}
+              loading={loading}
+              title="Reset my Password"
+              loadingTitle={"Sending Link"}
+              icon={<LockOpen />}
+            />
+
             <Grid container sx={{ marginY: "10px" }}>
               <Grid item xs>
-                <Typography  variant="body2">
-                  Remember password?
-                </Typography>
+                <Typography variant="body2">Remember password?</Typography>
               </Grid>
               <Grid item>
                 <Link to={"/auth"}>
@@ -96,8 +74,8 @@ export default function ForgotPassword() {
             </Grid>
             <Grid container>
               <Grid item xs>
-                <Typography  variant="body2">
-                 Don't have an account yet?
+                <Typography variant="body2">
+                  Don't have an account yet?
                 </Typography>
               </Grid>
               <Grid item>
