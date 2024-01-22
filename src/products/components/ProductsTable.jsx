@@ -20,6 +20,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton, InputBase } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import * as dayjs from "dayjs";
 // import {
 //   openproducts,
 //   setselectedProduct,
@@ -77,9 +78,10 @@ function ProductsTable({ data }) {
     { id: "id", label: "Id" },
     { id: "name", label: "Name", minWidth: 40 },
     { id: "category", label: "Category", minWidth: 40 },
-    { id: "quantity", label: "Quantity" },
+    { id: "quantity", label: "QTY" },
     { id: "unitPrice", label: "Unit Price (UGX)", minWidth: 40 },
     { id: "totalPrice", label: "Total Price (UGX)", minWidth: 40 },
+    {id: "expiryDate", label: "Expires", minWidth: 40 },
     {
       id: "action",
       label: "Action",
@@ -99,8 +101,9 @@ function ProductsTable({ data }) {
     },
   ];
 
-  function createData(id, name, quantity, category, unitPrice) {
+  function createData(id, name, quantity, category, unitPrice,exp) {
     const totalPrice = quantity * unitPrice;
+    const expiryDate = dayjs(exp).format("MMM, DD-YYYY");
 
     return {
       id,
@@ -109,17 +112,20 @@ function ProductsTable({ data }) {
       category,
       unitPrice,
       totalPrice,
+       expiryDate,
     };
   }
 
   const rows = data.map((item) =>
     createData(
-      item.id,
-      item.name,
-      item.quantity,
-      item.category.name,
-      item.unitPrice,
-      item.totalPrice
+      item?.id,
+      item?.name,
+      item?.quantity,
+      item?.category.name,
+      item?.unitPrice,
+      item?.totalPrice,
+      item?.expDate
+
     )
   );
 
