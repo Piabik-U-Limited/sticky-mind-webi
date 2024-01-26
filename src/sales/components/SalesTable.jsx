@@ -24,40 +24,10 @@ import * as dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
 function SalesTable({ data }) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  //const selectedProduct = useSelector((state) => state.product.selectedProduct);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [filterQuery, setFilterQuery] = React.useState("");
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleOpen = (event, products) => {
-    setAnchorEl(event.currentTarget);
-    //update global state for selected products
-    // dispatch(setselectedProduct(products));
-  };
+  
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const viewproducts = () => {
-    setAnchorEl(null);
-    //dispatch(openproducts());
-  };
-  const selectproducts = () => {
-    // navigate(`/admin/dashboard/product/${selectedProduct.id}`);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
 
   function createData(id, customerName, refNo, date, totalAmount, items) {
     return {
@@ -165,7 +135,7 @@ function SalesTable({ data }) {
                     </TableRow>
                   </TableBody>
                 </Table>
-                <Button
+                {/* <Button
                   endIcon={<OpenInNew />}
                   variant="contained"
                   sx={{
@@ -175,7 +145,7 @@ function SalesTable({ data }) {
                   }}
                 >
                   Details
-                </Button>
+                </Button> */}
               </Box>
             </Collapse>
           </TableCell>
@@ -184,23 +154,7 @@ function SalesTable({ data }) {
     );
   }
 
-  Row.propTypes = {
-    row: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      fat: PropTypes.number.isRequired,
-      items: PropTypes.arrayOf(
-        PropTypes.shape({
-          amount: PropTypes.number.isRequired,
-          customerId: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-        })
-      ).isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      protein: PropTypes.number.isRequired,
-    }).isRequired,
-  };
+  
 
   const rows = data.map((item) =>
     createData(

@@ -72,7 +72,7 @@ export default function ForgotPassword() {
                 </Link>
               </Grid>
             </Grid>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Typography variant="body2">
                   Don't have an account yet?
@@ -83,7 +83,7 @@ export default function ForgotPassword() {
                   <Typography>Create Account</Typography>
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         )}
       </Formik>

@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { Grid, Button, Box } from "@mui/material";
-import { TextInputField, SelectField, FormDatePicker } from "../components";
+import {
+  TextInputField,
+  SelectField,
+  FormDatePicker,
+  FormSubmitButton,
+} from "../components";
 import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
@@ -30,10 +35,14 @@ function AddProductForm(props) {
     sellingPrice: yup
       .number("Selling price must be a number")
       .required("Selling price is required")
-      .test('greaterThan', 'Selling price must be greater than unit price', function(value) {
-        let { unitPrice } = this.parent;
-        return value > unitPrice;
-      })
+      .test(
+        "greaterThan",
+        "Selling price must be greater than unit price",
+        function (value) {
+          let { unitPrice } = this.parent;
+          return value > unitPrice;
+        }
+      ),
   });
 
   function validateSelect(value) {
@@ -213,42 +222,13 @@ function AddProductForm(props) {
               </div>
             </Grid>
             <div className="form-grid">
-              {state.submitting ? (
-                <LoadingButton
-                  className="btnNext"
-                  loading
-                  color="secondary"
-                  loadingPosition="start"
-                  variant="contained"
-                  sx={{
-                    fontSize: "14px",
-                    padding: "8px 40px",
-                    borderRadius: "15px",
-                  }}
-                >
-                  Saving
-                </LoadingButton>
-              ) : (
-                <Button
-                  type="submit"
-                  className="submit-btn"
-                  sx={{
-                    fontSize: "14px",
-                    padding: "8px 40px",
-                    backgroundColor: "#0F9D58",
-                    color: "white",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    border: "none",
-                    "&:hover": {
-                      backgroundColor: "#0F9D58c0",
-                    },
-                  }}
-                  endIcon={<Save />}
-                >
-                  Save
-                </Button>
-              )}
+              <FormSubmitButton
+                handleSubmit={handleSubmit}
+                loading={state.submitting}
+                title="Save product"
+                loadingTitle={"Signing In..."}
+                icon={<Save />}
+              />
             </div>
           </form>
         )}

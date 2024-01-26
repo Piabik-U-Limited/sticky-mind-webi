@@ -70,7 +70,7 @@ useEffect(() => {
                 <p>Loading batches...</p>
               ) : (
                 <SelectField
-                  labelName="Select Category"
+                  labelName="Select Batch"
                   name="batchId"
                   //validate={validateSelect}
                   fullWidth

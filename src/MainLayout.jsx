@@ -105,7 +105,7 @@ function MainLayout(props) {
             },
           }}
         >
-          <DrawerComponent drawerWidth={drawerWidth} theme={themeMode} />
+          <DrawerComponent drawerWidth={drawerWidth} theme={themeMode}  toggleDrawer={handleDrawerToggle} />
         </Drawer>
       </Box>
       <Box

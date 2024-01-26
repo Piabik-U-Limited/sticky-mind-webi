@@ -14,12 +14,15 @@ import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Key, Login, Password } from "@mui/icons-material";
 import { Formik } from "formik";
-import { TextInputField, PasswordInput } from "../components";
+import { TextInputField, PasswordInput,FormSubmitButton } from "../components";
 import { companies } from "../utils/companies";
 import { loginSchema } from "../shemas/loginSchema";
 import useLogin from "../api/hooks/useLogin";
+import { useSelector } from "react-redux";
 export default function SignIn() {
   const { handleLogin } = useLogin();
+  const {loading} = useSelector((state) => state.auth)
+
   return (
     <Box
       sx={{
@@ -101,7 +104,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" />}
               label="Remember me"
             />
-            <Button
+            {/* <Button
               type="submit"
               fullWidth
               onClick={handleSubmit}
@@ -121,18 +124,25 @@ export default function SignIn() {
               endIcon={<Login />}
             >
               Sign In
-            </Button>
+            </Button> */}
+            <FormSubmitButton
+              handleSubmit={handleSubmit}
+              loading={loading}
+              title=" Sign In"
+              loadingTitle={"Signing In..."}
+              icon={<Login />}
+            />
             <Grid container>
               <Grid item xs>
                 <Link to="/auth/reset" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
+              {/* <Grid item>
                 <Link to={"/auth/signup"}>
                   <Typography>Create Account</Typography>
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
         )}
