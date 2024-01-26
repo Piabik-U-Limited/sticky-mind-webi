@@ -57,11 +57,11 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
     },
     
     
-    {
-      name: "Invetory Settings",
-      icon: <Settings />,
-      link: "/settings",
-    },
+    // {
+    //   name: "Invetory Settings",
+    //   icon: <Settings />,
+    //   link: "/settings",
+    // },
   ];
   return (
     <div>
