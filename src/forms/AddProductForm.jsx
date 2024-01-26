@@ -81,7 +81,7 @@ function AddProductForm(props) {
           );
           const data = { ...values, expDate, manDate };
           handleAddProduct(data);
-          console.log(data);
+          
         }}
       >
         {({ handleSubmit, setFieldValue }) => (

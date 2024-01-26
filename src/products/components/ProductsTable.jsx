@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton, InputBase } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import * as dayjs from "dayjs";
+//import * as dayjs from "dayjs";
 // import {
 //   openproducts,
 //   setselectedProduct,
@@ -101,10 +101,9 @@ function ProductsTable({ data }) {
     },
   ];
 
-  function createData(id, name, quantity, category, unitPrice,exp) {
+  function createData(id, name, quantity, category, unitPrice,expDate) {
     const totalPrice = quantity * unitPrice;
-    const expiryDate = dayjs(exp).format("MMM, DD-YYYY");
-
+    const expiryDate = expDate;
     return {
       id,
       name,
@@ -112,7 +111,7 @@ function ProductsTable({ data }) {
       category,
       unitPrice,
       totalPrice,
-       expiryDate,
+      expiryDate,
     };
   }
 
@@ -123,7 +122,6 @@ function ProductsTable({ data }) {
       item?.quantity,
       item?.category.name,
       item?.unitPrice,
-      item?.totalPrice,
       item?.expDate
 
     )
@@ -138,6 +136,7 @@ function ProductsTable({ data }) {
       //row.duration.toLowerCase().includes(filterQuery.toLowerCase())
     );
   });
+  console.log(data)
   return (
     <Paper sx={{ width: "100%", overflow: "scroll", borderRadius: 2 }}>
       <Paper

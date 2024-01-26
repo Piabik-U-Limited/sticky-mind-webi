@@ -4,7 +4,7 @@ import useProducts from "../api/hooks/useProducts";
 import ProductsTable from "./components/ProductsTable";
 import { useSelector } from "react-redux";
 function Products() {
-  const products = useSelector((state) => state.products.products);
+  const {products} = useSelector((state) => state.products);
   const { handleFetchProducts } = useProducts();
   useEffect(() => {
     handleFetchProducts();
