@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton, InputBase } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-//import * as dayjs from "dayjs";
+import  dayjs from "dayjs";
 // import {
 //   openproducts,
 //   setselectedProduct,
@@ -103,7 +103,7 @@ function ProductsTable({ data }) {
 
   function createData(id, name, quantity, category, unitPrice,expDate) {
     const totalPrice = quantity * unitPrice;
-    const expiryDate = expDate;
+    const expiryDate = dayjs(expDate).format("MMMM D, YYYY");
     return {
       id,
       name,

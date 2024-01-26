@@ -12,7 +12,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import * as dayjs from "dayjs";
+import  dayjs from "dayjs";
 // import utc from "dayjs/plugin/utc";
 // import timezone from "dayjs/plugin/timezone";
 // import {
