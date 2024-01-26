@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, IconButton, Typography, Button,Box } from "@mui/material";
 import { Menu, AddBox, PercentRounded, } from "@mui/icons-material";
 import AccountMenu from "./ActionMenu";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import AddMenu from "./AddMenu";
+
 import { toggleShowAddProductModal } from "../redux/slices/products.slice";
 import { toggleShowAddSaleModal } from "../redux/slices/sales.slice";
 function Header(props) {
   const dispatch = useDispatch();
   const [greeting, setGreeting] = useState("");
+  const {user}=useSelector((state)=>state.auth)
 
   useEffect(() => {
     const currentTime = new Date();
@@ -43,8 +45,9 @@ function Header(props) {
         >
           <Menu sx={{ color: "#0F9D58" }} />
         </IconButton>
-        <Typography variant="h5" fontWeight="bold" color="#0F9D58">
-          {greeting}
+        <Typography variant="h6" fontWeight="bold" color="#0F9D58" >
+          {greeting} 
+          {/* {user?.name.split(' ')[1]} */}
         </Typography>
         <div style={{ display: "flex" }}>
         <AddMenu/>
