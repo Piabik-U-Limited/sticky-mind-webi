@@ -24,7 +24,8 @@ export default function AddMenu(props) {
           alignItems: "center",
           textAlign: "center",
           mr: 2,
-          display: { sm: "none" },
+          display: { m: "none", },
+          
         }}
       >
         <Tooltip title="Add Sale/Stock">
@@ -81,13 +82,13 @@ export default function AddMenu(props) {
         <Typography sx={{ padding: "16px" }}>What to do</Typography>
         <Divider />
 
-        <MenuItem onClick={() => dispatch(toggleShowAddSaleModal())}>
+        <MenuItem onClick={() => dispatch(toggleShowAddProductModal())}>
           <ListItemIcon>
             <AddBox fontSize="small" />
           </ListItemIcon>
           New Stock
         </MenuItem>
-        <MenuItem onClick={() => dispatch(toggleShowAddProductModal())}>
+        <MenuItem onClick={() => dispatch(toggleShowAddSaleModal())}>
           <ListItemIcon>
             <PercentRounded fontSize="small" />
           </ListItemIcon>

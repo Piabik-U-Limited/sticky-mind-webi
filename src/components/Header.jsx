@@ -48,7 +48,7 @@ function Header(props) {
         </Typography>
         <div style={{ display: "flex" }}>
         <AddMenu/>
-        <Box sx={{display: { xs: "none", sm: "block" },}}>
+        <Box sx={{display: { xs: "none", sm: "none", m: "block",  },}}>
           <Button
             sx={{
               backgroundColor: "#0F9D58",
