@@ -10,12 +10,12 @@ function SuccessAlert({ open, close, message }) {
     >
       <Alert
         severity="success"
-        variant="outlined"
+        variant="filled"
         onClose={close}
-        sx={{
-          backgroundColor: "#fff",
-          boxShadow: "0px 2px 8px rgba(0,0,0,0.32)",
-        }}
+        // sx={{
+        //   backgroundColor: "#fff",
+        //   boxShadow: "0px 2px 8px rgba(0,0,0,0.32)",
+        // }}
       >
         {message}
       </Alert>

@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { Formik } from "formik";
 import { Grid, Button } from "@mui/material";
-import { TextInputField, SelectField } from "../components";
+import { TextInputField, SelectField,FormSubmitButton } from "../components";
 import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
@@ -62,7 +62,7 @@ useEffect(() => {
               />
             </div>
             <div>
-              <label htmlFor="supervisorId">
+              <label htmlFor="batchId">
                 Batch<span className="asterisks">*</span>
               </label>
               {loading ? (
