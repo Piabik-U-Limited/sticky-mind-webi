@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { Save } from "@mui/icons-material";
 import useProducts from "../api/hooks/useProducts";
 import useCategories from "../api/hooks/useCategories";
-import * as dayjs from "dayjs";
+import dayjs from 'dayjs';
 function AddProductForm(props) {
   const { handleAddProduct } = useProducts();
   const { handleFetchCategories } = useCategories();
