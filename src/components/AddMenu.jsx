@@ -24,7 +24,7 @@ export default function AddMenu(props) {
           alignItems: "center",
           textAlign: "center",
           mr: 2,
-          display: { m: "none", },
+          display: { sm: "none", },
           
         }}
       >
