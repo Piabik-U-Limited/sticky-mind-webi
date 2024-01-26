@@ -32,7 +32,6 @@ const PasswordInput = ({ label, ...props }) => {
           variant="outlined"
           sx={{
             input: {
-              color: "#542A52",
               height: "6px",
             },
           }}
