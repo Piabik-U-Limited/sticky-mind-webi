@@ -10,11 +10,13 @@ import ApiClient from "../apiClient";
 import useSetError from "./useSetError";
 import { useDispatch, useSelector } from "react-redux";
 import useDashboard from "./useDashboard";
+import useProducts from "./useProducts";
 function useSales() {
   const dispatch = useDispatch();
   const api = new ApiClient();
   const { captureError } = useSetError();
   const { handleFetchDashboardData } = useDashboard();
+  const { handleFetchProducts } = useProducts();
   const {company} = useSelector((state) => state.auth);
 
   const handleFetchSales = async () => {
@@ -42,7 +44,9 @@ function useSales() {
 
         handleFetchSales(); //fetch Sales after adding new sale to be in sync
         handleFetchDashboardData(); // fetch dashboard stats be in sync
+        handleFetchProducts(); //fetch products after adding new sale to be in sync
         dispatch(toggleShowAddSaleModal());
+       
       } else {
         captureError(response);
       }
