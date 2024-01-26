@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, IconButton, Typography, Button,Avatar } from "@mui/material";
-import { Menu, AddBox, PercentRounded,Person } from "@mui/icons-material";
+import { AppBar, Toolbar, IconButton, Typography, Button,Box } from "@mui/material";
+import { Menu, AddBox, PercentRounded, } from "@mui/icons-material";
 import AccountMenu from "./ActionMenu";
 import { useDispatch } from "react-redux";
-
+import AddMenu from "./AddMenu";
 import { toggleShowAddProductModal } from "../redux/slices/products.slice";
 import { toggleShowAddSaleModal } from "../redux/slices/sales.slice";
 function Header(props) {
@@ -47,7 +47,8 @@ function Header(props) {
           {greeting}
         </Typography>
         <div style={{ display: "flex" }}>
-        
+        <AddMenu/>
+        <Box sx={{display: { xs: "none", sm: "block" },}}>
           <Button
             sx={{
               backgroundColor: "#0F9D58",
@@ -72,6 +73,7 @@ function Header(props) {
           >
             New Sale
           </Button>
+          </Box>
           <AccountMenu />
         </div>
       </Toolbar>
