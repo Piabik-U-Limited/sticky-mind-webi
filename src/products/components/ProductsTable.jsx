@@ -78,6 +78,7 @@ function ProductsTable({ data }) {
     { id: "id", label: "Id" },
     { id: "name", label: "Name", minWidth: 40 },
     { id: "category", label: "Category", minWidth: 40 },
+    { id: "batch", label: "Batch", minWidth: 40 },
     { id: "quantity", label: "QTY" },
     { id: "unitPrice", label: "Unit Price (UGX)", minWidth: 40 },
     { id: "totalPrice", label: "Total Price (UGX)", minWidth: 40 },
@@ -101,14 +102,17 @@ function ProductsTable({ data }) {
     },
   ];
 
-  function createData(id, name, quantity, category, unitPrice,expDate) {
+  function createData(id, name, quantity, cat, unitPrice,expDate) {
     const totalPrice = quantity * unitPrice;
     const expiryDate = dayjs(expDate).format("MMMM D, YYYY");
+    const category = cat?.name;
+    const batch =cat?.batch?.name
     return {
       id,
       name,
       quantity,
       category,
+      batch,
       unitPrice,
       totalPrice,
       expiryDate,
@@ -120,7 +124,7 @@ function ProductsTable({ data }) {
       item?.id,
       item?.name,
       item?.quantity,
-      item?.category.name,
+      item?.category,
       item?.unitPrice,
       item?.expDate
 

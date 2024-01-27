@@ -19,6 +19,7 @@ const TextInputField = ({ ...props }) => {
       </div>
       <div style={{ marginBottom: "10px" }}>
         <TextField
+         disabled={props.disabled}
           type={props.type}
           multiline={props.multiline}
           placeholder={props.placeholder}

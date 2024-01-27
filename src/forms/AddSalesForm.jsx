@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import { Formik, FieldArray, Field } from "formik";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
-import { Grid, Button, Paper, IconButton } from "@mui/material";
+import {
+  Grid,
+  Button,
+  Paper,
+  IconButton,
+  Card,
+  Typography,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Add, ErrorSharp, Save, Close } from "@mui/icons-material";
 import { SelectField, TextInputField } from "../components";
@@ -41,16 +48,18 @@ const AddSalesForm = () => {
     !products.products.length > 0 && handleFetchProducts();
   }, []);
   return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          handleAddSale(values);
-          console.log(values);
-        }}
-      >
-        {({ handleSubmit, values, errors }) => (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        handleAddSale(values);
+        console.log(values);
+      }}
+    >
+      {({ handleSubmit, values, errors }) => {
+        return (
+          <Grid container spacing={2} sx={{ padding: 2, display: "flex", justifyContent: "space-between" }}>  
+          <Grid>
           <form onSubmit={handleSubmit}>
             <FieldArray
               name="items"
@@ -204,9 +213,17 @@ const AddSalesForm = () => {
               )}
             />
           </form>
-        )}
-      </Formik>
-    </div>
+          </Grid>
+       <Grid>
+         <Paper sx={{ padding: 1, borderRadius: 1, marginTop: 1}} >
+         <Typography>Summary of the sale</Typography>
+        </Paper>
+       </Grid>
+     </Grid>
+        );
+      }}
+    </Formik>
+       
   );
 };
 
