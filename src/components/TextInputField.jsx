@@ -33,7 +33,7 @@ const TextInputField = ({ ...props }) => {
           fullWidth
           sx={{
             input: {
-              height: "6px",
+              height: "2px",
             },
           }}
         />

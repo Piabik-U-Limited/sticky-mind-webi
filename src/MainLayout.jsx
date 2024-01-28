@@ -5,7 +5,10 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { AddProductForm, AddSalesForm } from "./forms";
+//import { AddProductForm } from "./forms";
+//import { AddSalesForm } from "./sales";
+import { AddSalesForm } from "./sales";
+import ProductForm from "./products/components/ProductForm";
 import { setSuccess, setError } from "./redux/slices/notification.slice";
 import {
   SuccessAlert,
@@ -136,8 +139,10 @@ function MainLayout(props) {
           open={products.showAddProductModal}
           handleClose={() => dispatch(toggleShowAddProductModal())}
           title="Add New Product"
+          fullScreen={true}
         >
-          <AddProductForm />
+          {/* <AddProductForm /> */}
+          <ProductForm/>
         </FormModal>
         <FormModal
           open={sales.showAddSaleModal}

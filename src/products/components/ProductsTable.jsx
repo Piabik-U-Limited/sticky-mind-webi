@@ -140,7 +140,6 @@ function ProductsTable({ data }) {
       //row.duration.toLowerCase().includes(filterQuery.toLowerCase())
     );
   });
-  console.log(data)
   return (
     <Paper sx={{ width: "100%", overflow: "scroll", borderRadius: 2 }}>
       <Paper
