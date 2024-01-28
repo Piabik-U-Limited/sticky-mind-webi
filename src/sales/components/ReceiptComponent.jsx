@@ -13,6 +13,7 @@ const ReceiptComponent = ({ items }) => {
             <TableRow>
               <TableCell>Product </TableCell>
               <TableCell>Batch</TableCell>
+              <TableCell>Stock</TableCell>
               <TableCell align="right">QTY</TableCell>
               <TableCell align="right">Total</TableCell>
             </TableRow>
@@ -22,6 +23,7 @@ const ReceiptComponent = ({ items }) => {
               <TableRow key={index}>
                 <TableCell>{item?.product?.name}</TableCell>
                 <TableCell>{item?.product?.category?.batch?.name}</TableCell>
+                <TableCell>{item?.product?.quantity}</TableCell>
                 <TableCell align="right">{item?.quantity}</TableCell>
                 <TableCell align="right">{item?.unitPrice * item?.quantity}</TableCell>
               </TableRow>
