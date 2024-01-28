@@ -37,7 +37,7 @@ const AddSalesForm = () => {
         quantity: yup
           .number("Quantity must be a number")
           .min(1, "Minimum Quantity should be 1")
-          .max(yup.ref('product.quantity'), "Quantity cannot exceed product quantity")
+          .max(yup.ref('product.quantity'), "Quantity cannot exceed what is in stock")
           .required("Quantity is required"),
       })
     ),
