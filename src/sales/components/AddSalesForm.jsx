@@ -37,6 +37,7 @@ const AddSalesForm = () => {
         quantity: yup
           .number("Quantity must be a number")
           .min(1, "Minimum Quantity should be 1")
+          .max(yup.ref('product.quantity'), "Quantity cannot exceed product quantity")
           .required("Quantity is required"),
       })
     ),
@@ -118,6 +119,7 @@ const AddSalesForm = () => {
                                           <MenuItem
                                             key={product.id}
                                             value={product}
+                                            disabled={product.quantity <= 0}
                                           >
                                             <Tooltip
                                               key={product.id}
@@ -125,7 +127,7 @@ const AddSalesForm = () => {
                                                 product.category?.batch?.name
                                               }
                                             >
-                                              {product.name}
+                                              {product.name}{`${product.quantity===0?"(Out of Stock)":""}`}
                                             </Tooltip>
                                           </MenuItem>
                                         ))}
