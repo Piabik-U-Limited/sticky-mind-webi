@@ -6,8 +6,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 const ReceiptComponent = ({ items }) => {
   return (
     <div>
-      <Typography variant="h6">Summary of the Sale</Typography>
+      
       <TableContainer component={Paper} style={{ marginTop: '1rem' }}>
+      <Typography variant="h6">Summary of the Sale</Typography>
         <Table size='small' sx={{fontSize: 10}}>
           <TableHead>
             <TableRow>

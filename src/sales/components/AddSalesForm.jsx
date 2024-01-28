@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Formik, FieldArray, Field } from "formik";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
+import {Autocomplete} from "@mui/material";
 import {
   Grid,
   Button,
@@ -30,14 +31,13 @@ const AddSalesForm = () => {
         product: yup
           .object()
           .required("You must select the product being sold"),
-        unitPrice: yup
-          .number("Price must be a currency value")
-          .min(1, "Minimum price should be 100")
-          .required("Unit price is required"),
         quantity: yup
           .number("Quantity must be a number")
           .min(1, "Minimum Quantity should be 1")
-          .max(yup.ref('product.quantity'), "Quantity cannot exceed what is in stock")
+          .max(
+            yup.ref("product.quantity"),
+            "Quantity cannot exceed what is in stock"
+          )
           .required("Quantity is required"),
       })
     ),
@@ -50,6 +50,11 @@ const AddSalesForm = () => {
   useEffect(() => {
     !products.length > 0 && handleFetchProducts();
   }, []);
+
+  const options = products.map((product) => ({
+    label: `${product.name}${product.quantity === 0 ? "(Out of Stock)" : ""}`,
+    value: product,
+  }));
   return (
     <Formik
       initialValues={initialValues}
@@ -85,175 +90,133 @@ const AddSalesForm = () => {
               justifyContent: "space-between",
               flexDirection: "row",
             }}
-            xs={12} sm={8} md={12}
+            xs={12}
+            sm={8}
+            md={12}
           >
             <Grid item xs={12} sm={12} md={7}>
-            <form onSubmit={handleSubmit}>
-              <FieldArray
-                name="items"
-                render={({ remove, push }) => (
-                  <div>
-                    {values.items.map((item, index) => (
-                      <Grid container spacing={2} key={index}>
-                        <Grid item xs={4}>
-                          <div>
-                            <label htmlFor="product">
-                              Product Name<span className="asterisks">*</span>
-                            </label>
-                            <Field name={`items[${index}].product`}>
-                              {({ field }) => (
-                                <div>
-                                  {loading ? (
-                                    <p>Loading Products...</p>
-                                  ) : (
-                                    <FormControl fullWidth size="small">
-                                      <Select
-                                        {...field}
-                                        variant="standard"
-                                        error={
-                                          touched.items?.[index]?.product &&
-                                          errors.items?.[index]?.product
-                                        }
-                                      >
-                                        {products.map((product) => (
-                                          <MenuItem
-                                            key={product.id}
-                                            value={product}
-                                            disabled={product.quantity <= 0}
-                                          >
-                                            <Tooltip
-                                              key={product.id}
-                                              title={
-                                                product.category?.batch?.name
+              <form onSubmit={handleSubmit}>
+                <FieldArray
+                  name="items"
+                  render={({ remove, push }) => (
+                    <div>
+                      {values.items.map((item, index) => (
+                        <Grid container spacing={2} key={index}>
+                          <Grid item xs={4}>
+                            <div>
+                              <label htmlFor="product">
+                                Product Name<span className="asterisks">*</span>
+                              </label>
+                              <Field name={`items[${index}].product`}>
+                                {({ field }) => (
+                                  <div>
+                                    {loading ? (
+                                      <p>Loading Products...</p>
+                                    ) : (
+                                      <FormControl fullWidth size="small">
+                                        <Autocomplete
+                                          options={options}
+                                          getOptionLabel={(option) =>
+                                            option.label
+                                            
+                                          }
+                                          getOptionDisabled={(option) => option.value.quantity <= 0}
+                                          renderInput={(params) => (
+                                            <TextField
+                                              {...params}
+                                              variant="standard"
+                                              error={
+                                                touched.items?.[index]
+                                                  ?.product &&
+                                                errors.items?.[index]?.product
                                               }
-                                            >
-                                              {product.name}{`${product.quantity===0?"(Out of Stock)":""}`}
-                                            </Tooltip>
-                                          </MenuItem>
-                                        ))}
-                                      </Select>
-                                      <Typography
-                                        sx={{ color: "tomato" }}
-                                        variant="caption"
-                                      >
-                                        {touched.items?.[index]?.product &&
-                                          errors.items?.[index]?.product}
-                                      </Typography>
-                                    </FormControl>
-                                  )}
-                                </div>
-                              )}
-                            </Field>
-                          </div>
+                                            />
+                                          )}
+                                          onChange={(event, newValue) => {
+                                            setFieldValue(
+                                              `items[${index}].product`, newValue.value
+                                            )
+                                            // console.log(newValue)
+                                          }}
+                                         // value={values.items[index].product}
+                                        />
+                                        <Typography
+                                          sx={{ color: "tomato" }}
+                                          variant="caption"
+                                        >
+                                          {touched.items?.[index]?.product &&
+                                            errors.items?.[index]?.product}
+                                        </Typography>
+                                      </FormControl>
+                                    )}
+                                  </div>
+                                )}
+                              </Field>
+                            </div>
+                          </Grid>
+                          <Grid item xs={3}>
+                            <div>
+                              <label htmlFor="quantity">
+                                Quantity <span className="asterisks">*</span>
+                              </label>
+                              <Field name={`items[${index}].quantity`}>
+                                {({ field }) => (
+                                  <TextField
+                                    {...field}
+                                    placeholder="e.g 10"
+                                    type="number"
+                                    size="small"
+                                    variant="standard"
+                                    error={
+                                      touched.items?.[index]?.quantity &&
+                                      errors.items?.[index]?.quantity
+                                    }
+                                    helperText={
+                                      touched.items?.[index]?.quantity &&
+                                      errors.items?.[index]?.quantity
+                                    }
+                                  />
+                                )}
+                              </Field>
+                            </div>
+                          </Grid>
+                          <Grid item xs={3}>
+                            <div>
+                              <label htmlFor="unitPrice">
+                                Unit Price <span className="asterisks">*</span>
+                              </label>
+                              <Field name={`items[${index}].unitPrice`}>
+                                {({ field }) => (
+                                  <TextField
+                                    {...field}
+                                    placeholder="Automatic"
+                                    type="number"
+                                    size="small"
+                                    variant="standard"
+                                    error={
+                                      touched.items?.[index]?.unitPrice &&
+                                      errors.items?.[index]?.unitPrice
+                                    }
+                                    helperText={
+                                      touched.items?.[index]?.unitPrice &&
+                                      errors.items?.[index]?.unitPrice
+                                    }
+                                    disabled
+                                  />
+                                )}
+                              </Field>
+                            </div>
+                          </Grid>
+                          <Grid item xs={2}>
+                            {index > 0 && (
+                              <IconButton onClick={() => remove(index)}>
+                                <Close />
+                              </IconButton>
+                            )}
+                          </Grid>
                         </Grid>
-                        <Grid item xs={3}>
-                          <div>
-                            <label htmlFor="quantity">
-                              Quantity <span className="asterisks">*</span>
-                            </label>
-                            <Field name={`items[${index}].quantity`}>
-                              {({ field }) => (
-                                <TextField
-                                  {...field}
-                                  placeholder="e.g 10"
-                                  type="number"
-                                  size="small"
-                                  variant="standard"
-                                  error={
-                                    touched.items?.[index]?.quantity &&
-                                    errors.items?.[index]?.quantity
-                                  }
-                                  helperText={
-                                    touched.items?.[index]?.quantity &&
-                                    errors.items?.[index]?.quantity
-                                  }
-                                />
-                              )}
-                            </Field>
-                          </div>
-                        </Grid>
-                        <Grid item xs={3}>
-                          <div>
-                            <label htmlFor="unitPrice">
-                              Unit Price <span className="asterisks">*</span>
-                            </label>
-                            <Field name={`items[${index}].unitPrice`} >
-                              {({ field }) => (
-                                <TextField
-                                  {...field}
-                                  placeholder="Automatic"
-                                  type="number"
-                                  size="small"
-                                  variant="standard"
-                                  error={
-                                    touched.items?.[index]?.unitPrice &&
-                                    errors.items?.[index]?.unitPrice
-                                  }
-                                  helperText={
-                                    touched.items?.[index]?.unitPrice &&
-                                    errors.items?.[index]?.unitPrice
-                                  }
-                                  disabled
-                                />
-                              )}
-                            </Field>
-                          </div>
-                        </Grid>
-                        <Grid item xs={2}>
-                          {index > 0 && (
-                            <IconButton onClick={() => remove(index)}>
-                              <Close />
-                            </IconButton>
-                          )}
-                        </Grid>
-                      </Grid>
-                    ))}
-                    <Button
-                      className="submit-btn"
-                      sx={{
-                        fontSize: "14px",
-                        padding: "8px 40px",
-                        backgroundColor: "#0F9D58",
-                        color: "white",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        border: "none",
-                        margin: 1,
-                        "&:hover": {
-                          backgroundColor: "#0F9D58c0",
-                        },
-                      }}
-                      endIcon={<Add />}
-                      onClick={() =>
-                        push({
-                          id: values.items.length + 1,
-                          productId: "",
-                          quantity: 0,
-                          unitPrice: 0,
-                        })
-                      }
-                    >
-                      Add Item
-                    </Button>
-                    {sales.submitting ? (
-                      <LoadingButton
-                        className="btnNext"
-                        loading
-                        color="secondary"
-                        loadingPosition="start"
-                        variant="contained"
-                        sx={{
-                          fontSize: "14px",
-                          padding: "8px 40px",
-                          borderRadius: "15px",
-                        }}
-                      >
-                        Saving
-                      </LoadingButton>
-                    ) : (
+                      ))}
                       <Button
-                        onClick={handleSubmit}
-                        type="submit"
                         className="submit-btn"
                         sx={{
                           fontSize: "14px",
@@ -263,19 +226,64 @@ const AddSalesForm = () => {
                           borderRadius: "5px",
                           cursor: "pointer",
                           border: "none",
+                          margin: 1,
                           "&:hover": {
                             backgroundColor: "#0F9D58c0",
                           },
                         }}
-                        endIcon={<Save />}
+                        endIcon={<Add />}
+                        onClick={() =>
+                          push({
+                            id: values.items.length + 1,
+                            productId: "",
+                            quantity: 0,
+                            unitPrice: 0,
+                          })
+                        }
                       >
-                        Save
+                        Add Item
                       </Button>
-                    )}
-                  </div>
-                )}
-              />
-            </form>
+                      {sales.submitting ? (
+                        <LoadingButton
+                          className="btnNext"
+                          loading
+                          color="secondary"
+                          loadingPosition="start"
+                          variant="contained"
+                          sx={{
+                            fontSize: "14px",
+                            padding: "8px 40px",
+                            borderRadius: "15px",
+                          }}
+                        >
+                          Saving
+                        </LoadingButton>
+                      ) : (
+                        <Button
+                          onClick={handleSubmit}
+                          type="submit"
+                          className="submit-btn"
+                          sx={{
+                            fontSize: "14px",
+                            padding: "8px 40px",
+                            backgroundColor: "#0F9D58",
+                            color: "white",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            border: "none",
+                            "&:hover": {
+                              backgroundColor: "#0F9D58c0",
+                            },
+                          }}
+                          endIcon={<Save />}
+                        >
+                          Save
+                        </Button>
+                      )}
+                    </div>
+                  )}
+                />
+              </form>
             </Grid>
             <Grid item xs={12} sm={12} md={5}>
               <ReceiptComponent items={values.items} />
