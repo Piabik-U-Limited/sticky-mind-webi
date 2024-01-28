@@ -177,7 +177,7 @@ const AddSalesForm = () => {
                             <label htmlFor="unitPrice">
                               Unit Price <span className="asterisks">*</span>
                             </label>
-                            <Field name={`items[${index}].unitPrice`}>
+                            <Field name={`items[${index}].unitPrice`} >
                               {({ field }) => (
                                 <TextField
                                   {...field}
@@ -193,6 +193,7 @@ const AddSalesForm = () => {
                                     touched.items?.[index]?.unitPrice &&
                                     errors.items?.[index]?.unitPrice
                                   }
+                                  disabled
                                 />
                               )}
                             </Field>

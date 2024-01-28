@@ -29,7 +29,7 @@ const ReceiptComponent = ({ items }) => {
               </TableRow>
             ))}
             <TableRow>
-              <TableCell colSpan={3} align="right">Total</TableCell>
+              <TableCell colSpan={4} align="right">Total</TableCell>
               <TableCell align="right">{items.reduce((total, item) => total + item.unitPrice * item.quantity, 0)}</TableCell>
               </TableRow>
           </TableBody>
