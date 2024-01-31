@@ -33,7 +33,8 @@ const validationSchema = yup.object().shape({
         .number("Quantity must be a number")
         .min(1, "Minimum Quantity should be 1")
         .required("Quantity is required"),
-     
+      categoryId: yup.string().required("You must select the Category"),
+      expDate: yup.date().required("Expiry date is required"),
     })
   ),
 });

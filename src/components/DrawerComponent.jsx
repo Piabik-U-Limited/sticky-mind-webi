@@ -12,10 +12,10 @@ import { Link, useLocation } from "react-router-dom";
 import {
   Store,
   Dashboard,
-  Settings,
+  
   Percent,
   Category,
-  FormatListBulleted
+  
 } from "@mui/icons-material";
 
 import { useNavigate } from "react-router-dom";
@@ -35,11 +35,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       icon: <Dashboard />,
       link: "/",
     },
-    {
-      name: "Batches",
-      icon: <FormatListBulleted />,
-      link: "/batches",
-    },
+    
     {
       name: "Categories",
       icon: <Category />,

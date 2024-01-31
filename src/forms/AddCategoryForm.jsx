@@ -7,30 +7,24 @@ import * as yup from "yup";
 import { useSelector } from "react-redux";
 import { Save } from "@mui/icons-material";
 import useCategories from "../api/hooks/useCategories";
-import useBatches from "../api/hooks/useBatches";
 
 
 function AddCategoryForm(props) {
   const submitting = useSelector((state) => state.categories.submitting);
-  const { batches, loading } = useSelector((state) => state.batches);
   const { handleAddCategory } = useCategories();
-  const { handleFetchBatches } = useBatches();
+  const {company}=useSelector(state=>state.auth)
   const validationSchema = yup.object({
     name: yup.string().required("Category name is required"),
-    batchId: yup.string().required("Please select a batch"),
     description: yup.string("Quantity must be a number"),
  
   });
-useEffect(() => {
-  !batches.length > 0 && handleFetchBatches();
-},[])
   return (
     <div>
       <Formik
         initialValues={{
           name: "",
           decription: "",
-          batchId: "",
+          companyId:company?.id
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -53,7 +47,7 @@ useEffect(() => {
 
               <TextInputField
                 name="name"
-                placeholder="Flu camp"
+                placeholder="Anti Malarials"
                 type="input"
                 size="small"
                 sx={{
@@ -61,30 +55,7 @@ useEffect(() => {
                 }}
               />
             </div>
-            <div>
-              <label htmlFor="batchId">
-                Batch<span className="asterisks">*</span>
-              </label>
-              {loading ? (
-                // Render a loading indicator or message while data is being fetched
-                <p>Loading batches...</p>
-              ) : (
-                <SelectField
-                  labelName="Select Batch"
-                  name="batchId"
-                  //validate={validateSelect}
-                  fullWidth
-                  size="small"
-                  sx={{
-                    marginTop: "5px",
-                  }}
-                  MenuItems={batches.map((batch) => ({
-                    value: batch.id,
-                    name: batch.name,
-                  }))}
-                />
-              )}
-            </div>
+         
 
             <div>
               <label htmlFor="description">Description</label>
@@ -92,7 +63,7 @@ useEffect(() => {
               <TextInputField
                 multiline={true}
                 name="decription"
-                placeholder="N/A"
+                placeholder="OPTIONAL"
                 type="text"
                 size="small"
                 sx={{

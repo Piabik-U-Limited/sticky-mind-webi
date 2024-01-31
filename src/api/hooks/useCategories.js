@@ -34,7 +34,7 @@ function useCategories() {
   const handleAddCategory = async (data) => {
     setSubmitting(true);
     try {
-      const response = await api._makeRequest("post", "categories", data);
+      const response = await api._makeRequest("post",`categories/${company?.id}`, data);
       if (response.status === 201) {
         dispatch(setSuccess(response.data.message));
 

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { ErrorMessage, Formik, FieldArray, Field } from "formik";
+import React, { useEffect, } from "react";
+import {  Formik, FieldArray, Field } from "formik";
 import {
   TextField,
   Button,
@@ -8,9 +8,7 @@ import {
   FormControl,
   InputLabel,
   InputAdornment,
-  Container,
   Grid,
-  Box,
   IconButton,
   Typography,
   Paper,
@@ -19,8 +17,9 @@ import useCategories from "../../api/hooks/useCategories";
 import { Add, Close, Save } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
-import dayjs from "dayjs";
 import useProducts from "../../api/hooks/useProducts";
+
+import { LoadingButton } from "@mui/lab";
 const validationSchema = yup.object().shape({
   products: yup.array().of(
     yup.object().shape({
@@ -29,6 +28,7 @@ const validationSchema = yup.object().shape({
         .number("Price must be a currency value")
         .min(1, "Minimum price should be 100")
         .required("Unit price is required"),
+        rate: yup.number("Rate must be a number").min(1.1).max(10).required("Rate is required"),
       quantity: yup
         .number("Quantity must be a number")
         .min(1, "Minimum Quantity should be 1")
@@ -38,7 +38,6 @@ const validationSchema = yup.object().shape({
     })
   ),
 });
-import { LoadingButton } from "@mui/lab";
 
 const initialValues = {
   products: [
@@ -49,7 +48,8 @@ const initialValues = {
       unitPrice: 0,
       manufactureDate: "",
       expDate: "",
-      sellingPrice: 0,
+      batch: "",
+      rate: 1.5,
     },
   ],
 };
@@ -59,6 +59,7 @@ const ProductForm = () => {
   const { handleAddProduct } = useProducts();
   const { categories, loading } = useSelector((state) => state.categories);
   const { submitting } = useSelector((state) => state.products);
+
   useEffect(() => {
     !categories.length > 0 && handleFetchCategories();
   }, []);
@@ -72,56 +73,11 @@ const ProductForm = () => {
         handleAddProduct(values);
       }}
     >
-      {({ handleSubmit, values, errors, setFieldValue, touched }) => {
-        useEffect(() => {
-          // Iterate over each product
-          values.products.forEach((product, index) => {
-            // Check if unitPrice is not empty
-            if (product.unitPrice !== "") {
-              // Calculate the new selling price
-              const newSellingPrice =
-                parseFloat(product.unitPrice) * 1.5 +
-                parseFloat(product.unitPrice);
-
-              // Update the selling price for the current product
-              setFieldValue(`products[${index}].sellingPrice`, newSellingPrice);
-            }
-          });
-        }, [values.products, setFieldValue]);
+      {({ handleSubmit, values, errors, touched }) => {
+       
         return (
           <Grid>
             <form onSubmit={handleSubmit}>
-              <Box mb={2}>
-                <Grid container spacing={2}>
-                  <Grid item xs={3}>
-                    <InputLabel style={{ fontSize: "0.8rem" }}>
-                      Product Name
-                    </InputLabel>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <InputLabel style={{ fontSize: "0.8rem" }}>
-                      Quantity
-                    </InputLabel>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <InputLabel style={{ fontSize: "0.8rem" }}>
-                      Category
-                    </InputLabel>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <InputLabel style={{ fontSize: "0.8rem" }}>
-                      Unit Price
-                    </InputLabel>
-                  </Grid>
-
-                  <Grid item xs={2}>
-                    <InputLabel style={{ fontSize: "0.8rem" }}>
-                      Expiry Date
-                    </InputLabel>
-                  </Grid>
-                  <Grid item xs={1}></Grid>
-                </Grid>
-              </Box>
               <FieldArray
                 name="products"
                 render={({ remove, push }) => (
@@ -131,8 +87,17 @@ const ProductForm = () => {
                         sx={{ padding: 1, borderRadius: 1, marginTop: 1 }}
                         key={index}
                       >
-                        <Grid container spacing={2}>
-                          <Grid item xs={2}>
+                        {index > 0 && (
+                              <IconButton onClick={() => remove(index)}>
+                                <Close />
+                              </IconButton>
+                            )}
+                        <Grid container spacing={2} xs={12} sm={12} md={12}>
+                       
+                          <Grid item xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Product Name <span className="asterisks">*</span>
+                            </InputLabel>
                             <Field name={`products[${index}].name`}>
                               {({ field }) => (
                                 <TextField
@@ -155,7 +120,10 @@ const ProductForm = () => {
                             </Field>
                           </Grid>
 
-                          <Grid item xs={2}>
+                          <Grid item  xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Quantity<span className="asterisks">*</span>
+                            </InputLabel>
                             <Field name={`products[${index}].quantity`}>
                               {({ field }) => (
                                 <TextField
@@ -176,7 +144,10 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
-                          <Grid item xs={2}>
+                          <Grid item xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Category
+                            </InputLabel>
                             <Field name={`products[${index}].categoryId`}>
                               {({ field }) => (
                                 <div>
@@ -198,8 +169,7 @@ const ProductForm = () => {
                                             key={category.id}
                                             value={category.id}
                                           >
-                                            {category.name}(
-                                            {category?.batch?.name})
+                                            {category.name}
                                           </MenuItem>
                                         ))}
                                       </Select>
@@ -217,7 +187,10 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
-                          <Grid item xs={2}>
+                          <Grid item xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Unit Price<span className="asterisks">*</span>
+                            </InputLabel>
                             <Field name={`products[${index}].unitPrice`}>
                               {({ field }) => (
                                 <TextField
@@ -245,7 +218,35 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
-                          <Grid item xs={2}>
+                          <Grid item xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                            Rate value<span className="asterisks">*</span>
+                            </InputLabel>
+                            <Field name={`products[${index}].rate`}>
+                              {({ field }) => (
+                                <TextField
+                                  {...field}
+                                  variant="standard"
+                                  fullWidth
+                                  type="number"
+                                  
+                                  size="small"
+                                  error={
+                                    touched.products?.[index]?.rate &&
+                                    errors.products?.[index]?.rate
+                                  }
+                                  helperText={
+                                    touched.products?.[index]?.rate &&
+                                    errors.products?.[index]?.rate
+                                  }
+                                />
+                              )}
+                            </Field>
+                          </Grid>
+                          <Grid item xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Expiry Date<span className="asterisks">*</span>
+                            </InputLabel>
                             <Field name={`products[${index}].expDate`}>
                               {({ field }) => (
                                 <TextField
@@ -266,13 +267,7 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
-                          <Grid item xs={2}>
-                            {index > 0 && (
-                              <IconButton onClick={() => remove(index)}>
-                                <Close />
-                              </IconButton>
-                            )}
-                          </Grid>
+                          
                         </Grid>
                       </Paper>
                     ))}
@@ -299,45 +294,46 @@ const ProductForm = () => {
                       }
                     ></Button>
                     {submitting ? (
-                       <LoadingButton
-                       className="btnNext"
-                       loading
-                       color="secondary"
-                       loadingPosition="start"
-                       variant="contained"
-                       sx={{
-                         fontSize: "14px",
-                         padding: "8px 40px",
-                         borderRadius: "15px",
-                       }}
-                     >
-                       Adding {values.products.length>1 ? "Products" : "Product"}
-                     </LoadingButton>
-                    ): <Button
-                    onClick={handleSubmit}
-                    type="submit"
-                    className="submit-btn"
-                    sx={{
-                      fontSize: "14px",
-                      padding: "8px 40px",
-                      borderColor: "#0F9D58",
-                      color: "#fff",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                      backgroundColor: "#0F9D58",
+                      <LoadingButton
+                        className="btnNext"
+                        loading
+                        color="secondary"
+                        loadingPosition="start"
+                        variant="contained"
+                        sx={{
+                          fontSize: "14px",
+                          padding: "8px 40px",
+                          borderRadius: "15px",
+                        }}
+                      >
+                        Adding{" "}
+                        {values.products.length > 1 ? "Products" : "Product"}
+                      </LoadingButton>
+                    ) : (
+                      <Button
+                        onClick={handleSubmit}
+                        type="submit"
+                        className="submit-btn"
+                        sx={{
+                          fontSize: "14px",
+                          padding: "8px 40px",
+                          borderColor: "#0F9D58",
+                          color: "#fff",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                          backgroundColor: "#0F9D58",
 
-                      margin: 1,
-                      "&:hover": {
-                        backgroundColor: "#0F9D58c0",
-                      },
-                    }}
-                    endIcon={<Save />}
-                  >
-                    Submit{" "}
-                    {values.products.length > 1 ? "Products" : "Product"}
-                  </Button>}
-                   
-                   
+                          margin: 1,
+                          "&:hover": {
+                            backgroundColor: "#0F9D58c0",
+                          },
+                        }}
+                        endIcon={<Save />}
+                      >
+                        Submit{" "}
+                        {values.products.length > 1 ? "Products" : "Product"}
+                      </Button>
+                    )}
                   </div>
                 )}
               />

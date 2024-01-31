@@ -36,7 +36,7 @@ function useProducts() {
   const handleAddProduct = async (data) => {
     setSubmitting(true);
     try {
-      const response = await api._makeRequest("post", "products", data);
+      const response = await api._makeRequest("post", `products/${company?.id}`, data);
       if (response.status === 201) {
         dispatch(setSuccess(response.data.message));
 
