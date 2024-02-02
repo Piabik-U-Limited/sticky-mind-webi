@@ -95,7 +95,7 @@ const ProductForm = () => {
           values.products.forEach((product, index) => {
             // Check if unitPrice is not empty
             if (
-              !product.isAutomated &&
+              product.isAutomated &&
               product.unitPrice !== 0 &&
               product.rate !== 0
             ) {
@@ -284,12 +284,12 @@ const ProductForm = () => {
                                   //disabled={values.products?.[index]?.isAutomated}
                                   InputProps={{
                                     startAdornment: (
-                                      <Tooltip title={values.products?.[index]?.isAutomated ? "Make it automatic" : "Make it manual"}>
+                                      <Tooltip title={values.products?.[index]?.isAutomated ?"Make it manual": "Make it automatic" }>
                                       <FormControlLabel
                                         control={
                                           <Switch
                                             checked={
-                                              !values.products?.[index]
+                                              values.products?.[index]
                                                 ?.isAutomated
                                             }
                                             onChange={() => {
