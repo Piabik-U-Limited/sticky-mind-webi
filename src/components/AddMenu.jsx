@@ -20,11 +20,10 @@ export default function AddMenu(props) {
     <React.Fragment>
       <Box
         sx={{
-          display: "flex",
           alignItems: "center",
           textAlign: "center",
           mr: 2,
-          display: { sm: "none", },
+          display: { sm: "none", md: "flex" },
           
         }}
       >

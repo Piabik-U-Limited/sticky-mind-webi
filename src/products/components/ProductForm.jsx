@@ -1,5 +1,5 @@
-import React, { useEffect, } from "react";
-import {  Formik, FieldArray, Field } from "formik";
+import React, { useEffect } from "react";
+import { Formik, FieldArray, Field } from "formik";
 import {
   TextField,
   Button,
@@ -12,6 +12,9 @@ import {
   IconButton,
   Typography,
   Paper,
+  FormControlLabel,
+  Tooltip,
+  Switch,
 } from "@mui/material";
 import useCategories from "../../api/hooks/useCategories";
 import { Add, Close, Save } from "@mui/icons-material";
@@ -28,13 +31,24 @@ const validationSchema = yup.object().shape({
         .number("Price must be a currency value")
         .min(1, "Minimum price should be 100")
         .required("Unit price is required"),
-        rate: yup.number("Rate must be a number").min(1.1).max(10).required("Rate is required"),
+      rate: yup
+        .number("Rate must be a number")
+        .min(1.1)
+        .max(10)
+        .required("Rate is required"),
       quantity: yup
         .number("Quantity must be a number")
         .min(1, "Minimum Quantity should be 1")
         .required("Quantity is required"),
       categoryId: yup.string().required("You must select the Category"),
       expDate: yup.date().required("Expiry date is required"),
+      sellingPrice: yup
+        .number("Selling price must be a number")
+        .required("Selling price is required")
+        .min(
+          yup.ref("unitPrice"),
+          "Selling price cannot be less than the unit price"
+        ),
     })
   ),
 });
@@ -50,6 +64,8 @@ const initialValues = {
       expDate: "",
       batch: "",
       rate: 1.5,
+      sellingPrice: 0,
+      isAutomated: true,
     },
   ],
 };
@@ -73,8 +89,26 @@ const ProductForm = () => {
         handleAddProduct(values);
       }}
     >
-      {({ handleSubmit, values, errors, touched }) => {
-       
+      {({ handleSubmit, values, errors, touched, setFieldValue }) => {
+        useEffect(() => {
+          // Iterate over each product
+          values.products.forEach((product, index) => {
+            // Check if unitPrice is not empty
+            if (
+              !product.isAutomated &&
+              product.unitPrice !== 0 &&
+              product.rate !== 0
+            ) {
+              // Calculate the new selling price
+
+              // Update the selling price for the current item
+              setFieldValue(
+                `products[${index}].sellingPrice`,
+                product?.unitPrice * product?.rate
+              );
+            }
+          });
+        }, [values.products, setFieldValue]);
         return (
           <Grid>
             <form onSubmit={handleSubmit}>
@@ -88,12 +122,11 @@ const ProductForm = () => {
                         key={index}
                       >
                         {index > 0 && (
-                              <IconButton onClick={() => remove(index)}>
-                                <Close />
-                              </IconButton>
-                            )}
+                          <IconButton onClick={() => remove(index)}>
+                            <Close />
+                          </IconButton>
+                        )}
                         <Grid container spacing={2} xs={12} sm={12} md={12}>
-                       
                           <Grid item xs={6} sm={4} md={2}>
                             <InputLabel style={{ fontSize: "0.8rem" }}>
                               Product Name <span className="asterisks">*</span>
@@ -107,39 +140,8 @@ const ProductForm = () => {
                                   type="input"
                                   placeholder="Product Name"
                                   size="small"
-                                  error={
-                                    touched.products?.[index]?.name &&
-                                    errors.products?.[index]?.name
-                                  }
-                                  helperText={
-                                    touched.products?.[index]?.name &&
-                                    errors.products?.[index]?.name
-                                  }
-                                />
-                              )}
-                            </Field>
-                          </Grid>
-
-                          <Grid item  xs={6} sm={4} md={2}>
-                            <InputLabel style={{ fontSize: "0.8rem" }}>
-                              Quantity<span className="asterisks">*</span>
-                            </InputLabel>
-                            <Field name={`products[${index}].quantity`}>
-                              {({ field }) => (
-                                <TextField
-                                  {...field}
-                                  variant="standard"
-                                  fullWidth
-                                  type="number"
-                                  size="small"
-                                  error={
-                                    touched.products?.[index]?.quantity &&
-                                    errors.products?.[index]?.quantity
-                                  }
-                                  helperText={
-                                    touched.products?.[index]?.quantity &&
-                                    errors.products?.[index]?.quantity
-                                  }
+                                  error={errors.products?.[index]?.name}
+                                  helperText={errors.products?.[index]?.name}
                                 />
                               )}
                             </Field>
@@ -187,6 +189,7 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
+
                           <Grid item xs={6} sm={4} md={2}>
                             <InputLabel style={{ fontSize: "0.8rem" }}>
                               Unit Price<span className="asterisks">*</span>
@@ -218,9 +221,33 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
-                          <Grid item xs={6} sm={4} md={2}>
+                          <Grid item xs={6} sm={4} md={1}>
                             <InputLabel style={{ fontSize: "0.8rem" }}>
-                            Rate value<span className="asterisks">*</span>
+                              Quantity<span className="asterisks">*</span>
+                            </InputLabel>
+                            <Field name={`products[${index}].quantity`}>
+                              {({ field }) => (
+                                <TextField
+                                  {...field}
+                                  variant="standard"
+                                  fullWidth
+                                  type="number"
+                                  size="small"
+                                  error={
+                                    touched.products?.[index]?.quantity &&
+                                    errors.products?.[index]?.quantity
+                                  }
+                                  helperText={
+                                    touched.products?.[index]?.quantity &&
+                                    errors.products?.[index]?.quantity
+                                  }
+                                />
+                              )}
+                            </Field>
+                          </Grid>
+                          <Grid item xs={6} sm={4} md={1}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Rate <span className="asterisks">*</span>
                             </InputLabel>
                             <Field name={`products[${index}].rate`}>
                               {({ field }) => (
@@ -229,7 +256,6 @@ const ProductForm = () => {
                                   variant="standard"
                                   fullWidth
                                   type="number"
-                                  
                                   size="small"
                                   error={
                                     touched.products?.[index]?.rate &&
@@ -238,6 +264,56 @@ const ProductForm = () => {
                                   helperText={
                                     touched.products?.[index]?.rate &&
                                     errors.products?.[index]?.rate
+                                  }
+                                />
+                              )}
+                            </Field>
+                          </Grid>
+                          <Grid item xs={6} sm={4} md={2}>
+                            <InputLabel style={{ fontSize: "0.8rem" }}>
+                              Selling Price <span className="asterisks">*</span>
+                            </InputLabel>
+
+                            <Field name={`products[${index}].sellingPrice`}>
+                              {({ field }) => (
+                                <TextField
+                                  {...field}
+                                  variant="standard"
+                                  fullWidth
+                                  type="number"
+                                  //disabled={values.products?.[index]?.isAutomated}
+                                  InputProps={{
+                                    startAdornment: (
+                                      <Tooltip title={values.products?.[index]?.isAutomated ? "Make it automatic" : "Make it manual"}>
+                                      <FormControlLabel
+                                        control={
+                                          <Switch
+                                            checked={
+                                              !values.products?.[index]
+                                                ?.isAutomated
+                                            }
+                                            onChange={() => {
+                                              setFieldValue(
+                                                `products[${index}].isAutomated`,
+                                                !product.isAutomated
+                                              );
+                                            }}
+                                            name="auto"
+                                            size={"10"}
+                                          />
+                                        }
+                                        //label="Auto"
+                                      /></Tooltip>
+                                    ),
+                                  }}
+                                  size="small"
+                                  error={
+                                    touched.products?.[index]?.sellingPrice &&
+                                    errors.products?.[index]?.sellingPrice
+                                  }
+                                  helperText={
+                                    touched.products?.[index]?.sellingPrice &&
+                                    errors.products?.[index]?.sellingPrice
                                   }
                                 />
                               )}
@@ -267,7 +343,6 @@ const ProductForm = () => {
                               )}
                             </Field>
                           </Grid>
-                          
                         </Grid>
                       </Paper>
                     ))}

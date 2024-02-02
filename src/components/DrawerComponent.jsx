@@ -9,14 +9,7 @@ import {
   ListItem,
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import {
-  Store,
-  Dashboard,
-  
-  Percent,
-  Category,
-  
-} from "@mui/icons-material";
+import { Store, Dashboard, Percent, Category } from "@mui/icons-material";
 
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +28,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       icon: <Dashboard />,
       link: "/",
     },
-    
+
     {
       name: "Categories",
       icon: <Category />,
@@ -51,8 +44,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       icon: <Percent />,
       link: "/sales",
     },
-    
-    
+
     // {
     //   name: "Invetory Settings",
     //   icon: <Settings />,
