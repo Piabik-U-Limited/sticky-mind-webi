@@ -23,7 +23,7 @@ export default function AddMenu(props) {
           alignItems: "center",
           textAlign: "center",
           mr: 2,
-          display: { sm: "none", md: "flex" },
+          display: { sm: "none",  },
           
         }}
       >
