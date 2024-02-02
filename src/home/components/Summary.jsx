@@ -26,8 +26,8 @@ function Summary() {
   return (
     <div>
       <SummeryData />
-      <Box className="grid-container">
-        <Grid container className="graphWrapper">
+      <Box className="grid-container" >
+        <Grid container className="graphWrapper" >
           <div className="lineGraph">
             <div className="chart-heading" style={{ padding: 10 }}>
               <Typography style={{ fontWeight: "600" }} variant="h6" textTransform={"capitalize"}>

@@ -115,7 +115,7 @@ function MainLayout(props) {
         component="div"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 1,
           width: {
             xs: `calc(100% + ${drawerWidth}px)`,
             sm: `calc(100% + ${drawerWidth}px)`,
@@ -125,10 +125,10 @@ function MainLayout(props) {
         {/* <Toolbar /> */}
         <Box
           style={{
-            marginTop: 60,
+            marginTop: 70,
             padding: 0,
             "@media (minWidth: 600px)": {
-              width: "100vw",
+              width: "90vw",
               overflowY: "auto",
             },
           }}

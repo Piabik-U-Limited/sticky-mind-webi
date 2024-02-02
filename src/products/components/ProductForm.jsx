@@ -299,7 +299,8 @@ const ProductForm = () => {
                                               );
                                             }}
                                             name="auto"
-                                            size={"10"}
+                                            size="small"
+                                            
                                           />
                                         }
                                         //label="Auto"
@@ -362,9 +363,13 @@ const ProductForm = () => {
                       onClick={() =>
                         push({
                           id: values.products.length + 1,
-                          productId: "",
                           quantity: 0,
                           unitPrice: 0,
+                          rate: 1.5,
+                          sellingPrice: 0,
+                          expDate: "",
+                          productId: "",
+                          isAutomated: true,
                         })
                       }
                     ></Button>
