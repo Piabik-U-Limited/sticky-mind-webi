@@ -101,8 +101,8 @@ const AddSalesForm = () => {
                   render={({ remove, push }) => (
                     <div>
                       {values.items.map((item, index) => (
-                        <Grid container spacing={2} key={index}>
-                          <Grid item xs={4}>
+                        <Grid container spacing={2} key={index} xs={12} sm={12} md={12}>
+                          <Grid item xs={12} sm={12} md={4}>
                             <div>
                               <label htmlFor="product">
                                 Product Name<span className="asterisks">*</span>
@@ -154,7 +154,7 @@ const AddSalesForm = () => {
                               </Field>
                             </div>
                           </Grid>
-                          <Grid item xs={3}>
+                          <Grid item xs={6} sm={6} md={3}>
                             <div>
                               <label htmlFor="quantity">
                                 Quantity <span className="asterisks">*</span>
@@ -180,7 +180,7 @@ const AddSalesForm = () => {
                               </Field>
                             </div>
                           </Grid>
-                          <Grid item xs={3}>
+                          <Grid item xs={6} sm={6} md={3}>
                             <div>
                               <label htmlFor="unitPrice">
                                 Unit Price <span className="asterisks">*</span>
