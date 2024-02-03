@@ -21,12 +21,8 @@ import {
 import { IconButton, InputBase } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import  dayjs from "dayjs";
-// import {
-//   openproducts,
-//   setselectedProduct,
-//   toggleEditproducts,
-// } from "../../../redux/slices/productSlice";
-// import { toggleOpenDelete } from "../../../redux/slices/itemSlice";
+
+import { toggleShowEditProductModal,setSelectedProduct } from "../../redux/slices/products.slice";
 import { useNavigate } from "react-router-dom";
 
 function ProductsTable({ data }) {
@@ -38,10 +34,10 @@ function ProductsTable({ data }) {
   const [filterQuery, setFilterQuery] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleOpen = (event, products) => {
+  const handleOpen = (event, product) => {
     setAnchorEl(event.currentTarget);
     //update global state for selected products
-    // dispatch(setselectedProduct(products));
+     dispatch(setSelectedProduct(product));
   };
 
   const handleClose = () => {
@@ -57,7 +53,7 @@ function ProductsTable({ data }) {
   };
   const editproducts = () => {
     setAnchorEl(null);
-    // dispatch(toggleEditproducts());
+     dispatch(toggleShowEditProductModal());
   };
 
   const deleteproducts = () => {

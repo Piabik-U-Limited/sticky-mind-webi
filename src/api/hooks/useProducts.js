@@ -5,6 +5,7 @@ import {
   setLoading,
   toggleShowAddProductModal,
   setSubmitting,
+  toggleShowEditProductModal
 } from "../../redux/slices/products.slice";
 import ApiClient from "../apiClient";
 import useSetError from "./useSetError";
@@ -51,7 +52,25 @@ function useProducts() {
     }
     setSubmitting(false);
   };
-  return { handleFetchProducts, handleAddProduct };
+
+  //edit product
+  const handleEditProduct = async (data, id) => {
+    setSubmitting(true);
+    try {
+      const response = await api._makeRequest("put", `products/${id}`, data);
+      if (response.status === 200) {
+        dispatch(setSuccess(response.data.message));
+        handleFetchProducts();
+        dispatch(toggleShowEditProductModal());
+      } else {
+        captureError(response);
+      }
+    } catch (error) {
+      captureError(error);
+    }
+    setSubmitting(false);
+  };
+  return { handleFetchProducts, handleAddProduct, handleEditProduct };
 }
 
 export default useProducts;
