@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Formik, FieldArray, Field } from "formik";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
-import {Autocomplete} from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import {
   Grid,
   Button,
@@ -80,6 +80,7 @@ const AddSalesForm = () => {
             }
           });
         }, [values.items, setFieldValue]);
+
         return (
           <Grid
             container
@@ -101,7 +102,14 @@ const AddSalesForm = () => {
                   render={({ remove, push }) => (
                     <div>
                       {values.items.map((item, index) => (
-                        <Grid container spacing={2} key={index} xs={12} sm={12} md={12}>
+                        <Grid
+                          container
+                          spacing={2}
+                          key={index}
+                          xs={12}
+                          sm={12}
+                          md={12}
+                        >
                           <Grid item xs={12} sm={12} md={4}>
                             <div>
                               <label htmlFor="product">
@@ -118,9 +126,10 @@ const AddSalesForm = () => {
                                           options={options}
                                           getOptionLabel={(option) =>
                                             option.label
-                                            
                                           }
-                                          getOptionDisabled={(option) => option.value.quantity <= 0}
+                                          getOptionDisabled={(option) =>
+                                            option.value.quantity <= 0
+                                          }
                                           renderInput={(params) => (
                                             <TextField
                                               {...params}
@@ -134,11 +143,10 @@ const AddSalesForm = () => {
                                           )}
                                           onChange={(event, newValue) => {
                                             setFieldValue(
-                                              `items[${index}].product`, newValue.value
-                                            )
-                                            // console.log(newValue)
+                                              `items[${index}].product`,
+                                              newValue.value
+                                            );
                                           }}
-                                         // value={values.items[index].product}
                                         />
                                         <Typography
                                           sx={{ color: "tomato" }}
@@ -296,36 +304,3 @@ const AddSalesForm = () => {
 };
 
 export default AddSalesForm;
-
-{
-  /* <Button
-                className="submit-btn"
-                sx={{
-                  fontSize: "14px",
-                  padding: "8px 40px",
-                  backgroundColor: "#0F9D58",
-                  color: "white",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  border: "none",
-                  margin: 1,
-                  "&:hover": {
-                    backgroundColor: "#0F9D58c0",
-                  },
-                }}
-                endIcon={<Add />}
-                onClick={() =>
-                  setItems([
-                    ...items,
-                    {
-                      id: items.length + 2,
-                      productName: "",
-                      quantity: 0,
-                      unitPrice: 0,
-                    },
-                  ])
-                }
-              >
-                Add Item
-              </Button> */
-}

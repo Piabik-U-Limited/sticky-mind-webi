@@ -4,7 +4,7 @@ import { Box, CssBaseline, Drawer, Paper } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-
+import EditProductForm from "./products/components/EditProductForm";
 //import { AddProductForm } from "./forms";
 //import { AddSalesForm } from "./sales";
 import { AddSalesForm } from "./sales";
@@ -153,6 +153,7 @@ function MainLayout(props) {
         >
           <AddSalesForm />
         </FormModal>
+       
 
         <SuccessAlert
           message={notification.success}

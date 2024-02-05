@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import useProducts from "../api/hooks/useProducts";
-
+import { toggleShowEditProductModal } from "../redux/slices/products.slice";
 import ProductsTable from "./components/ProductsTable";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { FormModal } from "../components";
+import EditProductForm from "./components/EditProductForm";
 function Products() {
-  const {products} = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const {products,showEditProductModal,selectedProduct} = useSelector((state) => state.products);
   const { handleFetchProducts } = useProducts();
   useEffect(() => {
     handleFetchProducts();
@@ -12,6 +15,15 @@ function Products() {
   return (
     <div>
       <ProductsTable data={products} />
+      <FormModal
+          open={showEditProductModal}
+          handleClose={() => dispatch(toggleShowEditProductModal())}
+          title={`Edit ${selectedProduct?.name}`}
+          maxWidth="md"
+          fullScreen={true}
+        >
+          <EditProductForm />
+        </FormModal>
     </div>
   );
 }
