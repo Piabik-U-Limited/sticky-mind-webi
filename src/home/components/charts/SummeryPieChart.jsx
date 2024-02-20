@@ -52,7 +52,15 @@ const SummeryPieChart = () => {
       </text>
     );
   };
-  const COLORS = ["purple", "#87CEEB", "#FFBB28", "#0F9D58", "yellow", "blue", "pink"];
+  const COLORS = [
+    "purple",
+    "#87CEEB",
+    "#FFBB28",
+    "#0F9D58",
+    "#000080",
+    "blue",
+    "pink",
+  ];
   return (
     <Grid container spacing={2} alignItems="center" justifyContent={"center"}>
       <PieChart width={200} height={200}>
