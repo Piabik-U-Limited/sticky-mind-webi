@@ -45,7 +45,7 @@ function Header(props) {
         >
           <Menu sx={{ color: "#0F9D58" }} />
         </IconButton>
-        <Typography variant="h6" fontWeight="bold" color="#0F9D58" >
+        <Typography variant="h6" fontWeight="bold" color="#0F9D58" sx={{display: { xs: "none", sm: "block", m:"block"},}}>
           {greeting} 
           {/* {user?.name.split(' ')[1]} */}
         </Typography>
