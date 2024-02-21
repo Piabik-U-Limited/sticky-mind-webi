@@ -24,13 +24,17 @@ function Summary() {
     handleFetchStats(value);
   };
   return (
-    <div>
+    <Box>
       <SummeryData />
-      <Box className="grid-container" >
-        <Grid container className="graphWrapper" >
+      <Box className="grid-container">
+        <Grid container className="graphWrapper">
           <div className="lineGraph">
             <div className="chart-heading" style={{ padding: 10 }}>
-              <Typography style={{ fontWeight: "600" }} variant="h6" textTransform={"capitalize"}>
+              <Typography
+                style={{ fontWeight: "600" }}
+                variant="h6"
+                textTransform={"capitalize"}
+              >
                 {statType} Sales
               </Typography>
               <FormControl sx={{ minWidth: 120 }} size="small">
@@ -60,8 +64,11 @@ function Summary() {
             }}
           >
             <div>
-            <Typography style={{ fontWeight: "600" }} textTransform={"capitalize"}>
-                 Sales Pie-Chart
+              <Typography
+                style={{ fontWeight: "600" }}
+                textTransform={"capitalize"}
+              >
+                Sales Pie-Chart
               </Typography>
             </div>
             <div>
@@ -70,7 +77,7 @@ function Summary() {
           </Card>
         </Grid>
       </Box>
-    </div>
+    </Box>
   );
 }
 

@@ -33,9 +33,9 @@ function SummeryData() {
                 <img src={sales} alt="Sales" width={30} />
               </div>
               <div>
-                <Typography variant="subtitle1">Total Sales Today</Typography>
+                <Typography variant="subtitle1">Total Sales</Typography>
                 <Typography variant="h6">
-                  {state.dashboardData?.salesToday}
+                  {state.dashboardData?.totalSales}
                 </Typography>
               </div>
             </div>
@@ -103,7 +103,7 @@ function SummeryData() {
                 <img src={income} alt="Income" width={30} />
               </div>
               <div>
-                <Typography variant="subtitle1">Gross Sales Today</Typography>
+                <Typography variant="subtitle1">Gross Sales</Typography>
                 <Typography variant="h6">
                   UGX. {state.dashboardData?.grossSales}
                 </Typography>
@@ -174,7 +174,42 @@ function SummeryData() {
               <div className="right staff">
                 <Typography variant="subtitle1">Today's Profit</Typography>
                 <Typography variant="h6">
-                  UGX. {state.dashboardData?.netProfit}
+                  UGX. {state.dashboardData?.todayStats?.profit}
+                </Typography>
+              </div>
+            </div>
+          )}
+        </Card>
+      </Grid>
+
+      {/* Today Sales Card */}
+      <Grid item xs={12} sm={6} md={3}>
+        <Card
+          className="card-content"
+          sx={{
+            borderRadius: 1,
+            backgroundColor: "#000080",
+            padding: 1,
+            height: "100%",
+          }}
+        >
+          {state.loading ? (
+            <PulseLoader color="#fff" height={30} width={15} />
+          ) : (
+            <div
+              style={{
+                color: "#fff",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="left">
+                <img src={stock} alt="Stock" width={30} />
+              </div>
+              <div className="right staff">
+                <Typography variant="subtitle1">Sales Today</Typography>
+                <Typography variant="h6">
+                  UGX. {state.dashboardData?.todayStats?.sales}
                 </Typography>
               </div>
             </div>
