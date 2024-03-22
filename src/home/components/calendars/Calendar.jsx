@@ -8,10 +8,22 @@ import { StickyCard } from "../../../components";
 export default function Calendar() {
   const [tasks, setTasks] = React.useState([
     {
+      title: "Designing the development process",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
+      status: "OVERDUE",
+    },
+    {
       title: "Meeting with CEO",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
       status: "DONE",
+    },
+    {
+      title: "Requirements analysis",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
+      status: "INPROGRESS",
     },
     {
       title: "Building the development team, the first time",

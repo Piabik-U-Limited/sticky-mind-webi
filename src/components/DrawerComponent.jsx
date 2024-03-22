@@ -7,6 +7,8 @@ import {
   Typography,
   List,
   ListItem,
+  IconButton,
+  Chip,
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -19,14 +21,18 @@ import {
   Notes,
   Person,
   Settings,
+  Brightness4,
 } from "@mui/icons-material";
 
 import { useNavigate } from "react-router-dom";
-
+import { changeMode } from "../redux/slices/themeSlice";
+import { useDispatch, useSelector } from "react-redux";
 function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [active, setActive] = React.useState("Dashboard");
-
+  const location = useLocation();
+  const themeMode = useSelector((state) => state.theme.mode);
   const handleChange = (itemName) => {
     setActive(itemName);
     toggleDrawer();
@@ -47,7 +53,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
     {
       name: "Tasks",
       icon: <Task />,
-      link: "/products",
+      link: "/tasks",
     },
     {
       name: "Notes",
@@ -120,6 +126,21 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
             </React.Fragment>
           );
         })}
+        <Chip
+          variant="filled"
+          deleteIcon={<Brightness4 />}
+          onDelete={
+            themeMode === "light"
+              ? () => dispatch(changeMode("dark"))
+              : () => dispatch(changeMode("light"))
+          }
+          label={
+            themeMode === "light"
+              ? "Change to dark mode"
+              : "Change to light mode"
+          }
+          labelStyle={{ color: "#00C49F" }}
+        />
       </List>
     </div>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainLayout from "./MainLayout";
 import Home from "./home/Home";
+import Tasks from "./tasks/Tasks";
 import Products from "./products/Products";
 import Sales from "./sales/Sales";
 import Categories from "./categories/Categories";
@@ -43,9 +44,16 @@ function App() {
             <Route path="" element={<CreateCompony />} />
             <Route path="create" element={<CreateCompony />} />
           </Route>
-          <Route path="/" element={<MainLayout />}>
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <MainLayout />
+              </RequireAuth>
+            }
+          >
             <Route index element={<Home />} />
-            <Route path="products" element={<Products />} />
+            <Route path="tasks" element={<Tasks />} />
             <Route path="sales" element={<Sales />} />
             <Route path="categories" element={<Categories />} />
             <Route path="settings" element={<Settings />} />

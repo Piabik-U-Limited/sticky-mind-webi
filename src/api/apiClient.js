@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API_URL, API_KEY } from "../constants/contants";
+import store from "../redux/store";
+import useTokens from "./hooks/useTokens";
 export default class ApiClient {
   constructor() {
     this.base_url = API_URL;
@@ -8,7 +10,7 @@ export default class ApiClient {
 
   //Resubale methods
   async _makeRequest(method, endpoint, data) {
-    //const tokens = store.getState().tokens.tokens || "None";
+    const tokens = store.getState().auth.tokens || null;
     try {
       const response = await axios({
         method: method,
@@ -16,7 +18,7 @@ export default class ApiClient {
         headers: {
           "Content-Type": "application/json",
           "X-API-KEY": this.api_key,
-          //Authorization: `Bearer ${tokens?.access_token}`,
+          Authorization: `Bearer ${tokens?.access_token}`,
         },
         withCredentials: true,
         data: data,
@@ -27,7 +29,7 @@ export default class ApiClient {
     }
   }
   async _submitFile(method, endpoint, data) {
-    //const tokens = store.getState().tokens.tokens || "None";
+    const tokens = store.getState().auth.tokens || "None";
     try {
       const response = await axios({
         method: method,
@@ -35,7 +37,7 @@ export default class ApiClient {
         headers: {
           "Content-Type": "multipart/form-data",
           "X-API-KEY": this.api_key,
-          //Authorization: `Bearer ${tokens?.access_token}`,
+          Authorization: `Bearer ${tokens?.access_token}`,
         },
         withCredentials: true,
         data: data,

@@ -11,23 +11,21 @@ import useCategories from "../api/hooks/useCategories";
 function AddCategoryForm(props) {
   const submitting = useSelector((state) => state.categories.submitting);
   const { handleAddCategory } = useCategories();
-  const { company } = useSelector((state) => state.auth);
   const validationSchema = yup.object({
     name: yup.string().required("Category name is required"),
-    description: yup.string("Quantity must be a number"),
+    content: yup.string("Content must be a number"),
   });
   return (
     <div>
       <Formik
         initialValues={{
           name: "",
-          decription: "",
-          companyId: company?.id,
+          content: "",
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           handleAddCategory(values);
-          //   console.log(values);
+          console.log(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -55,11 +53,11 @@ function AddCategoryForm(props) {
             </div>
 
             <div>
-              <label htmlFor="description">Description</label>
+              <label htmlFor="content">Description</label>
 
               <TextInputField
                 multiline={true}
-                name="decription"
+                name="content"
                 placeholder="OPTIONAL"
                 type="text"
                 size="small"

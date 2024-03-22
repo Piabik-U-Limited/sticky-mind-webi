@@ -20,7 +20,7 @@ export default function SignUp() {
   return (
     <Box
       sx={{
-        marginTop: 8,
+        marginTop: 1,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -37,8 +37,11 @@ export default function SignUp() {
       <Formik
         initialValues={{
           name: "",
-          userName: "",
+          username: "",
           password: "",
+          confirmPassword: "",
+          email: "",
+          phone: "",
         }}
         validationSchema={registerSchema}
         onSubmit={(values) => {
@@ -64,7 +67,7 @@ export default function SignUp() {
               }}
             />
             <TextInputField
-              name="userName"
+              name="username"
               placeholder="Enter Username"
               type="input"
               size="small"
@@ -75,7 +78,16 @@ export default function SignUp() {
             <TextInputField
               name="email"
               placeholder="Enter Email"
-              type="inpuit"
+              type="input"
+              size="small"
+              sx={{
+                marginTop: "5px",
+              }}
+            />
+            <TextInputField
+              name="phone"
+              placeholder="Enter Phone Number"
+              type="input"
               size="small"
               sx={{
                 marginTop: "5px",
@@ -84,6 +96,14 @@ export default function SignUp() {
             <PasswordInput
               name="password"
               placeholder="Enter password"
+              size="small"
+              sx={{
+                marginTop: "5px",
+              }}
+            />
+            <PasswordInput
+              name="confirmPassword"
+              placeholder="Confirm password"
               size="small"
               sx={{
                 marginTop: "5px",

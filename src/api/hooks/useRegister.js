@@ -18,7 +18,7 @@ function useRegister() {
       dispatch(setLoading(true));
       const response = await apiClient._makeRequest(
         "post",
-        "auth/register",
+        "auth/signup",
         data
       );
 
@@ -32,7 +32,7 @@ function useRegister() {
         Cookies.set("refresh_token", response.data.tokens.refresh_token);
         Cookies.set("access_token", response.data.tokens.access_token);
         Cookies.set("user", JSON.stringify(response.data.user));
-       
+
         dispatch(setLoading(false));
         navigate("/company/create", { replace: true });
       } else {
@@ -63,7 +63,7 @@ function useRegister() {
       captureError(error);
     }
     dispatch(setLoading(false));
-  }
+  };
   const handleResetpassword = async (data) => {
     dispatch(setLoading(true));
     try {
@@ -83,9 +83,8 @@ function useRegister() {
       captureError(error);
     }
     dispatch(setLoading(false));
-    
-  }
-  return { handleRegister,handleRequestpasswordreset,handleResetpassword };
+  };
+  return { handleRegister, handleRequestpasswordreset, handleResetpassword };
 }
 
 export default useRegister;

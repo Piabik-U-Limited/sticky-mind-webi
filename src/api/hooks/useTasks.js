@@ -1,27 +1,27 @@
 import React from "react";
 import { setError, setSuccess } from "../../redux/slices/notification.slice";
+
 import {
-  setCategoriess,
-  setLoading,
-  toggleShowAddCategoryModal,
+  setTasks,
   setSubmitting,
-} from "../../redux/slices/categories.slice";
+  setLoading,
+  toggleShowAddTaskModal,
+} from "../../redux/slices/tasks.slice";
 import ApiClient from "../apiClient";
 import useSetError from "./useSetError";
 import { useDispatch, useSelector } from "react-redux";
-function useCategories() {
+function useTasks() {
   const dispatch = useDispatch();
   const api = new ApiClient();
   const { captureError } = useSetError();
-  const company = useSelector((state) => state.auth.company);
 
-  const handleFetchCategories = async () => {
+  const handleFetchTasks = async () => {
     dispatch(setLoading(true));
     try {
-      const response = await api._makeRequest("get", `categories`);
+      const response = await api._makeRequest("get", `tasks`);
 
       if (response.status === 200) {
-        dispatch(setCategoriess(response.data));
+        dispatch(setTasks(response.data));
       } else {
         captureError(response);
       }
@@ -31,15 +31,15 @@ function useCategories() {
     dispatch(setLoading(false));
   };
 
-  const handleAddCategory = async (data) => {
+  const handleAddTask = async (data) => {
     setSubmitting(true);
     try {
-      const response = await api._makeRequest("post", `categories`, data);
+      const response = await api._makeRequest("post", `tasks`, data);
       if (response.status === 201) {
         dispatch(setSuccess(response.data.message));
 
-        handleFetchCategories();
-        dispatch(toggleShowAddCategoryModal());
+        handleFetchTasks();
+        dispatch(toggleShowAddTaskModal());
       } else {
         captureError(response);
       }
@@ -48,7 +48,7 @@ function useCategories() {
     }
     setSubmitting(false);
   };
-  return { handleFetchCategories, handleAddCategory };
+  return { handleFetchTasks, handleAddTask };
 }
 
-export default useCategories;
+export default useTasks;

@@ -38,7 +38,7 @@ const SummeryBarChart = () => {
   ];
   console.log(data);
   return (
-    <Card sx={{ padding: 1 }}>
+    <Card sx={{ padding: 1 }} elevation={0}>
       <BarChart width={200} height={200} data={data1}>
         <Bar dataKey="DONE" fill="#00C49F" />
         {/* <Bar dataKey="IN_PROGRESS" fill="#FFBB28" />

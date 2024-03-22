@@ -18,11 +18,11 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function CompletionRate() {
   return (
-    <PieChart width={200} height={200} onMouseEnter={() => {}}>
+    <PieChart width={200} height={150} onMouseEnter={() => {}}>
       <Pie
         data={data}
-        cx={"50%"}
-        cy={80}
+        cx={"60%"}
+        cy={60}
         innerRadius={30}
         outerRadius={60}
         fill="#8884d8"
