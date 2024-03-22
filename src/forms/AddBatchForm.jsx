@@ -10,7 +10,7 @@ import useBatches from "../api/hooks/useBatches";
 function AddBatchForm() {
   const { submitting } = useSelector((state) => state.batches);
   const { company } = useSelector((state) => state.auth);
-  const {handleAddBatch}=useBatches()
+  const { handleAddBatch } = useBatches();
   const validationSchema = yup.object({
     name: yup.string().required("Batch name is required"),
     batchNumber: yup
@@ -118,13 +118,13 @@ function AddBatchForm() {
                   sx={{
                     fontSize: "14px",
                     padding: "8px 40px",
-                    backgroundColor: "#0F9D58",
+                    backgroundColor: "#00C49F",
                     color: "white",
                     borderRadius: "5px",
                     cursor: "pointer",
                     border: "none",
                     "&:hover": {
-                      backgroundColor: "#0F9D58c0",
+                      backgroundColor: "#00C49Fc0",
                     },
                   }}
                   endIcon={<Save />}

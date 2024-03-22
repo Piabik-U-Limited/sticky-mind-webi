@@ -14,14 +14,14 @@ import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Key, Login, Password } from "@mui/icons-material";
 import { Formik } from "formik";
-import { TextInputField, PasswordInput,FormSubmitButton } from "../components";
+import { TextInputField, PasswordInput, FormSubmitButton } from "../components";
 import { companies } from "../utils/companies";
 import { loginSchema } from "../shemas/loginSchema";
 import useLogin from "../api/hooks/useLogin";
 import { useSelector } from "react-redux";
 export default function SignIn() {
   const { handleLogin } = useLogin();
-  const {loading} = useSelector((state) => state.auth)
+  const { loading } = useSelector((state) => state.auth);
 
   return (
     <Box
@@ -32,7 +32,7 @@ export default function SignIn() {
         alignItems: "center",
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "70px", width: "70px" }}>
+      <Avatar sx={{ m: 1, bgcolor: "#00C49F", height: "70px", width: "70px" }}>
         <Key fontSize="large" />
       </Avatar>
       <Typography component="h1" variant="h5">
@@ -40,9 +40,8 @@ export default function SignIn() {
       </Typography>
       <Formik
         initialValues={{
-          userName: "",
+          email: "",
           password: "",
-          companyName: "",
         }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
@@ -74,17 +73,8 @@ export default function SignIn() {
             /> */}
 
             <TextInputField
-              name="companyName"
-              placeholder="Enter Company Name"
-              type="input"
-              size="small"
-              sx={{
-                marginTop: "5px",
-              }}
-            />
-            <TextInputField
-              name="userName"
-              placeholder="Enter Username"
+              name="email"
+              placeholder="Enter Email"
               type="input"
               size="small"
               sx={{
@@ -112,13 +102,13 @@ export default function SignIn() {
               sx={{
                 fontSize: "14px",
                 padding: "8px 40px",
-                backgroundColor: "#0F9D58",
+                backgroundColor: "#00C49F",
                 color: "white",
                 borderRadius: "5px",
                 cursor: "pointer",
                 border: "none",
                 "&:hover": {
-                  backgroundColor: "#0F9D58c0",
+                  backgroundColor: "#00C49Fc0",
                 },
               }}
               endIcon={<Login />}
@@ -138,11 +128,11 @@ export default function SignIn() {
                   Forgot password?
                 </Link>
               </Grid>
-              {/* <Grid item>
+              <Grid item>
                 <Link to={"/auth/signup"}>
                   <Typography>Create Account</Typography>
                 </Link>
-              </Grid> */}
+              </Grid>
             </Grid>
           </Box>
         )}

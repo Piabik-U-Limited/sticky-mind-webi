@@ -23,8 +23,7 @@ export default function AddMenu(props) {
           alignItems: "center",
           textAlign: "center",
           mr: 2,
-          display: { sm: "none",  },
-          
+          display: { sm: "none" },
         }}
       >
         <Tooltip title="Add Sale/Stock">
@@ -32,12 +31,12 @@ export default function AddMenu(props) {
             //className="rotate-icon"
             onClick={handleClick}
             size="small"
-            sx={{ mr: 2 ,}}
+            sx={{ mr: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar backgroundColor="#0F9D58">
+            <Avatar backgroundColor="#00C49F">
               <KeyboardArrowDown />
             </Avatar>
           </IconButton>

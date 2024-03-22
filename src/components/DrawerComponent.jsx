@@ -9,7 +9,17 @@ import {
   ListItem,
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-import { Store, Dashboard, Percent, Category } from "@mui/icons-material";
+import {
+  Store,
+  Dashboard,
+  Percent,
+  Category,
+  Home,
+  Task,
+  Notes,
+  Person,
+  Settings,
+} from "@mui/icons-material";
 
 import { useNavigate } from "react-router-dom";
 
@@ -24,8 +34,8 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
 
   const drawerItems = [
     {
-      name: "Dashboard",
-      icon: <Dashboard />,
+      name: "Home",
+      icon: <Home />,
       link: "/",
     },
 
@@ -35,28 +45,35 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
       link: "/categories",
     },
     {
-      name: "Manage Products",
-      icon: <Store />,
+      name: "Tasks",
+      icon: <Task />,
       link: "/products",
     },
     {
-      name: "Manage Sales",
-      icon: <Percent />,
+      name: "Notes",
+      icon: <Notes />,
       link: "/sales",
     },
 
-    // {
-    //   name: "Invetory Settings",
-    //   icon: <Settings />,
-    //   link: "/settings",
-    // },
+    {
+      name: "Settings",
+      icon: <Settings />,
+      link: "/settings",
+    },
+
+    {
+      name: "Profile",
+      icon: <Person />,
+      link: "/profile",
+    },
   ];
   return (
     <div>
       {/* This is the container of the Logo on the Drawer/Sidebar */}
-      <Toolbar style={{ backgroundColor: "#0F9D58", margin: 0 }}>
+      <Toolbar style={{ backgroundColor: "#00C49F", margin: 0 }}>
+        {" "}
         <div className="topbar-logo">
-          <Typography fontWeight="bold">Stock Manager</Typography>
+          <Typography fontWeight="bold">Sticky Mind</Typography>
         </div>
       </Toolbar>
 
@@ -70,7 +87,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
                   onClick={() => handleChange(item.name)}
                   sx={
                     active === item.name && {
-                      backgroundColor: "#0F9D58",
+                      backgroundColor: "#00C49F",
                       borderRadius: 1,
                     }
                   }
@@ -81,7 +98,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
                         active === item.name
                           ? { color: "#fff" }
                           : theme === "light"
-                          ? { color: "#0F9D58" }
+                          ? { color: "#00C49F" }
                           : { color: "lightgray" }
                       }
                     >
@@ -93,7 +110,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
                         active === item.name
                           ? { color: "#fff" }
                           : theme === "light"
-                          ? { color: "#0F9D58" }
+                          ? { color: "#00C49F" }
                           : { color: "lightgray" }
                       }
                     />

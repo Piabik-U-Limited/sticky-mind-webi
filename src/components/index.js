@@ -9,7 +9,9 @@ export { default as SuccessAlert } from "./SuccessAlert";
 
 export { default as SelectField } from "./SelectField";
 export { default as TextInputField } from "./TextInputField";
-export {default as FormDatePicker} from "./FormDatePicker"
-export {default as FormSubmitButton} from "./FormSubmitButton"
-export {default as PasswordInput} from "./PasswordInput"
+export { default as FormDatePicker } from "./FormDatePicker";
+export { default as FormSubmitButton } from "./FormSubmitButton";
+export { default as PasswordInput } from "./PasswordInput";
 
+export { default as SearchComponent } from "./SearchComponent";
+export { default as StickyCard } from "./StickyCard";

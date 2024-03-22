@@ -136,13 +136,13 @@ function EditStaffForm(props) {
                   sx={{
                     fontSize: "14px",
                     pEditing: "8px 40px",
-                    backgroundColor: "#0F9D58",
+                    backgroundColor: "#00C49F",
                     color: "white",
                     borderRadius: "5px",
                     cursor: "pointer",
                     border: "none",
                     "&:hover": {
-                      backgroundColor: "#0F9D58c0",
+                      backgroundColor: "#00C49Fc0",
                     },
                   }}
                 >

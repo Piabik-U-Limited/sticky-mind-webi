@@ -22,7 +22,7 @@ function Authenticating() {
           alignItems: "center",
         }}
       >
-        <BeatLoader color="#0F9D58" size={50} />
+        <BeatLoader color="#00C49F" size={50} />
       </Box>
     </Box>
   );

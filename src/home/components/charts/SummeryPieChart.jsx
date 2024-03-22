@@ -56,7 +56,7 @@ const SummeryPieChart = () => {
     "purple",
     "#87CEEB",
     "#FFBB28",
-    "#0F9D58",
+    "#00C49F",
     "#000080",
     "blue",
     "pink",
@@ -80,7 +80,6 @@ const SummeryPieChart = () => {
         </Pie>
 
         <Tooltip />
-       
       </PieChart>
     </Grid>
   );

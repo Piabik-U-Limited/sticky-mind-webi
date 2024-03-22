@@ -75,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   /* gap: 1.0rem; */
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .lineGraph {
@@ -83,7 +83,7 @@
 }
 
 .pieChart {
-  width: 25%;
+  width: 29%;
 }
 
 @media screen and (max-width: 760px) {
@@ -100,5 +100,6 @@
   }
   .pieChart {
     width: 100%;
+    margin-top: 10px;
   }
 }

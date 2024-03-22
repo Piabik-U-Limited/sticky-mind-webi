@@ -20,9 +20,9 @@ const NoStaffFound = (props) => {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: "#0F9D58",
+                backgroundColor: "#00C49F",
                 ":hover": {
-                  backgroundColor: "#0F9D58c0",
+                  backgroundColor: "#00C49Fc0",
                 },
               }}
               onClick={props.refresh}

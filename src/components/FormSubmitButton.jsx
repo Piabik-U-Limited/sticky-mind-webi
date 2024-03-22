@@ -1,7 +1,13 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-function FormSubmitButton({loading, title, loadingTitle, handleSubmit,icon}) {
+function FormSubmitButton({
+  loading,
+  title,
+  loadingTitle,
+  handleSubmit,
+  icon,
+}) {
   return (
     <div className="form-grid">
       {loading ? (
@@ -26,13 +32,13 @@ function FormSubmitButton({loading, title, loadingTitle, handleSubmit,icon}) {
           sx={{
             fontSize: "14px",
             padding: "8px 40px",
-            backgroundColor: "#0F9D58",
+            backgroundColor: "#00C49F",
             color: "white",
             borderRadius: "5px",
             cursor: "pointer",
             border: "none",
             "&:hover": {
-              backgroundColor: "#0F9D58c0",
+              backgroundColor: "#00C49Fc0",
             },
           }}
           onClick={handleSubmit}

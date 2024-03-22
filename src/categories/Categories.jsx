@@ -28,15 +28,15 @@ function Categories() {
             height: "70vh",
           }}
         >
-          <ScaleLoader color="#0F9D58" height={100} width={15} />
+          <ScaleLoader color="#00C49F" height={100} width={15} />
         </div>
       ) : (
         <div>
           <Button
             sx={{
-              backgroundColor: "#0F9D58",
+              backgroundColor: "#00C49F",
               margin: 1,
-              ":hover": { backgroundColor: "#0F9D58c0" },
+              ":hover": { backgroundColor: "#00C49Fc0" },
             }}
             endIcon={<Add />}
             variant="contained"

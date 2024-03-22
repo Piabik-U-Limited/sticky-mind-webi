@@ -1,22 +1,20 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { Grid, Button } from "@mui/material";
-import { TextInputField, SelectField,FormSubmitButton } from "../components";
+import { TextInputField, SelectField, FormSubmitButton } from "../components";
 import { LoadingButton } from "@mui/lab";
 import * as yup from "yup";
 import { useSelector } from "react-redux";
 import { Save } from "@mui/icons-material";
 import useCategories from "../api/hooks/useCategories";
 
-
 function AddCategoryForm(props) {
   const submitting = useSelector((state) => state.categories.submitting);
   const { handleAddCategory } = useCategories();
-  const {company}=useSelector(state=>state.auth)
+  const { company } = useSelector((state) => state.auth);
   const validationSchema = yup.object({
     name: yup.string().required("Category name is required"),
     description: yup.string("Quantity must be a number"),
- 
   });
   return (
     <div>
@@ -24,7 +22,7 @@ function AddCategoryForm(props) {
         initialValues={{
           name: "",
           decription: "",
-          companyId:company?.id
+          companyId: company?.id,
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -55,7 +53,6 @@ function AddCategoryForm(props) {
                 }}
               />
             </div>
-         
 
             <div>
               <label htmlFor="description">Description</label>
@@ -95,13 +92,13 @@ function AddCategoryForm(props) {
                   sx={{
                     fontSize: "14px",
                     padding: "8px 40px",
-                    backgroundColor: "#0F9D58",
+                    backgroundColor: "#00C49F",
                     color: "white",
                     borderRadius: "5px",
                     cursor: "pointer",
                     border: "none",
                     "&:hover": {
-                      backgroundColor: "#0F9D58c0",
+                      backgroundColor: "#00C49Fc0",
                     },
                   }}
                   endIcon={<Save />}

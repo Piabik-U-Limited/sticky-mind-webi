@@ -21,7 +21,7 @@ import {
 
 import { toggleShowAddProductModal } from "./redux/slices/products.slice";
 import { toggleShowAddSaleModal } from "./redux/slices/sales.slice";
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 function MainLayout(props) {
   const { window } = props;
@@ -108,7 +108,11 @@ function MainLayout(props) {
             },
           }}
         >
-          <DrawerComponent drawerWidth={drawerWidth} theme={themeMode}  toggleDrawer={()=>{}} />
+          <DrawerComponent
+            drawerWidth={drawerWidth}
+            theme={themeMode}
+            toggleDrawer={() => {}}
+          />
         </Drawer>
       </Box>
       <Box
@@ -142,7 +146,7 @@ function MainLayout(props) {
           fullScreen={true}
         >
           {/* <AddProductForm /> */}
-          <ProductForm/>
+          <ProductForm />
         </FormModal>
         <FormModal
           open={sales.showAddSaleModal}
@@ -153,7 +157,6 @@ function MainLayout(props) {
         >
           <AddSalesForm />
         </FormModal>
-       
 
         <SuccessAlert
           message={notification.success}

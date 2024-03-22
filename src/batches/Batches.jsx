@@ -11,7 +11,9 @@ import Batch from "./components/Batch";
 
 function Batches() {
   const { handleFetchBatches } = useBatches();
-  const {batches,loading,showAddBatchModal} = useSelector((state) => state.batches);
+  const { batches, loading, showAddBatchModal } = useSelector(
+    (state) => state.batches
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     handleFetchBatches();
@@ -27,15 +29,15 @@ function Batches() {
             height: "70vh",
           }}
         >
-          <ScaleLoader color="#0F9D58" height={100} width={15} />
+          <ScaleLoader color="#00C49F" height={100} width={15} />
         </div>
       ) : (
         <div>
           <Button
             sx={{
-              backgroundColor: "#0F9D58",
+              backgroundColor: "#00C49F",
               margin: 1,
-              ":hover": { backgroundColor: "#0F9D58c0" },
+              ":hover": { backgroundColor: "#00C49Fc0" },
             }}
             endIcon={<Add />}
             variant="contained"
@@ -62,9 +64,7 @@ function Batches() {
                 }}
               >
                 <NotAccessible />
-                <Typography variant="h6">
-                  No batches are avalibale
-                </Typography>
+                <Typography variant="h6">No batches are avalibale</Typography>
               </div>
             )}
           </Paper>

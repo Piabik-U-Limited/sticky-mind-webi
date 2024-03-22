@@ -12,7 +12,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import  dayjs from "dayjs";
+import dayjs from "dayjs";
 // import utc from "dayjs/plugin/utc";
 // import timezone from "dayjs/plugin/timezone";
 // import {
@@ -25,9 +25,6 @@ import { useNavigate } from "react-router-dom";
 
 function SalesTable({ data }) {
   const [filterQuery, setFilterQuery] = React.useState("");
-
-  
-
 
   function createData(id, customerName, refNo, date, totalAmount, items) {
     return {
@@ -139,9 +136,9 @@ function SalesTable({ data }) {
                   endIcon={<OpenInNew />}
                   variant="contained"
                   sx={{
-                    backgroundColor: "#0F9D58",
+                    backgroundColor: "#00C49F",
                     margin: 1,
-                    ":hover": { backgroundColor: "#0F9D58c0" },
+                    ":hover": { backgroundColor: "#00C49Fc0" },
                   }}
                 >
                   Details
@@ -153,8 +150,6 @@ function SalesTable({ data }) {
       </React.Fragment>
     );
   }
-
-  
 
   const rows = data.map((item) =>
     createData(
@@ -184,7 +179,7 @@ function SalesTable({ data }) {
           display: "flex",
           alignItems: "center",
           padding: 5,
-          backgroundColor: "#0F9D58",
+          backgroundColor: "#00C49F",
           color: "#fff",
         }}
       >
@@ -207,8 +202,8 @@ function SalesTable({ data }) {
         </IconButton>
         <Button
           sx={{
-            backgroundColor: "#0F9D58",
-            ":hover": { backgroundColor: "#0F9D58c0" },
+            backgroundColor: "#00C49F",
+            ":hover": { backgroundColor: "#00C49Fc0" },
           }}
           endIcon={<Add />}
           variant="contained"

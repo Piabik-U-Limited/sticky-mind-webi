@@ -14,16 +14,15 @@ import {
   FormControlLabel,
   Tooltip,
   Switch,
- 
 } from "@mui/material";
 import useCategories from "../../api/hooks/useCategories";
-import {  Save } from "@mui/icons-material";
+import { Save } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
 import useProducts from "../../api/hooks/useProducts";
 import dayjs from "dayjs";
 import { LoadingButton } from "@mui/lab";
-import {FormSubmitButton} from "../../components"
+import { FormSubmitButton } from "../../components";
 const validationSchema = yup.object().shape({
   name: yup.string().required("Product name is required"),
   unitPrice: yup
@@ -105,11 +104,10 @@ const EditProductForm = () => {
             <form onSubmit={handleSubmit}>
               <div>
                 <Paper sx={{ padding: 1, borderRadius: 1, marginTop: 1 }}>
-                  
-                    <Typography>
-                      Profit: {values?.sellingPrice - values?.unitPrice}
-                    </Typography>
-                 
+                  <Typography>
+                    Profit: {values?.sellingPrice - values?.unitPrice}
+                  </Typography>
+
                   <Grid container spacing={2} xs={12} sm={12} md={12}>
                     <Grid item xs={6} sm={4} md={2}>
                       <InputLabel style={{ fontSize: "0.8rem" }}>
@@ -306,7 +304,11 @@ const EditProductForm = () => {
                   </Grid>
                 </Paper>
                 <FormSubmitButton
-                icon={<Save />} title={"Edit Product"} loadingTitle={"Editing Product"} loading={submitting}/>
+                  icon={<Save />}
+                  title={"Edit Product"}
+                  loadingTitle={"Editing Product"}
+                  loading={submitting}
+                />
 
                 {/* {submitting ? (
                   <LoadingButton
@@ -331,15 +333,15 @@ const EditProductForm = () => {
                     sx={{
                       fontSize: "14px",
                       padding: "8px 40px",
-                      borderColor: "#0F9D58",
+                      borderColor: "#00C49F",
                       color: "#fff",
                       borderRadius: "5px",
                       cursor: "pointer",
-                      backgroundColor: "#0F9D58",
+                      backgroundColor: "#00C49F",
 
                       margin: 1,
                       "&:hover": {
-                        backgroundColor: "#0F9D58c0",
+                        backgroundColor: "#00C49Fc0",
                       },
                     }}
                     endIcon={<Save />}

@@ -4,6 +4,7 @@ import {
   Box,
   Card,
   Grid,
+  Paper,
   FormControl,
   InputLabel,
   Select,
@@ -12,7 +13,13 @@ import {
 import "./styles/summery.css";
 import { setStatType } from "../../redux/slices/dashbard.slice";
 import { useSelector, useDispatch } from "react-redux";
-import { SummeryBarChart, SummeryPieChart, SummeryData } from "./charts";
+import {
+  SummeryBarChart,
+  SummeryPieChart,
+  SummeryData,
+  CompletionRate,
+} from "./charts";
+import { Calendar } from "./calendars";
 import useDashboard from "../../api/hooks/useDashboard";
 function Summary() {
   const dispatch = useDispatch();
@@ -25,11 +32,11 @@ function Summary() {
   };
   return (
     <Box>
-      <SummeryData />
       <Box className="grid-container">
         <Grid container className="graphWrapper">
           <div className="lineGraph">
-            <div className="chart-heading" style={{ padding: 10 }}>
+            <SummeryData />
+            {/* <div className="chart-heading" style={{ padding: 10 }}>
               <Typography
                 style={{ fontWeight: "600" }}
                 variant="h6"
@@ -44,7 +51,7 @@ function Summary() {
                   value={statType}
                   label="Statstics"
                   onChange={(e) => handleFetchStatsType(e.target.value)}
-                  //sx={{color:'#0F9D58'}}
+                  //sx={{color:'#00C49F'}}
                   size="small"
                 >
                   <MenuItem value={"hourly"}>Hourly</MenuItem>
@@ -53,8 +60,10 @@ function Summary() {
                   <MenuItem value={"monthly"}>Monthly</MenuItem>
                 </Select>
               </FormControl>
-            </div>
-            <SummeryBarChart />
+            </div> */}
+            <Card sx={{ marginTop: 1 }}>
+              <Calendar />
+            </Card>
           </div>
 
           <Card
@@ -63,17 +72,14 @@ function Summary() {
               padding: 1,
             }}
           >
-            <div>
-              <Typography
-                style={{ fontWeight: "600" }}
-                textTransform={"capitalize"}
-              >
-                Sales Pie-Chart
-              </Typography>
-            </div>
-            <div>
-              <SummeryPieChart />
-            </div>
+            <Grid item xs={12} container>
+              <Grid item xs={6} sm={6} md={12}>
+                <CompletionRate />
+              </Grid>
+              <Grid item xs={6} sm={6} md={12}>
+                <SummeryBarChart />
+              </Grid>
+            </Grid>
           </Card>
         </Grid>
       </Box>

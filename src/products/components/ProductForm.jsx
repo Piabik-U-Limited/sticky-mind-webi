@@ -284,27 +284,33 @@ const ProductForm = () => {
                                   //disabled={values.products?.[index]?.isAutomated}
                                   InputProps={{
                                     startAdornment: (
-                                      <Tooltip title={values.products?.[index]?.isAutomated ?"Make it manual": "Make it automatic" }>
-                                      <FormControlLabel
-                                        control={
-                                          <Switch
-                                            checked={
-                                              values.products?.[index]
-                                                ?.isAutomated
-                                            }
-                                            onChange={() => {
-                                              setFieldValue(
-                                                `products[${index}].isAutomated`,
-                                                !product.isAutomated
-                                              );
-                                            }}
-                                            name="auto"
-                                            size="small"
-                                            
-                                          />
+                                      <Tooltip
+                                        title={
+                                          values.products?.[index]?.isAutomated
+                                            ? "Make it manual"
+                                            : "Make it automatic"
                                         }
-                                        //label="Auto"
-                                      /></Tooltip>
+                                      >
+                                        <FormControlLabel
+                                          control={
+                                            <Switch
+                                              checked={
+                                                values.products?.[index]
+                                                  ?.isAutomated
+                                              }
+                                              onChange={() => {
+                                                setFieldValue(
+                                                  `products[${index}].isAutomated`,
+                                                  !product.isAutomated
+                                                );
+                                              }}
+                                              name="auto"
+                                              size="small"
+                                            />
+                                          }
+                                          //label="Auto"
+                                        />
+                                      </Tooltip>
                                     ),
                                   }}
                                   size="small"
@@ -352,8 +358,8 @@ const ProductForm = () => {
                       sx={{
                         fontSize: "14px",
                         padding: "8px 40px",
-                        borderColor: "#0F9D58",
-                        color: "#0F9D58",
+                        borderColor: "#00C49F",
+                        color: "#00C49F",
                         borderRadius: "5px",
                         cursor: "pointer",
 
@@ -397,15 +403,15 @@ const ProductForm = () => {
                         sx={{
                           fontSize: "14px",
                           padding: "8px 40px",
-                          borderColor: "#0F9D58",
+                          borderColor: "#00C49F",
                           color: "#fff",
                           borderRadius: "5px",
                           cursor: "pointer",
-                          backgroundColor: "#0F9D58",
+                          backgroundColor: "#00C49F",
 
                           margin: 1,
                           "&:hover": {
-                            backgroundColor: "#0F9D58c0",
+                            backgroundColor: "#00C49Fc0",
                           },
                         }}
                         endIcon={<Save />}

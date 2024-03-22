@@ -20,10 +20,9 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 export default function CreateCompony() {
-    const {handleCreateCompany}=useCompany()
-    const {loading,user}=useSelector((state)=>state.auth)
+  const { handleCreateCompany } = useCompany();
+  const { loading, user } = useSelector((state) => state.auth);
 
-  
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -34,7 +33,9 @@ export default function CreateCompony() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "80px", width: "80px" }} >
+        <Avatar
+          sx={{ m: 1, bgcolor: "#00C49F", height: "80px", width: "80px" }}
+        >
           <Business fontSize="large" />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -44,12 +45,12 @@ export default function CreateCompony() {
           initialValues={{
             name: "",
             location: "",
-            creatorId:user?.id
+            creatorId: user?.id,
           }}
           //validationSchema={validationSchema}
           onSubmit={(values) => {
             handleCreateCompany(values);
-            console.log(values)
+            console.log(values);
           }}
         >
           {({ handleSubmit }) => (
@@ -78,7 +79,7 @@ export default function CreateCompony() {
                   marginTop: "5px",
                 }}
               />
-              
+
               <Button
                 component="label"
                 fullWidth
@@ -88,13 +89,13 @@ export default function CreateCompony() {
                   fontSize: "14px",
                   padding: "8px 40px",
                   marginY: "10px",
-                  backgroundColor: "#0F9D58",
+                  backgroundColor: "#00C49F",
                   color: "white",
                   borderRadius: "5px",
                   cursor: "pointer",
                   border: "none",
                   "&:hover": {
-                    backgroundColor: "#0F9D58c0",
+                    backgroundColor: "#00C49Fc0",
                   },
                 }}
               >
@@ -102,44 +103,44 @@ export default function CreateCompony() {
                 <VisuallyHiddenInput type="file" />
               </Button>
               {loading ? (
-              <LoadingButton
-                className="btnNext"
-                fullWidth
-                loading
-                color="secondary"
-                loadingPosition="start"
-                variant="contained"
-                sx={{
-                  fontSize: "14px",
-                  padding: "8px 40px",
-                  borderRadius: "15px",
-                }}
-              >
-                Creating Account....
-              </LoadingButton>
-            ) : (
-              <Button
-                type="submit"
-                fullWidth
-                onClick={handleSubmit}
-                variant="contained"
-                sx={{
-                  fontSize: "14px",
-                  padding: "8px 40px",
-                  backgroundColor: "#0F9D58",
-                  color: "white",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  border: "none",
-                  "&:hover": {
-                    backgroundColor: "#0F9D58c0",
-                  },
-                }}
-                endIcon={<Add />}
-              >
-                Create Company
-              </Button>
-            )}
+                <LoadingButton
+                  className="btnNext"
+                  fullWidth
+                  loading
+                  color="secondary"
+                  loadingPosition="start"
+                  variant="contained"
+                  sx={{
+                    fontSize: "14px",
+                    padding: "8px 40px",
+                    borderRadius: "15px",
+                  }}
+                >
+                  Creating Account....
+                </LoadingButton>
+              ) : (
+                <Button
+                  type="submit"
+                  fullWidth
+                  onClick={handleSubmit}
+                  variant="contained"
+                  sx={{
+                    fontSize: "14px",
+                    padding: "8px 40px",
+                    backgroundColor: "#00C49F",
+                    color: "white",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    border: "none",
+                    "&:hover": {
+                      backgroundColor: "#00C49Fc0",
+                    },
+                  }}
+                  endIcon={<Add />}
+                >
+                  Create Company
+                </Button>
+              )}
             </Box>
           )}
         </Formik>

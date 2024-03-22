@@ -3,18 +3,24 @@ import { Typography, Card, Grid } from "@mui/material";
 import { products, income, sales, stock } from "../../../assets/icons";
 import { PulseLoader } from "react-spinners";
 import { useSelector } from "react-redux";
+import {
+  CalendarMonth,
+  CalendarToday,
+  DataArray,
+  DataUsage,
+} from "@mui/icons-material";
 function SummeryData() {
   const state = useSelector((state) => state.dashboard);
 
   return (
     <Grid container spacing={2} alignItems="stretch">
-      {/* Sales Card */}
+      {/* Due Today */}
       <Grid item xs={12} sm={6} md={3}>
         <Card
           className="card-content"
           sx={{
             borderRadius: 1,
-            backgroundColor: "purple",
+            backgroundColor: "#00C49F",
             padding: 1,
             height: "100%",
           }}
@@ -30,10 +36,10 @@ function SummeryData() {
               }}
             >
               <div className="left">
-                <img src={sales} alt="Sales" width={30} />
+                <CalendarToday />
               </div>
               <div>
-                <Typography variant="subtitle1">Total Sales</Typography>
+                <Typography variant="subtitle1">Due Today</Typography>
                 <Typography variant="h6">
                   {state.dashboardData?.totalSales}
                 </Typography>
@@ -42,14 +48,13 @@ function SummeryData() {
           )}
         </Card>
       </Grid>
-
       {/* Products Card */}
       <Grid item xs={12} sm={6} md={3}>
         <Card
           className="card-content"
           sx={{
             borderRadius: 1,
-            backgroundColor: "#87CEEB",
+            backgroundColor: "#0088FE",
             padding: 1,
             height: "100%",
           }}
@@ -65,10 +70,10 @@ function SummeryData() {
               }}
             >
               <div className="left">
-                <img src={products} alt="products" width={30} />
+                <DataUsage />
               </div>
               <div className="right students">
-                <Typography variant="subtitle1">Products</Typography>
+                <Typography variant="subtitle1">Over due</Typography>
                 <Typography variant="h6">
                   {state.dashboardData?.totalProducts}
                 </Typography>
@@ -77,43 +82,7 @@ function SummeryData() {
           )}
         </Card>
       </Grid>
-
-      {/* Income Card */}
-      <Grid item xs={12} sm={6} md={3}>
-        <Card
-          className="card-content"
-          sx={{
-            borderRadius: 1,
-            backgroundColor: "#0F9D58",
-            padding: 1,
-            height: "100%",
-          }}
-        >
-          {state.loading ? (
-            <PulseLoader color="#fff" height={30} width={15} />
-          ) : (
-            <div
-              style={{
-                color: "#fff",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <div className="left">
-                <img src={income} alt="Income" width={30} />
-              </div>
-              <div>
-                <Typography variant="subtitle1">Gross Sales</Typography>
-                <Typography variant="h6">
-                  UGX. {state.dashboardData?.grossSales}
-                </Typography>
-              </div>
-            </div>
-          )}
-        </Card>
-      </Grid>
-
-      {/* Stock Card */}
+      {/* This Month */}
       <Grid item xs={12} sm={6} md={3}>
         <Card
           className="card-content"
@@ -135,25 +104,25 @@ function SummeryData() {
               }}
             >
               <div className="left">
-                <img src={stock} alt="Stock" width={30} />
+                <CalendarMonth />
               </div>
-              <div className="right staff">
-                <Typography variant="subtitle1">Current Stock</Typography>
+              <div>
+                <Typography variant="subtitle1">This Month</Typography>
                 <Typography variant="h6">
-                  UGX. {state.dashboardData?.stock}
+                  {state.dashboardData?.grossSales}
                 </Typography>
               </div>
             </div>
           )}
         </Card>
       </Grid>
-      {/* Profit Card */}
+      {/* Completed Today */}
       <Grid item xs={12} sm={6} md={3}>
         <Card
           className="card-content"
           sx={{
             borderRadius: 1,
-            backgroundColor: "#000080",
+            backgroundColor: "#FF8042",
             padding: 1,
             height: "100%",
           }}
@@ -169,47 +138,12 @@ function SummeryData() {
               }}
             >
               <div className="left">
-                <img src={stock} alt="Stock" width={30} />
+                <DataArray />
               </div>
               <div className="right staff">
-                <Typography variant="subtitle1">Today's Profit</Typography>
+                <Typography variant="subtitle1">Completed Today</Typography>
                 <Typography variant="h6">
-                  UGX. {state.dashboardData?.todayStats?.profit}
-                </Typography>
-              </div>
-            </div>
-          )}
-        </Card>
-      </Grid>
-
-      {/* Today Sales Card */}
-      <Grid item xs={12} sm={6} md={3}>
-        <Card
-          className="card-content"
-          sx={{
-            borderRadius: 1,
-            backgroundColor: "#000080",
-            padding: 1,
-            height: "100%",
-          }}
-        >
-          {state.loading ? (
-            <PulseLoader color="#fff" height={30} width={15} />
-          ) : (
-            <div
-              style={{
-                color: "#fff",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <div className="left">
-                <img src={stock} alt="Stock" width={30} />
-              </div>
-              <div className="right staff">
-                <Typography variant="subtitle1">Sales Today</Typography>
-                <Typography variant="h6">
-                  UGX. {state.dashboardData?.todayStats?.sales}
+                  {state.dashboardData?.stock}
                 </Typography>
               </div>
             </div>

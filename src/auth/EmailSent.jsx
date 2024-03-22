@@ -12,7 +12,7 @@ export default function EmailSent() {
         alignItems: "center",
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "70px", width: "70px" }}>
+      <Avatar sx={{ m: 1, bgcolor: "#00C49F", height: "70px", width: "70px" }}>
         <EmailOutlined fontSize="large" />
       </Avatar>
       <Typography component="h1" variant="h5">
@@ -20,13 +20,12 @@ export default function EmailSent() {
       </Typography>
 
       <Box component="form" sx={{ mt: 1 }} minWidth={"32%"}>
-        <Typography  textAlign={"center"}>
+        <Typography textAlign={"center"}>
           We have sent a password reset link to your email
         </Typography>
         <Typography textAlign={"center"}>
           Check your inbox, to see the next steps
-          <br /> Remember to check spam folder
-          if you don't see it
+          <br /> Remember to check spam folder if you don't see it
         </Typography>
       </Box>
     </Box>

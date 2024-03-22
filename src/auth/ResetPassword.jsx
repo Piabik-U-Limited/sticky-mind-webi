@@ -31,7 +31,7 @@ export default function ForgotPassword() {
         alignItems: "center",
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "70px", width: "70px" }}>
+      <Avatar sx={{ m: 1, bgcolor: "#00C49F", height: "70px", width: "70px" }}>
         <LockOutlined fontSize="large" />
       </Avatar>
       <Typography component="h1" variant="h5">

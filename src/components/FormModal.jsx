@@ -20,7 +20,7 @@ function FormModal(props) {
       fullScreen={props.fullScreen}
       maxWidth={props.maxWidth}
     >
-      <AppBar sx={{ position: "relative", backgroundColor: "#0F9D58" }}>
+      <AppBar sx={{ position: "relative", backgroundColor: "#00C49F" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <DialogTitle id="scroll-dialog-title">{props.title}</DialogTitle>
 

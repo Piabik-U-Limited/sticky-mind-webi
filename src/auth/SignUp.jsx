@@ -28,7 +28,7 @@ export default function SignUp() {
         //backgroundColor: "red",
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: "#0F9D58", height: "70px", width: "70px" }}>
+      <Avatar sx={{ m: 1, bgcolor: "#00C49F", height: "70px", width: "70px" }}>
         <PersonAddAlt fontSize="large" />
       </Avatar>
       <Typography component="h1" variant="h5">
@@ -114,13 +114,13 @@ export default function SignUp() {
                 sx={{
                   fontSize: "14px",
                   padding: "8px 40px",
-                  backgroundColor: "#0F9D58",
+                  backgroundColor: "#00C49F",
                   color: "white",
                   borderRadius: "5px",
                   cursor: "pointer",
                   border: "none",
                   "&:hover": {
-                    backgroundColor: "#0F9D58c0",
+                    backgroundColor: "#00C49Fc0",
                   },
                 }}
                 startIcon={<PersonAdd />}

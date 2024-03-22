@@ -12,7 +12,7 @@ const LoadingComponent = (props) => {
     >
       <Card sx={{ width: "100%", justifyContent: "space-evenly" }}>
         <CardContent>
-          <DotLoader color="#0F9D58" size={100} />
+          <DotLoader color="#00C49F" size={100} />
         </CardContent>
       </Card>
     </Box>

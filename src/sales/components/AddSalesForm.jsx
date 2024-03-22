@@ -229,14 +229,14 @@ const AddSalesForm = () => {
                         sx={{
                           fontSize: "14px",
                           padding: "8px 40px",
-                          backgroundColor: "#0F9D58",
+                          backgroundColor: "#00C49F",
                           color: "white",
                           borderRadius: "5px",
                           cursor: "pointer",
                           border: "none",
                           margin: 1,
                           "&:hover": {
-                            backgroundColor: "#0F9D58c0",
+                            backgroundColor: "#00C49Fc0",
                           },
                         }}
                         endIcon={<Add />}
@@ -274,13 +274,13 @@ const AddSalesForm = () => {
                           sx={{
                             fontSize: "14px",
                             padding: "8px 40px",
-                            backgroundColor: "#0F9D58",
+                            backgroundColor: "#00C49F",
                             color: "white",
                             borderRadius: "5px",
                             cursor: "pointer",
                             border: "none",
                             "&:hover": {
-                              backgroundColor: "#0F9D58c0",
+                              backgroundColor: "#00C49Fc0",
                             },
                           }}
                           endIcon={<Save />}
