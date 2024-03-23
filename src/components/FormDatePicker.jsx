@@ -11,12 +11,11 @@ function FormDatePicker(props) {
   const errorText = meta.error && meta.touched ? meta.error : "";
   return (
     <div style={{ width: "100%" }}>
-      
-        <label>
-          {props.label}
-          <span style={{ color: "red" }}>{props.isRequired ? "*" : ""}</span>
-        </label>
-     
+      <label>
+        {props.label}
+        <span style={{ color: "red" }}>{props.isRequired ? "*" : ""}</span>
+      </label>
+
       <div style={{ marginBottom: "10px" }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -24,10 +23,11 @@ function FormDatePicker(props) {
             value={field.value}
             onChange={(date) => props.handleChange(date)}
           />
+          <br />
+          <Typography sx={{ color: "tomato" }} variant="caption">
+            {errorText}
+          </Typography>
         </LocalizationProvider>
-        <Typography sx={{ color: "tomato" }} variant="caption">
-          {errorText}
-        </Typography>
       </div>
     </div>
   );

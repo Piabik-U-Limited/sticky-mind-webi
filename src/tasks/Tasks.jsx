@@ -1,44 +1,21 @@
-import React from "react";
-import { Grid, Drawer } from "@mui/material";
+import React, { useEffect } from "react";
+import { Grid, Drawer, IconButton } from "@mui/material";
 import { StickyNote, TaskAddButton } from "./components";
 import { AddTaskForm } from "../forms";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleShowAddTaskModal } from "../redux/slices/tasks.slice";
+import { Close } from "@mui/icons-material";
+import useTasks from "../api/hooks/useTasks";
 function Tasks() {
-  const [tasks, setTasks] = React.useState([
-    {
-      title: "Designing the development process",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "OVERDUE",
-    },
-    {
-      title: "Meeting with CEO",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "DONE",
-    },
-    {
-      title: "Requirements analysis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "INPROGRESS",
-    },
-    {
-      title: "Building the development team, the first time",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "TODO",
-    },
-    {
-      title: "Setting up the development environment",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "TODO",
-    },
-  ]);
   const dispatch = useDispatch();
-  const { showAddTaskModal } = useSelector((state) => state.tasks);
+  const { showAddTaskModal, tasks } = useSelector((state) => state.tasks);
+  //console.log(tasks);
+
+  const { handleFetchTasks } = useTasks();
+
+  useEffect(() => {
+    handleFetchTasks();
+  }, []);
   return (
     <Grid container spacing={2}>
       {tasks.map((task, index) => (
@@ -50,13 +27,17 @@ function Tasks() {
         <TaskAddButton add={() => dispatch(toggleShowAddTaskModal())} />
       </Grid>
       <Drawer
-        anchor={"left"}
+        anchor={"right"}
         open={showAddTaskModal}
         onClose={() => dispatch(toggleShowAddTaskModal())}
         sx={{
           padding: 10,
+          //width: 600,
         }}
       >
+        <IconButton sx={{ position: "absolute", right: 8, top: 4 }}>
+          <Close onClick={() => dispatch(toggleShowAddTaskModal())} />
+        </IconButton>
         <AddTaskForm />
       </Drawer>
     </Grid>

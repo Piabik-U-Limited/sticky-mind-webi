@@ -34,7 +34,7 @@ function useRegister() {
         Cookies.set("user", JSON.stringify(response.data.user));
 
         dispatch(setLoading(false));
-        navigate("/company/create", { replace: true });
+        navigate("/", { replace: true });
       } else {
         captureError(response);
       }

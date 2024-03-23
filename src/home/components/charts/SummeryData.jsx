@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 function SummeryData() {
   const state = useSelector((state) => state.dashboard);
-
+  console.log(state.dashboardData);
   return (
     <Grid container spacing={2} alignItems="stretch">
       {/* Due Today */}
@@ -41,7 +41,7 @@ function SummeryData() {
               <div>
                 <Typography variant="subtitle1">Due Today</Typography>
                 <Typography variant="h6">
-                  {state.dashboardData?.totalSales}
+                  {state.dashboardData?.todoTasksToday?.length}
                 </Typography>
               </div>
             </div>
@@ -54,7 +54,7 @@ function SummeryData() {
           className="card-content"
           sx={{
             borderRadius: 1,
-            backgroundColor: "#0088FE",
+            backgroundColor: "#FF8042",
             padding: 1,
             height: "100%",
           }}
@@ -75,7 +75,7 @@ function SummeryData() {
               <div className="right students">
                 <Typography variant="subtitle1">Over due</Typography>
                 <Typography variant="h6">
-                  {state.dashboardData?.totalProducts}
+                  {state.dashboardData?.overDueTasks?.length}
                 </Typography>
               </div>
             </div>
@@ -109,7 +109,7 @@ function SummeryData() {
               <div>
                 <Typography variant="subtitle1">This Month</Typography>
                 <Typography variant="h6">
-                  {state.dashboardData?.grossSales}
+                  {state.dashboardData?.todoThisMonth?.length}
                 </Typography>
               </div>
             </div>
@@ -122,7 +122,7 @@ function SummeryData() {
           className="card-content"
           sx={{
             borderRadius: 1,
-            backgroundColor: "#FF8042",
+            backgroundColor: "#0088FE",
             padding: 1,
             height: "100%",
           }}
@@ -141,9 +141,9 @@ function SummeryData() {
                 <DataArray />
               </div>
               <div className="right staff">
-                <Typography variant="subtitle1">Completed Today</Typography>
+                <Typography variant="subtitle1">Done Today</Typography>
                 <Typography variant="h6">
-                  {state.dashboardData?.stock}
+                  {state.dashboardData?.completedTasksToday?.length}
                 </Typography>
               </div>
             </div>

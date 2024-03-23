@@ -6,17 +6,17 @@ import {
   setLoading,
   setStats,
 } from "../../redux/slices/dashbard.slice";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function useDashboard() {
   const api = new ApiClient();
   const dispatch = useDispatch();
   const { captureError } = useSetError();
-  const {company} = useSelector((state) => state.auth);
+  const { company } = useSelector((state) => state.auth);
   const handleFetchDashboardData = async () => {
     setLoading(true);
     try {
-      const response = await api._makeRequest("get", `dashboard/${company?.id}`);
+      const response = await api._makeRequest("get", `dashboard`);
       if (response.status === 200) {
         dispatch(setDashbaordData(response.data));
       } else {
@@ -31,7 +31,10 @@ function useDashboard() {
   const handleFetchStats = async (endpoint) => {
     setLoading(true);
     try {
-      const response = await api._makeRequest("get", `dashboard/${company?.id}/stats/${endpoint}`);
+      const response = await api._makeRequest(
+        "get",
+        `dashboard/${company?.id}/stats/${endpoint}`
+      );
       if (response.status === 200) {
         dispatch(setStats(response.data));
       } else {
@@ -41,8 +44,8 @@ function useDashboard() {
       captureError(error);
     }
     setLoading(false);
-  }
-  return { handleFetchDashboardData,handleFetchStats };
+  };
+  return { handleFetchDashboardData, handleFetchStats };
 }
 
 export default useDashboard;
