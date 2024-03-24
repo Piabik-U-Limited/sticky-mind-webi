@@ -46,7 +46,6 @@ export default function SignUp() {
         validationSchema={registerSchema}
         onSubmit={(values) => {
           handleRegister(values);
-          console.log(values);
         }}
       >
         {({ handleSubmit }) => (

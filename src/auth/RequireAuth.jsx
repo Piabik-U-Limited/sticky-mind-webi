@@ -5,7 +5,7 @@ import { setCompany, setTokens, setUser } from "../redux/slices/auth.slice";
 import { useDispatch } from "react-redux";
 import Authenticating from "./Authenticating";
 import { useNavigate } from "react-router-dom";
-
+import { changeMode } from "../redux/slices/themeSlice";
 const RequireAuth = ({ children }) => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
@@ -60,20 +60,21 @@ const RequireAuth = ({ children }) => {
         return;
       }
       dispatch(setUser(data));
-      // const company = Cookies.get("company");
-      // if (typeof company === 'undefined') {
-      //  // Handle the missing cookie here
-      //  navigation("/company/create");
-      //  return;
-      // }
-      // const companyData = JSON.parse(company);
-      // if (!companyData) {
-      //  navigation("/company/create");
-      //  return;
-      // }
-      // dispatch(setCompany(companyData));
+
+      //get theme cookie
+      const theme = Cookies.get("theme");
+      if (typeof theme === "undefined") {
+        dispatch(changeMode("light"));
+        return;
+      }
+
+      if (!theme) {
+        dispatch(changeMode("light"));
+        return;
+      }
+      dispatch(changeMode(theme));
     } catch (error) {
-      navigation("/auth");
+      dispatch(changeMode("light"));
       return;
     }
   };

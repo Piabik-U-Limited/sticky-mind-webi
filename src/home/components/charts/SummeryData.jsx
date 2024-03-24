@@ -11,7 +11,6 @@ import {
 } from "@mui/icons-material";
 function SummeryData() {
   const state = useSelector((state) => state.dashboard);
-  console.log(state.dashboardData);
   return (
     <Grid container spacing={2} alignItems="stretch">
       {/* Due Today */}

@@ -46,7 +46,6 @@ export default function SignIn() {
         validationSchema={loginSchema}
         onSubmit={(values) => {
           handleLogin(values);
-          //console.log(values);
         }}
       >
         {({ handleSubmit }) => (

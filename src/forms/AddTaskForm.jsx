@@ -66,7 +66,6 @@ function AddTaskForm(props) {
           let start = (values.start = dayjs(values.start).format("HH:mm:ss"));
           let end = (values.end = dayjs(values.end).format("HH:mm:ss"));
           handleAddTask({ ...values, start, end });
-          console.log({ ...values, start, end });
         }}
       >
         {({ handleSubmit, setFieldValue }) => (

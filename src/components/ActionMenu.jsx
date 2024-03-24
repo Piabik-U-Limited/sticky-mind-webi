@@ -13,11 +13,11 @@ import {
   Logout,
   Person2,
 } from "@mui/icons-material";
-
+import useTheme from "../api/hooks/useTheme";
 export default function AccountMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(false);
   const dispatch = useDispatch();
-  const themeMode = useSelector((state) => state.theme.mode);
+  const { themeMode, toggleTheme } = useTheme();
   const { handleLogout } = useLogin();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,7 +38,7 @@ export default function AccountMenu(props) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar >
+            <Avatar>
               <Person />
             </Avatar>
           </IconButton>
@@ -81,19 +81,13 @@ export default function AccountMenu(props) {
       >
         <Typography sx={{ padding: "16px" }}>Configerations</Typography>
         <Divider />
-        <MenuItem
-          onClick={
-            themeMode === "light"
-              ? () => dispatch(changeMode("dark"))
-              : () => dispatch(changeMode("light"))
-          }
-        >
+        <MenuItem onClick={toggleTheme}>
           <ListItemIcon>
             <Brightness4 fontSize="small" />
           </ListItemIcon>
           {themeMode === "light" ? " Dark Theme" : "Light Theme"}
         </MenuItem>
-        
+
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />

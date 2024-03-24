@@ -61,8 +61,6 @@ const EditProductForm = () => {
     !categories.length > 0 && handleFetchCategories();
   }, []);
 
-  console.log(selectedProduct);
-
   return (
     <Formik
       initialValues={{
@@ -79,7 +77,6 @@ const EditProductForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        //console.log(values);
         handleEditProduct(values, selectedProduct?.id);
       }}
     >

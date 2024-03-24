@@ -85,7 +85,6 @@ const ProductForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        console.log(values);
         handleAddProduct(values);
       }}
     >

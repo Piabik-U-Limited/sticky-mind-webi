@@ -34,7 +34,10 @@ function Summary() {
     <Box>
       <Box className="grid-container">
         <Grid container className="graphWrapper">
-          <div className="lineGraph">
+          <div
+            className="lineGraph"
+            //style={{ maxHeight: "400px", overflowY: "auto" }}
+          >
             <SummeryData />
             {/* <div className="chart-heading" style={{ padding: 10 }}>
               <Typography
@@ -63,6 +66,7 @@ function Summary() {
             </div> */}
             <Card sx={{ marginTop: 1 }}>
               <Calendar />
+              {/* <SummeryPieChart /> */}
             </Card>
           </div>
 

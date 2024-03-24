@@ -25,7 +25,6 @@ function AddCategoryForm(props) {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           handleAddCategory(values);
-          console.log(values);
         }}
       >
         {({ handleSubmit }) => (

@@ -22,7 +22,6 @@ function useTasks() {
 
       if (response.status === 200) {
         dispatch(setTasks(response.data));
-        console.log(response.data);
       } else {
         captureError(response);
       }

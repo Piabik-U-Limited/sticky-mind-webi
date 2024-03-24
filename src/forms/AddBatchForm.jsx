@@ -34,7 +34,6 @@ function AddBatchForm() {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           handleAddBatch(values);
-          console.log(values);
         }}
       >
         {({ handleSubmit }) => (

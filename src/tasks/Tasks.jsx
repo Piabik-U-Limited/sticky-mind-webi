@@ -9,7 +9,6 @@ import useTasks from "../api/hooks/useTasks";
 function Tasks() {
   const dispatch = useDispatch();
   const { showAddTaskModal, tasks } = useSelector((state) => state.tasks);
-  //console.log(tasks);
 
   const { handleFetchTasks } = useTasks();
 

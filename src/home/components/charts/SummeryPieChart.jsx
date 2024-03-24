@@ -16,16 +16,16 @@ import {
 import { useSelector } from "react-redux";
 import { Card, Grid } from "@mui/material";
 const SummeryPieChart = () => {
-  // const data = [
-  //   { name: "January", sales: 400 },
-  //   { name: "February", sales: 300 },
-  //   { name: "March", sales: 300 },
-  //   { name: "April", sales: 200 },
-  //   { name: "May", sales: 200 },
-  //   { name: "June", sales: 800 },
-  // ];
+  const data = [
+    { name: "January", sales: 400 },
+    { name: "February", sales: 300 },
+    { name: "March", sales: 300 },
+    { name: "April", sales: 200 },
+    { name: "May", sales: 200 },
+    { name: "June", sales: 800 },
+  ];
 
-  const data = useSelector((state) => state.dashboard.stats);
+  //const data = useSelector((state) => state.dashboard.stats);
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,

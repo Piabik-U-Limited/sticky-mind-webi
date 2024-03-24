@@ -10,6 +10,7 @@ import {
   IconButton,
   Chip,
 } from "@mui/material";
+import useTheme from "../api/hooks/useTheme";
 import { Link, useLocation } from "react-router-dom";
 import {
   Store,
@@ -32,7 +33,8 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
   const dispatch = useDispatch();
   const [active, setActive] = React.useState("Dashboard");
   const location = useLocation();
-  const themeMode = useSelector((state) => state.theme.mode);
+
+  const { themeMode, toggleTheme } = useTheme();
   const handleChange = (itemName) => {
     setActive(itemName);
     toggleDrawer();
@@ -129,11 +131,7 @@ function DrawerComponent({ drawerWidth, toggleDrawer, theme }) {
         <Chip
           variant="filled"
           deleteIcon={<Brightness4 />}
-          onDelete={
-            themeMode === "light"
-              ? () => dispatch(changeMode("dark"))
-              : () => dispatch(changeMode("light"))
-          }
+          onDelete={toggleTheme}
           label={
             themeMode === "light"
               ? "Change to dark mode"

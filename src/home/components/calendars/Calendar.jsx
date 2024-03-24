@@ -5,39 +5,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 //import { DateRangeCalendar } from "@mui/x-date-pickers/DateRangeCalendar";
 import { Grid, Box, Card } from "@mui/material";
 import { StickyCard } from "../../../components";
+import { useSelector } from "react-redux";
+
 export default function Calendar() {
-  const [tasks, setTasks] = React.useState([
-    {
-      title: "Designing the development process",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "OVERDUE",
-    },
-    {
-      title: "Meeting with CEO",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "DONE",
-    },
-    {
-      title: "Requirements analysis",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "INPROGRESS",
-    },
-    {
-      title: "Building the development team, the first time",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "TODO",
-    },
-    {
-      title: "Setting up the development environment",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,",
-      status: "TODO",
-    },
-  ]);
+  const { tasks } = useSelector((state) => state.tasks);
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={7}>

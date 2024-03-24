@@ -18,8 +18,8 @@ const StickyCard = ({ title, content, status }) => {
         label={title}
         variant="filled"
         deleteIcon={<ChevronRight />}
-        onDelete={() => console.log("deleted")}
-        onClick={() => console.log("clicked")}
+        onDelete={() => {}}
+        onClick={() => {}}
         sx={{
           marginTop: 1,
           boderRadius: 10,

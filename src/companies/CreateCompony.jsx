@@ -50,7 +50,6 @@ export default function CreateCompony() {
           //validationSchema={validationSchema}
           onSubmit={(values) => {
             handleCreateCompany(values);
-            console.log(values);
           }}
         >
           {({ handleSubmit }) => (
