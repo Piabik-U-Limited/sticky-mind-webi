@@ -26,14 +26,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route
-            path="/auth"
-            element={
-              <Authentic>
-                <Auth />
-              </Authentic>
-            }
-          >
+          <Route path="/auth" element={<Auth />}>
             <Route path="" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="reset" element={<ForgotPassword />} />

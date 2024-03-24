@@ -9,11 +9,11 @@ function useTheme() {
     if (themeMode === "dark") {
       dispatch(changeMode("light"));
       Cookies.remove("theme");
-      Cookies.set("theme", "light");
+      Cookies.set("theme", "light", { expires: 7 });
     } else {
       dispatch(changeMode("dark"));
       Cookies.remove("theme");
-      Cookies.set("theme", "dark");
+      Cookies.set("theme", "dark", { expires: 7 });
     }
   };
   return {

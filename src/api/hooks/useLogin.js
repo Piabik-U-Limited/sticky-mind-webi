@@ -33,9 +33,9 @@ function useLogin() {
     Cookies.remove("access_token");
     Cookies.remove("user");
     Cookies.remove("company");
-    navigate("/auth",{replace:true} );
-  }
-  return { handleLogin,handleLogout };
+    navigate("/auth", { replace: true });
+  };
+  return { handleLogin, handleLogout };
 }
 
 export default useLogin;

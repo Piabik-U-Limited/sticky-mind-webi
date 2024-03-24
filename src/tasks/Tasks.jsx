@@ -16,15 +16,16 @@ function Tasks() {
     handleFetchTasks();
   }, []);
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} justifyContent="center">
+      <Grid item xs={12} sm={12} md={4}>
+        <TaskAddButton add={() => dispatch(toggleShowAddTaskModal())} />
+      </Grid>
       {tasks.map((task, index) => (
         <Grid item xs={12} sm={12} md={4} key={index}>
           <StickyNote key={index} {...task} />
         </Grid>
       ))}
-      <Grid item xs={12} sm={12} md={4}>
-        <TaskAddButton add={() => dispatch(toggleShowAddTaskModal())} />
-      </Grid>
+
       <Drawer
         anchor={"right"}
         open={showAddTaskModal}

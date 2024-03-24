@@ -13,7 +13,7 @@ function ErrorAlert({ error, close }) {
         vertical: "bottom",
         horizontal: "right",
       }}
-      autoHideDuration={8000}
+      autoHideDuration={10000}
     >
       <Alert onClose={close} severity="error" variant="filled">
         {error}

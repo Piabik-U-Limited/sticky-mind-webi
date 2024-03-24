@@ -4,7 +4,7 @@ function SuccessAlert({ open, close, message }) {
   return (
     <Snackbar
       open={message ? true : false}
-      autoHideDuration={8000}
+      autoHideDuration={10000}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       onClose={close}
     >
