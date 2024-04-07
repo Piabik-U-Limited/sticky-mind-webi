@@ -10,7 +10,7 @@ function Home() {
   const statType = useSelector((state) => state.dashboard.statType);
   useEffect(() => {
     handleFetchDashboardData();
-    handleFetchStats(statType);
+    // handleFetchStats(statType);
     handleFetchTasks();
   }, []);
 

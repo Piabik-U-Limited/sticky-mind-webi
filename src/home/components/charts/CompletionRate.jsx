@@ -18,23 +18,23 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function CompletionRate() {
   return (
-    <PieChart width={200} height={150} onMouseEnter={() => {}}>
-      <Pie
-        data={data}
-        cx={"60%"}
-        cy={60}
-        innerRadius={30}
-        outerRadius={60}
-        fill="#8884d8"
-        paddingAngle={2}
-        dataKey="value"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
+    <ResponsiveContainer width={"100%"} height={150}>
+      <PieChart onMouseEnter={() => {}}>
+        <Pie
+          data={data}
+          innerRadius={30}
+          outerRadius={60}
+          fill="#8884d8"
+          paddingAngle={2}
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
 
-      <Tooltip />
-    </PieChart>
+        <Tooltip />
+      </PieChart>
+    </ResponsiveContainer>
   );
 }
