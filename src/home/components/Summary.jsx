@@ -77,10 +77,10 @@ function Summary() {
             }}
           >
             <Grid item xs={12} container>
-              <Grid item xs={6} sm={12} md={12}>
+              <Grid item xs={12} sm={12} md={12}>
                 <CompletionRate />
               </Grid>
-              <Grid item xs={6} sm={12} md={12}>
+              <Grid item xs={12} sm={12} md={12}>
                 <SummeryBarChart />
               </Grid>
             </Grid>

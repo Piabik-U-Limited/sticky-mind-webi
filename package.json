@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm i && vite build",
+    "build": "npm i && npx vite build",
     "serve": "vite preview",
     "production": "node app",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
